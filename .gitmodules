@@ -7,3 +7,6 @@
 [submodule "YMugenExtensions"]
 	path = YMugenExtensions
 	url = git@github.com:AlexanderYunker1983/YMugenExtensions.git
+[submodule "HolidaysCalendar"]
+	path = HolidaysCalendar
+	url = git@github.com:AlexanderYunker1983/holidays-calendar.git
