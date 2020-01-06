@@ -4,6 +4,8 @@ using MugenMvvmToolkit.Binding;
 using MugenMvvmToolkit.Interfaces;
 using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.Models.IoC;
+using SalaryForecast.Core.Infrastructure;
+using SalaryForecast.Core.Infrastructure.Impl;
 using YLocalization;
 using YMugenExtensions;
 
@@ -20,6 +22,11 @@ namespace SalaryForecast.Core
             if (!iocContainer.CanResolve<ILocalizationManager>())
             {
                 iocContainer.Bind<ILocalizationManager, MugenLocalizationManager>(DependencyLifecycle.SingleInstance);
+            }
+            
+            if (!iocContainer.CanResolve<IJsonProvider>())
+            {
+                iocContainer.Bind<IJsonProvider, JsonProvider>(DependencyLifecycle.SingleInstance);
             }
 
             return true;

@@ -56,6 +56,9 @@
     <Reference Include="MugenMvvmToolkit.WPF.Binding, Version=6.5.1.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MugenMvvmToolkit.WPF.Binding.6.5.1.1\lib\net45\MugenMvvmToolkit.WPF.Binding.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -81,6 +84,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DesktopModule.cs" />
+    <Compile Include="Infrastructure\Impl\FileProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
