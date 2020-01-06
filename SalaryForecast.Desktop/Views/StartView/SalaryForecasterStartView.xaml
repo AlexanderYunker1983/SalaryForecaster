@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SalaryForecast.Desktop.Views.StartView"
+        xmlns:startViewModel="clr-namespace:SalaryForecast.Core.ViewModels.StartViewModel;assembly=SalaryForecast.Core"
         mc:Ignorable="d"
-        Title="SalaryForecasterStartView" Height="450" Width="800">
-    <Grid>
+        d:DataContext="{d:DesignInstance startViewModel:SalaryForecasterStartViewModel}"
+        Title="{Binding DisplayName}"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        MinHeight="480"
+        MinWidth="640">
+    <Grid Margin="11">
         
     </Grid>
 </Window>

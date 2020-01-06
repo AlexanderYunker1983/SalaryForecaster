@@ -60,5 +60,14 @@ namespace SalaryForecast.Core.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предсказатель зарплаты.
+        /// </summary>
+        internal static string ProgramTitle {
+            get {
+                return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
     }
 }
