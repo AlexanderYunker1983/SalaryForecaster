@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MugenMvvmToolkit" Version="6.5.1.1" />
+    <PackageReference Include="MugenMvvmToolkit.AutofacContainer" Version="6.5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\YLocalization\YLocalization.csproj" />
     <ProjectReference Include="..\YMugenExtensions\YMugenExtensions.csproj" />
   </ItemGroup>

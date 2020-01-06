@@ -95,6 +95,24 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MugenMvvmToolkit">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MugenMvvmToolkit.Android">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MugenMvvmToolkit.Android.AppCompat">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MugenMvvmToolkit.Android.Design">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MugenMvvmToolkit.AutofacContainer">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MugenMvvmToolkit.Binding">
+      <Version>6.5.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
