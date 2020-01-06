@@ -47,7 +47,10 @@ Section "$(ProductName) ${Y_PRODUCT_VERSION}" Product
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "DisplayName" "$(ProductName) ${Y_PRODUCT_VERSION}"
  
-    CreateShortCut "$DESKTOP\${SHORT_CUT}" "$INSTDIR\$(ProductName).exe"
+    CreateShortCut "$DESKTOP\${SHORT_CUT}" "$INSTDIR\SalaryForecast.Desktop.exe"
+	CreateDirectory "$SMPROGRAMS\${Y_PRODUCT}"
+	CreateShortCut "$SMPROGRAMS\${Y_PRODUCT}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+    CreateShortCut "$SMPROGRAMS\${Y_PRODUCT}\${SHORT_CUT}" "$INSTDIR\SalaryForecast.Desktop.exe"
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -74,7 +77,10 @@ Function .onInit
 FunctionEnd
 
 Section "Uninstall"
-    RMDir /r /REBOOTOK "$INSTDIR"
+    RMDir  "$INSTDIR"
     Delete "$DESKTOP\${SHORT_CUT}"
+	Delete "$SMPROGRAMS\${Y_PRODUCT}\*.*"
+    RmDir  "$SMPROGRAMS\${Y_PRODUCT}"
+	RmDir  "$PROGRAMFILES\Yunker"
     DeleteRegKey /ifempty HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}"
 SectionEnd
