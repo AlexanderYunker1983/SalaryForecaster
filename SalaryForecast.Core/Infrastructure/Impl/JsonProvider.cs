@@ -5,9 +5,9 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 {
     public class JsonProvider : IJsonProvider
     {
-        private readonly IFileProvider fileProvider;
+        private IFileProvider fileProvider;
 
-        public JsonProvider(IFileProvider fileProvider)
+        public void SetFileProvider(IFileProvider fileProvider)
         {
             this.fileProvider = fileProvider;
         }
@@ -22,7 +22,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
             var json = fileStream.ReadToEnd();
             var result = JsonConvert.DeserializeObject<Holidays>(json);
-
+            fileStream.Dispose();
             return result;
         }
     }
