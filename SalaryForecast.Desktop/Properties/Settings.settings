@@ -17,5 +17,11 @@
     <Setting Name="SecondCash" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">250</Value>
     </Setting>
+    <Setting Name="FirstPay" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
+    <Setting Name="SecondPay" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

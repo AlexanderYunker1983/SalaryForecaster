@@ -125,6 +125,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выплаты с зарплаты, руб..
+        /// </summary>
+        internal static string FirstPay {
+            get {
+                return ResourceManager.GetString("FirstPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to До следующей зарплаты осталось.
         /// </summary>
         internal static string NextSalaryDays {
@@ -148,6 +157,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Месячная разница, руб..
+        /// </summary>
+        internal static string SalaryDelta {
+            get {
+                return ResourceManager.GetString("SalaryDelta", resourceCulture);
             }
         }
         
@@ -197,6 +215,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Остаток после всех платежей, руб..
+        /// </summary>
+        internal static string SalaryWithoutCashAndPay {
+            get {
+                return ResourceManager.GetString("SalaryWithoutCashAndPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Наличные с аванса, руб..
         /// </summary>
         internal static string SecondCash {
@@ -211,6 +238,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string SecondPartDate {
             get {
                 return ResourceManager.GetString("SecondPartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выплаты с аванса, руб..
+        /// </summary>
+        internal static string SecondPay {
+            get {
+                return ResourceManager.GetString("SecondPay", resourceCulture);
             }
         }
         

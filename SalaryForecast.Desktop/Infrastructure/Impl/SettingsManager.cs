@@ -54,5 +54,25 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                 Settings.Default.Save();
             }
         }
+
+        public decimal FirstPay
+        {
+            get => Settings.Default.FirstPay;
+            set
+            {
+                Settings.Default.FirstPay = value;
+                Settings.Default.Save();
+            }
+        }
+
+        public decimal SecondPay
+        {
+            get => Settings.Default.SecondPay;
+            set
+            {
+                Settings.Default.SecondPay = value;
+                Settings.Default.Save();
+            }
+        }
     }
 }

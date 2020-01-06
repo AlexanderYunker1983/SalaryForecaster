@@ -41,5 +41,17 @@ namespace SalaryForecast.Core.ViewModels.SalarySettingsViewModel
             get => settingsManager.SecondCash;
             set => settingsManager.SecondCash = value;
         }
+
+        public decimal FirstPay
+        {
+            get => settingsManager.FirstPay;
+            set => settingsManager.FirstPay = value;
+        }
+
+        public decimal SecondPay
+        {
+            get => settingsManager.SecondPay;
+            set => settingsManager.SecondPay = value;
+        }
     }
 }

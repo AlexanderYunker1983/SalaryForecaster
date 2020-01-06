@@ -82,5 +82,29 @@ namespace SalaryForecast.Desktop.Properties {
                 this["SecondCash"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public decimal FirstPay {
+            get {
+                return ((decimal)(this["FirstPay"]));
+            }
+            set {
+                this["FirstPay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
+        public decimal SecondPay {
+            get {
+                return ((decimal)(this["SecondPay"]));
+            }
+            set {
+                this["SecondPay"] = value;
+            }
+        }
     }
 }

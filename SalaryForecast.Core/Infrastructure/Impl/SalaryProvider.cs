@@ -39,7 +39,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryPart = secondPart * settingsManager.Salary,
                     SalaryPercent = secondPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate),
-                    SalaryWithoutCash = secondPart * settingsManager.Salary - settingsManager.SecondCash
+                    SalaryWithoutCash = secondPart * settingsManager.Salary - settingsManager.SecondCash,
+                    SalaryWithoutCashAndPay = secondPart * settingsManager.Salary - settingsManager.SecondCash - settingsManager.SecondPay
                 };
                 KeyValuePair<int, Month> previousMonth;
                 if (monthPair.Key == 1)
@@ -58,14 +59,22 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 }
 
                 var firstPart = (decimal)previousMonth.Value.Days.Count(d => d.Value.IsWorkDate && d.Key > 15) / previousMonth.Value.WorkDaysCount;
-                result.Add(new Salary
+                var firstSalary = new Salary
                 {
                     SalaryPart = firstPart * settingsManager.Salary,
                     SalaryPercent = firstPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalaryFirstPartDate),
-                    SalaryWithoutCash = firstPart * settingsManager.Salary - settingsManager.FirstCash
-                });
-
+                    SalaryWithoutCash = firstPart * settingsManager.Salary - settingsManager.FirstCash,
+                    SalaryWithoutCashAndPay = firstPart * settingsManager.Salary - settingsManager.FirstCash - settingsManager.FirstPay,
+                    SalaryDelta = "-----"
+                };
+                result.Add(firstSalary);
+                var totalDeltaSalary = firstSalary.SalaryWithoutCashAndPay + salary.SalaryWithoutCashAndPay;
+                salary.SalaryDelta = $"{totalDeltaSalary:F2}";
+                if (totalDeltaSalary < 0)
+                {
+                    salary.WarningEnabled = true;
+                }
                 result.Add(salary);
             }
             return result;

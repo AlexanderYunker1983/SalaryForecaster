@@ -19,6 +19,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -39,5 +41,11 @@
 
         <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondCash'}" VerticalAlignment="Center"/>
         <xctk:DecimalUpDown Grid.Column="1" Grid.Row="4" Margin="0,0,0,3" Width="150" Value="{Binding SecondCash}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstPay'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="5" Margin="0,0,0,3" Width="150" Value="{Binding FirstPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondPay'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="6" Margin="0,0,0,3" Width="150" Value="{Binding SecondPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
     </Grid>
 </Window>

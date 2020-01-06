@@ -98,11 +98,15 @@
                     <ColumnDefinition Width="*" SharedSizeGroup="E"/>
                     <ColumnDefinition Width="*" SharedSizeGroup="F"/>
                     <ColumnDefinition Width="*" SharedSizeGroup="G"/>
+                    <ColumnDefinition Width="*" SharedSizeGroup="H"/>
+                    <ColumnDefinition Width="*" SharedSizeGroup="I"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Margin="3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.Date'}"/>
-                <TextBlock Grid.Column="1" Margin="3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartValue'}"/>
-                <TextBlock Grid.Column="2" Margin="3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartPercent'}"/>
-                <TextBlock Grid.Column="3" Margin="3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartWithoutCash'}"/>
+                <TextBlock Grid.Column="0" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.Date'}"/>
+                <TextBlock Grid.Column="1" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartValue'}"/>
+                <TextBlock Grid.Column="2" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartPercent'}"/>
+                <TextBlock Grid.Column="3" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryPartWithoutCash'}"/>
+                <TextBlock Grid.Column="4" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryWithoutCashAndPay'}"/>
+                <TextBlock Grid.Column="5" Margin="6,3" HorizontalAlignment="Center" Text="{DataBinding '$i18n.SalaryDelta'}"/>
             </Grid>
             <ItemsControl Grid.Column="2" Grid.Row="2" ItemsSource="{Binding CurrentSalaries}">
                 <ItemsControl.ItemTemplate>
@@ -113,11 +117,15 @@
                                 <ColumnDefinition Width="*" SharedSizeGroup="E"/>
                                 <ColumnDefinition Width="*" SharedSizeGroup="F"/>
                                 <ColumnDefinition Width="*" SharedSizeGroup="G"/>
+                                <ColumnDefinition Width="*" SharedSizeGroup="H"/>
+                                <ColumnDefinition Width="*" SharedSizeGroup="I"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Date, StringFormat={}{0:dd.MM.yyyy}}" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="{Binding SalaryPart, StringFormat={}{0:F2}}" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="2" Text="{Binding SalaryPercent, StringFormat={}{0:F2}}" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="3" Text="{Binding SalaryWithoutCash, StringFormat={}{0:F2}}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="{Binding SalaryWithoutCashAndPay, StringFormat={}{0:F2}}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="5" Text="{Binding SalaryDelta, StringFormat={}{0:F2}}" HorizontalAlignment="Center"/>
                             <Grid.Style>
                                 <Style TargetType="Grid">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -125,6 +133,11 @@
                                         <DataTrigger Binding="{Binding IsNextSalary}" Value="True">
                                             <DataTrigger.Setters>
                                                 <Setter Property="Background" Value="LawnGreen"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding WarningEnabled}" Value="True">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Background" Value="Red"/>
                                             </DataTrigger.Setters>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -136,7 +149,7 @@
             </ItemsControl>
         </Grid>
         <StatusBar Grid.Row="2" Margin="-11,0,-11,-11">
-            <TextBlock Text="{Binding NextSalaryStatus}"/>
+            <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16"/>
         </StatusBar>
     </Grid>
 </Window>
