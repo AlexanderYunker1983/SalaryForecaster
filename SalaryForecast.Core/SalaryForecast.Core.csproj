@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YLocalization\YLocalization.csproj" />
+    <ProjectReference Include="..\YMugenExtensions\YMugenExtensions.csproj" />
+  </ItemGroup>
+
+</Project>
