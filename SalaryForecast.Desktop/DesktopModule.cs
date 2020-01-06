@@ -18,7 +18,8 @@ namespace SalaryForecast.Desktop
             }
             else
             {
-                PlatformVariables.ProgramVersion = $"{version.Major}.{version.Minor}.{version.Build}-ALPA";
+                var gitVersion = GitVersionInformation.FullSemVer;
+                PlatformVariables.ProgramVersion = $"{gitVersion}-ALPA";
             }
             return true;
         }
