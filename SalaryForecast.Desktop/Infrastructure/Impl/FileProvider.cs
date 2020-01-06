@@ -12,7 +12,7 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             var directoryPath = Path.Combine(baseDirectory, "HolidaysJSON");
             var fileName = $"consultant{year}.json";
             var fullFilePath = Path.Combine(directoryPath, fileName);
-            return File.Exists(fullFilePath) ? new StreamReader(File.Open(fullFilePath, FileMode.Open)) : null;
+            return File.Exists(fullFilePath) ? new StreamReader(File.OpenRead(fullFilePath)) : null;
         }
     }
 }

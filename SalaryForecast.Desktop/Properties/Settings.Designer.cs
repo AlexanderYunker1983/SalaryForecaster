@@ -106,5 +106,17 @@ namespace SalaryForecast.Desktop.Properties {
                 this["SecondPay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsNeedToMigrate {
+            get {
+                return ((bool)(this["IsNeedToMigrate"]));
+            }
+            set {
+                this["IsNeedToMigrate"] = value;
+            }
+        }
     }
 }

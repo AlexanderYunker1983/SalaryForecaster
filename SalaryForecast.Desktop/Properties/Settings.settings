@@ -23,5 +23,8 @@
     <Setting Name="SecondPay" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">250</Value>
     </Setting>
+    <Setting Name="IsNeedToMigrate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
