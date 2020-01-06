@@ -149,7 +149,8 @@
             </ItemsControl>
         </Grid>
         <StatusBar Grid.Row="2" Margin="-11,0,-11,-11">
-            <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16"/>
+            <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" Margin="0,0,25,0" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding YearBalance}" FontSize="16" VerticalAlignment="Center"/>
         </StatusBar>
     </Grid>
 </Window>

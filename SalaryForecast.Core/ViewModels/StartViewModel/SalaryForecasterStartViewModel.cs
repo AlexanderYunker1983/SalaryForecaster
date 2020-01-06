@@ -21,6 +21,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly ILocalizationManager localizationManager;
         private readonly ISalaryProvider salaryProvider;
         private string nextSalaryStatus;
+        private string yearBalance;
 
         public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider)
         {
@@ -67,6 +68,9 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
 
             NextSalaryStatus = $"{localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
+
+            var yearSum = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPay);
+            YearBalance = $"{localizationManager.GetString("YearBalance")} {yearSum:F2}";
 
             OnPropertyChanged(nameof(PastSalaries));
             OnPropertyChanged(nameof(CurrentSalaries));
@@ -124,6 +128,21 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                 }
 
                 nextSalaryStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string YearBalance
+        {
+            get => yearBalance;
+            set
+            {
+                if (value == yearBalance)
+                {
+                    return;
+                }
+
+                yearBalance = value;
                 OnPropertyChanged();
             }
         }

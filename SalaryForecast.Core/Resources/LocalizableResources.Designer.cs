@@ -258,5 +258,14 @@ namespace SalaryForecast.Core.Resources {
                 return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Годовой баланс, руб.:.
+        /// </summary>
+        internal static string YearBalance {
+            get {
+                return ResourceManager.GetString("YearBalance", resourceCulture);
+            }
+        }
     }
 }

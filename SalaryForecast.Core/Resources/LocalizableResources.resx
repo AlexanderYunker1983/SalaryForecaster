@@ -183,4 +183,7 @@
   <data name="SecondPay" xml:space="preserve">
     <value>Выплаты с аванса, руб.</value>
   </data>
+  <data name="YearBalance" xml:space="preserve">
+    <value>Годовой баланс, руб.:</value>
+  </data>
 </root>
