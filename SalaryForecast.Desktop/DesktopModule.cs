@@ -2,7 +2,6 @@
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces;
 using MugenMvvmToolkit.Interfaces.Models;
-using MugenMvvmToolkit.Models.IoC;
 using SalaryForecast.Core;
 
 namespace SalaryForecast.Desktop
@@ -12,15 +11,7 @@ namespace SalaryForecast.Desktop
         public bool Load(IModuleContext context)
         {
             var version = Assembly.GetAssembly(GetType()).GetName().Version;
-            if (version.Major > 0)
-            {
-                PlatformVariables.ProgramVersion = $"{version.Major}.{version.Minor}.{version.Build}";
-            }
-            else
-            {
-                var gitVersion = GitVersionInformation.FullSemVer;
-                PlatformVariables.ProgramVersion = $"{gitVersion}-ALPA";
-            }
+            PlatformVariables.ProgramVersion = version.Build == 0 ? $"{version.Major}.{version.Minor}" : $"{version.Major}.{version.Minor}.{version.Build}-Developer Version";
             return true;
         }
 
