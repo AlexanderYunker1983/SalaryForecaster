@@ -7,6 +7,7 @@ using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.WPF.Infrastructure;
 using SalaryForecast.Core;
 using SalaryForecast.Core.Infrastructure;
+using SalaryForecast.Desktop.Properties;
 
 namespace SalaryForecast.Desktop
 {
@@ -15,17 +16,25 @@ namespace SalaryForecast.Desktop
     /// </summary>
     public partial class App
     {
-        private readonly object[] menuStructure = new object[]
-        {
+        private readonly object[] menuStructure = {
             new MenuWithSubItems("Settings",
                 new[]
                 {
                     MainMenuItems.SalarySettings,
                 }),
         };
+
         public App()
         {
             PlatformVariables.MenuStructure = menuStructure;
+
+            if (Settings.Default.IsNeedToMigrate)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.IsNeedToMigrate = false;
+                Settings.Default.Save();
+            }
+
             new BootstrapperEx(this, new AutofacContainer());
         }
 
