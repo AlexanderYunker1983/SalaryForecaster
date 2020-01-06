@@ -107,6 +107,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Наличные с зарплаты, руб..
+        /// </summary>
+        internal static string FirstCash {
+            get {
+                return ResourceManager.GetString("FirstCash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Число выплаты зарплаты:.
         /// </summary>
         internal static string FirstPartDate {
@@ -161,6 +170,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выплата без наличных, руб..
+        /// </summary>
+        internal static string SalaryPartWithoutCash {
+            get {
+                return ResourceManager.GetString("SalaryPartWithoutCash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Настройки зарплаты.
         /// </summary>
         internal static string SalarySettings {
@@ -175,6 +193,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string SalaryValue {
             get {
                 return ResourceManager.GetString("SalaryValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Наличные с аванса, руб..
+        /// </summary>
+        internal static string SecondCash {
+            get {
+                return ResourceManager.GetString("SecondCash", resourceCulture);
             }
         }
         

@@ -34,5 +34,25 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                 Settings.Default.Save();
             }
         }
+
+        public decimal FirstCash
+        {
+            get => Settings.Default.FirstCash;
+            set
+            {
+                Settings.Default.FirstCash = value;
+                Settings.Default.Save();
+            }
+        }
+
+        public decimal SecondCash
+        {
+            get => Settings.Default.SecondCash;
+            set
+            {
+                Settings.Default.SecondCash = value;
+                Settings.Default.Save();
+            }
+        }
     }
 }

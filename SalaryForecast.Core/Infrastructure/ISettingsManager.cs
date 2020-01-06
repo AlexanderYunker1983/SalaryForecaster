@@ -5,5 +5,7 @@
         int SalaryFirstPartDate { get; set; }
         int SalarySecondPartDate { get; set; }
         decimal Salary { get; set; }
+        decimal FirstCash { get; set; }
+        decimal SecondCash { get; set; }
     }
 }

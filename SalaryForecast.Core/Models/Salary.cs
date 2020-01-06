@@ -9,6 +9,7 @@ namespace SalaryForecast.Core.Models
         public DateTime Date { get; set; }
         public decimal SalaryPart { get; set; }
         public decimal SalaryPercent { get; set; }
+        public decimal SalaryWithoutCash { get; set; }
 
         public bool IsNextSalary
         {

@@ -9,9 +9,13 @@
         Title="{DataBinding '$i18n.SalarySettings'}"
         d:DataContext="{d:DesignInstance salarySettingsViewModel:SalarySettingsViewModel}"
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FontSize="14"
+        ResizeMode="NoResize">
     <Grid Margin="11">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -29,5 +33,11 @@
 
         <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondPartDate'}" VerticalAlignment="Center"/>
         <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" Margin="0,0,0,3" Width="150" Value="{Binding SecondPartDate}" Minimum="16" Maximum="31" Increment="1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstCash'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="3" Margin="0,0,0,3" Width="150" Value="{Binding FirstCash}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondCash'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="4" Margin="0,0,0,3" Width="150" Value="{Binding SecondCash}" Minimum="0" Maximum="1000000" Increment="1000"/>
     </Grid>
 </Window>

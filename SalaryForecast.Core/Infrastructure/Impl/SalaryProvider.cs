@@ -38,7 +38,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 {
                     SalaryPart = secondPart * settingsManager.Salary,
                     SalaryPercent = secondPart * 100.0m,
-                    Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate)
+                    Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate),
+                    SalaryWithoutCash = secondPart * settingsManager.Salary - settingsManager.SecondCash
                 };
                 KeyValuePair<int, Month> previousMonth;
                 if (monthPair.Key == 1)
@@ -61,7 +62,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 {
                     SalaryPart = firstPart * settingsManager.Salary,
                     SalaryPercent = firstPart * 100.0m,
-                    Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalaryFirstPartDate)
+                    Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalaryFirstPartDate),
+                    SalaryWithoutCash = firstPart * settingsManager.Salary - settingsManager.FirstCash
                 });
 
                 result.Add(salary);

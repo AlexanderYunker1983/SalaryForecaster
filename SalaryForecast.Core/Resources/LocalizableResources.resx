@@ -162,4 +162,13 @@
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="FirstCash" xml:space="preserve">
+    <value>Наличные с зарплаты, руб.</value>
+  </data>
+  <data name="SalaryPartWithoutCash" xml:space="preserve">
+    <value>Выплата без наличных, руб.</value>
+  </data>
+  <data name="SecondCash" xml:space="preserve">
+    <value>Наличные с аванса, руб.</value>
+  </data>
 </root>

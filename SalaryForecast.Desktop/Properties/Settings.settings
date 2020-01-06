@@ -11,5 +11,11 @@
     <Setting Name="SalaryValue" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="FirstCash" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
+    <Setting Name="SecondCash" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
