@@ -1,0 +1,51 @@
+﻿<Window x:Class="SalaryForecast.Desktop.Views.SalarySettingsView.SalarySettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:salarySettingsViewModel="clr-namespace:SalaryForecast.Core.ViewModels.SalarySettingsViewModel;assembly=SalaryForecast.Core"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="{DataBinding '$i18n.SalarySettings'}"
+        d:DataContext="{d:DesignInstance salarySettingsViewModel:SalarySettingsViewModel}"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        FontSize="14"
+        ResizeMode="NoResize">
+    <Grid Margin="11">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,3,3" Text="{DataBinding '$i18n.SalaryValue'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="0" Margin="0,0,0,3" Width="150" Value="{Binding SalaryValue}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstPartDate'}" VerticalAlignment="Center"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" Margin="0,0,0,3" Width="150" Value="{Binding FirstPartDate}" Minimum="1" Maximum="15" Increment="1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondPartDate'}" VerticalAlignment="Center"/>
+        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" Margin="0,0,0,3" Width="150" Value="{Binding SecondPartDate}" Minimum="16" Maximum="31" Increment="1"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstCash'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="3" Margin="0,0,0,3" Width="150" Value="{Binding FirstCash}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondCash'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="4" Margin="0,0,0,3" Width="150" Value="{Binding SecondCash}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstPay'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="5" Margin="0,0,0,3" Width="150" Value="{Binding FirstPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondPay'}" VerticalAlignment="Center"/>
+        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="6" Margin="0,0,0,3" Width="150" Value="{Binding SecondPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
+    </Grid>
+</Window>

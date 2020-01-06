@@ -117,7 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CurrentYear" xml:space="preserve">
+    <value>Текущий год</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата выплаты</value>
+  </data>
+  <data name="daysMany" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="daysSeveral" xml:space="preserve">
+    <value>дня</value>
+  </data>
+  <data name="daysSingle" xml:space="preserve">
+    <value>день</value>
+  </data>
+  <data name="FirstPartDate" xml:space="preserve">
+    <value>Число выплаты зарплаты:</value>
+  </data>
+  <data name="NextSalaryDays" xml:space="preserve">
+    <value>До следующей зарплаты осталось</value>
+  </data>
+  <data name="PreviousYear" xml:space="preserve">
+    <value>Предыдущий год</value>
+  </data>
   <data name="ProgramTitle" xml:space="preserve">
     <value>Предсказатель зарплаты</value>
+  </data>
+  <data name="SalaryPartPercent" xml:space="preserve">
+    <value>% от зарплаты</value>
+  </data>
+  <data name="SalaryPartValue" xml:space="preserve">
+    <value>Выплата, руб.</value>
+  </data>
+  <data name="SalarySettings" xml:space="preserve">
+    <value>Настройки зарплаты</value>
+  </data>
+  <data name="SalaryValue" xml:space="preserve">
+    <value>Величина зарплаты в месяц, руб.:</value>
+  </data>
+  <data name="SecondPartDate" xml:space="preserve">
+    <value>Число выплаты аванса:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="FirstCash" xml:space="preserve">
+    <value>Наличные с зарплаты, руб.</value>
+  </data>
+  <data name="FirstPay" xml:space="preserve">
+    <value>Выплаты с зарплаты, руб.</value>
+  </data>
+  <data name="SalaryDelta" xml:space="preserve">
+    <value>Месячная разница, руб.</value>
+  </data>
+  <data name="SalaryPartWithoutCash" xml:space="preserve">
+    <value>Выплата без наличных, руб.</value>
+  </data>
+  <data name="SalaryWithoutCashAndPay" xml:space="preserve">
+    <value>Остаток после всех платежей, руб.</value>
+  </data>
+  <data name="SecondCash" xml:space="preserve">
+    <value>Наличные с аванса, руб.</value>
+  </data>
+  <data name="SecondPay" xml:space="preserve">
+    <value>Выплаты с аванса, руб.</value>
+  </data>
+  <data name="YearBalance" xml:space="preserve">
+    <value>Годовой баланс, руб.:</value>
   </data>
 </root>
