@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.ViewModels;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
 using YLocalization;
+using YMugenExtensions.Menu;
 
 namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
     public class SalaryForecasterStartViewModel : ViewModelBase, IHasDisplayName
     {
+        public string DisplayName { get; set; }
+        public ObservableCollection<IMenuItemViewModel> Menu { get; set; } = new ObservableCollection<IMenuItemViewModel>();
+        private readonly Dictionary<string, IMenuItemViewModel> mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
         private readonly ILocalizationManager localizationManager;
         private readonly ISalaryProvider salaryProvider;
-        private string daysString;
-        private Salary selectedSalary;
-        public string DisplayName { get; set; }
+        private string nextSalaryStatus;
 
         public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider)
         {
@@ -28,61 +33,102 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         {
             base.OnInitialized();
 
-            SalariesPast = salaryProvider.GetSalaries(DateTime.Now.Year - 1);
-            Salaries = salaryProvider.GetSalaries(DateTime.Now.Year);
-            OnPropertyChanged(nameof(SalariesPast));
-            OnPropertyChanged(nameof(Salaries));
+            CreateMenuItems();
+            Menu.AddRange(ProcessMenu(PlatformVariables.MenuStructure));
+
+            UpdateCurrentSalaries();
+        }
+
+        private void UpdateCurrentSalaries()
+        {
+            var currentYear = DateTime.Now.Year;
+            PastSalaries = salaryProvider.GetSalaries(currentYear - 1);
+            CurrentSalaries = salaryProvider.GetSalaries(currentYear);
 
             var currentMonth = DateTime.Now.Month;
-            var currentMonthDate = Salaries.Where(s => s.Date.Month == currentMonth).ToList();
-            SelectedSalary = Salaries.First(s => s.Date > DateTime.Now);
-            var salaryDate = SelectedSalary.Date;
+            var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
+            var nextSalary = currentMonthDate.First(s => s.Date > DateTime.Now);
+            nextSalary.IsNextSalary = true;
+            var salaryDate = nextSalary.Date;
 
             var deltaDays = (salaryDate.Date - DateTime.Now.Date).Days;
 
-            var daysCountString = "дней";
+            var daysCountString = localizationManager.GetString("daysMany");
             if (deltaDays / 10 != 1)
             {
                 if (deltaDays % 10 == 1)
                 {
-                    daysCountString = "день";
+                    daysCountString = localizationManager.GetString("daysSingle");
                 }
                 if (deltaDays % 10 >= 2 && deltaDays % 10 <= 4)
                 {
-                    daysCountString = "дня";
+                    daysCountString = localizationManager.GetString("daysSeveral");
                 }
             }
 
-            DaysString = $"{deltaDays} {daysCountString}";
+            NextSalaryStatus = $"{localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
+
+            OnPropertyChanged(nameof(PastSalaries));
+            OnPropertyChanged(nameof(CurrentSalaries));
         }
 
-        public List<Salary> SalariesPast { get; set; }
-        public List<Salary> Salaries { get; set; }
-
-        public string DaysString
+        private void CreateMenuItems()
         {
-            get => daysString;
+            mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
+        }
+
+        private async Task OnOpenSalarySettings()
+        {
+            using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
+            {
+                await vm.ShowAsync();
+            }
+            UpdateCurrentSalaries();
+        }
+
+        private IEnumerable<IMenuItemViewModel> ProcessMenu(object[] menuStructure)
+        {
+            var result = new List<IMenuItemViewModel>();
+            foreach (var menu in menuStructure)
+            {
+                if (menu is MenuWithSubItems withSubitems)
+                {
+                    var sub = new SubMenuItemViewModel(localizationManager.GetString(withSubitems.Caption));
+                    var items = ProcessMenu(withSubitems.MenuItems.Cast<object>().ToArray());
+                    sub.Items.AddRange(items);
+                    result.Add(sub);
+                }
+                else
+                {
+                    if (menu.ToString().Equals(MainMenuItems.Separator))
+                    {
+                        result.Add(MenuItemViewModel.NewSeparator());
+                    }
+                    else if (mainMenuItems.TryGetValue(menu.ToString(), out var menuItem))
+                    {
+                        result.Add(menuItem);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public string NextSalaryStatus
+        {
+            get => nextSalaryStatus;
             set
             {
-                if (value == daysString)
+                if (value == nextSalaryStatus)
                 {
                     return;
                 }
 
-                daysString = value;
+                nextSalaryStatus = value;
                 OnPropertyChanged();
             }
         }
 
-        public Salary SelectedSalary
-        {
-            get => selectedSalary;
-            set
-            {
-                if (Equals(value, selectedSalary)) return;
-                selectedSalary = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<Salary> PastSalaries { get; set; }
+        public List<Salary> CurrentSalaries { get; set; }
     }
 }

@@ -62,11 +62,137 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Текущий год.
+        /// </summary>
+        internal static string CurrentYear {
+            get {
+                return ResourceManager.GetString("CurrentYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата выплаты.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to дней.
+        /// </summary>
+        internal static string daysMany {
+            get {
+                return ResourceManager.GetString("daysMany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to дня.
+        /// </summary>
+        internal static string daysSeveral {
+            get {
+                return ResourceManager.GetString("daysSeveral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to день.
+        /// </summary>
+        internal static string daysSingle {
+            get {
+                return ResourceManager.GetString("daysSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Число выплаты зарплаты:.
+        /// </summary>
+        internal static string FirstPartDate {
+            get {
+                return ResourceManager.GetString("FirstPartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to До следующей зарплаты осталось.
+        /// </summary>
+        internal static string NextSalaryDays {
+            get {
+                return ResourceManager.GetString("NextSalaryDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предыдущий год.
+        /// </summary>
+        internal static string PreviousYear {
+            get {
+                return ResourceManager.GetString("PreviousYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Предсказатель зарплаты.
         /// </summary>
         internal static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to % от зарплаты.
+        /// </summary>
+        internal static string SalaryPartPercent {
+            get {
+                return ResourceManager.GetString("SalaryPartPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выплата, руб..
+        /// </summary>
+        internal static string SalaryPartValue {
+            get {
+                return ResourceManager.GetString("SalaryPartValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Настройки зарплаты.
+        /// </summary>
+        internal static string SalarySettings {
+            get {
+                return ResourceManager.GetString("SalarySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Величина зарплаты в месяц, руб.:.
+        /// </summary>
+        internal static string SalaryValue {
+            get {
+                return ResourceManager.GetString("SalaryValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Число выплаты аванса:.
+        /// </summary>
+        internal static string SecondPartDate {
+            get {
+                return ResourceManager.GetString("SecondPartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Настройки.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
     }

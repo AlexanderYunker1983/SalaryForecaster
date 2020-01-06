@@ -16,7 +16,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             this.settingsManager = settingsManager;
         }
 
-        public void InitializeYear(int year)
+        private void InitializeYear(int year)
         {
             // Предыдущий год нужен для рассчёта зарплаты за январь
             calendarProvider.InitForYear(year - 1);
