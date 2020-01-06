@@ -3,7 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryForecaster", "SalaryForecaster\SalaryForecaster.csproj", "{50176DA1-FA79-42F6-AD02-14D93A877C7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryForecast.Core", "SalaryForecast.Core\SalaryForecast.Core.csproj", "{A3C7DAFB-2D2E-4003-8940-8CCCAEEFEAB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YMugenExtensions", "YMugenExtensions\YMugenExtensions.csproj", "{07C8091A-C33C-4BFD-93EE-2168CD3AF2D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YLocalization", "YLocalization\YLocalization.csproj", "{54BD6404-171B-4E8D-BE04-F8CBD3275413}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A3C7DAFB-2D2E-4003-8940-8CCCAEEFEAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C7DAFB-2D2E-4003-8940-8CCCAEEFEAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C7DAFB-2D2E-4003-8940-8CCCAEEFEAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C7DAFB-2D2E-4003-8940-8CCCAEEFEAB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C8091A-C33C-4BFD-93EE-2168CD3AF2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C8091A-C33C-4BFD-93EE-2168CD3AF2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C8091A-C33C-4BFD-93EE-2168CD3AF2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C8091A-C33C-4BFD-93EE-2168CD3AF2D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54BD6404-171B-4E8D-BE04-F8CBD3275413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54BD6404-171B-4E8D-BE04-F8CBD3275413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54BD6404-171B-4E8D-BE04-F8CBD3275413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54BD6404-171B-4E8D-BE04-F8CBD3275413}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
