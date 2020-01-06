@@ -1,5 +1,5 @@
-# Файл сборки для проекта SalaryForecast
+# Файл сборки для проекта SalaryForecaster
 
-YBUILD_ADD_STANDARD_PROJECT(SalaryForecast ANDR)
+YBUILD_ADD_STANDARD_PROJECT(SalaryForecaster ANDR)
 
-add_dependencies(SalaryForecast SalaryForecast.Core YLocalization YMugenExtensions)
+add_dependencies(SalaryForecaster SalaryForecast.Core YLocalization YMugenExtensions)
