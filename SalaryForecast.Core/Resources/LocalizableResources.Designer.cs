@@ -71,7 +71,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дата выплаты.
+        ///   Looks up a localized string similar to     Дата
+        ///выплаты.
         /// </summary>
         internal static string Date {
             get {
@@ -170,7 +171,7 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to % от зарплаты.
+        ///   Looks up a localized string similar to Доля.
         /// </summary>
         internal static string SalaryPartPercent {
             get {
@@ -179,7 +180,7 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выплата, руб..
+        ///   Looks up a localized string similar to    Выплата.
         /// </summary>
         internal static string SalaryPartValue {
             get {
@@ -188,7 +189,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выплата без наличных, руб..
+        ///   Looks up a localized string similar to Выплата без
+        ///  наличных.
         /// </summary>
         internal static string SalaryPartWithoutCash {
             get {
@@ -215,7 +217,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Остаток после всех платежей, руб..
+        ///   Looks up a localized string similar to Остаток после
+        ///всех платежей.
         /// </summary>
         internal static string SalaryWithoutCashAndPay {
             get {

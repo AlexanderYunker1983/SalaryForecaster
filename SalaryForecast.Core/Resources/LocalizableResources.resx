@@ -121,7 +121,8 @@
     <value>Текущий год</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Дата выплаты</value>
+    <value>    Дата
+выплаты</value>
   </data>
   <data name="daysMany" xml:space="preserve">
     <value>дней</value>
@@ -145,10 +146,10 @@
     <value>Предсказатель зарплаты</value>
   </data>
   <data name="SalaryPartPercent" xml:space="preserve">
-    <value>% от зарплаты</value>
+    <value>Доля</value>
   </data>
   <data name="SalaryPartValue" xml:space="preserve">
-    <value>Выплата, руб.</value>
+    <value>   Выплата</value>
   </data>
   <data name="SalarySettings" xml:space="preserve">
     <value>Настройки зарплаты</value>
@@ -172,10 +173,12 @@
     <value>Месячная разница, руб.</value>
   </data>
   <data name="SalaryPartWithoutCash" xml:space="preserve">
-    <value>Выплата без наличных, руб.</value>
+    <value>Выплата без
+  наличных</value>
   </data>
   <data name="SalaryWithoutCashAndPay" xml:space="preserve">
-    <value>Остаток после всех платежей, руб.</value>
+    <value>Остаток после
+всех платежей</value>
   </data>
   <data name="SecondCash" xml:space="preserve">
     <value>Наличные с аванса, руб.</value>
