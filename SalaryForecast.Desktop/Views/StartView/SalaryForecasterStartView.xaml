@@ -69,7 +69,7 @@
                       CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
                       CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"
                       AutoGenerateColumns="False" HeadersVisibility="Column"
-                      IsReadOnly="True" LoadingRow="DataGridLoadingRow" UnloadingRow="DataGridLoadingRow">
+                      IsReadOnly="True" LoadingRow="DataGridLoadingRowWithoutHighlighting" UnloadingRow="DataGridLoadingRowWithoutHighlighting">
                 <DataGrid.CellStyle>
                     <Style>
                         <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>

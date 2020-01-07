@@ -16,6 +16,8 @@ namespace SalaryForecast.Desktop.Views.StartView
             InitializeComponent();
         }
 
+
+
         private void DataGridLoadingRow(object sender, DataGridRowEventArgs e)
         {
             var ee = (DataGrid)sender;
@@ -24,10 +26,15 @@ namespace SalaryForecast.Desktop.Views.StartView
                 return;
             }
 
+            FillBackgrounds(ee, true);
+        }
+
+        private void FillBackgrounds(DataGrid ee, bool withHighlighting)
+        {
             var counter = -1;
             for (var index = 0; index < ee.Items.Count; index++)
             {
-                if ((index + 1)% 2 != 0)
+                if ((index + 1) % 2 != 0)
                 {
                     counter++;
                 }
@@ -36,31 +43,37 @@ namespace SalaryForecast.Desktop.Views.StartView
                     var row = (DataGridRow)ee.ItemContainerGenerator.ContainerFromIndex(index);
                     if (row != null)
                     {
-                        var a = row.DataContext;
-                        if (a is Salary salary)
+                        if (withHighlighting)
                         {
-                            var colorChanged = false;
-                            if (salary.IsNextSalary)
+                            var a = row.DataContext;
+                            if (a is Salary salary)
                             {
-                                row.Background = new LinearGradientBrush(Colors.Lime, Colors.White, new Point(0,0.5), new Point(1.0,0.5));
-                                colorChanged = true;
-                            }
-
-                            if (salary.WarningEnabled)
-                            {
-                                if (!colorChanged)
+                                var colorChanged = false;
+                                if (salary.IsNextSalary)
                                 {
-                                    row.Background = new SolidColorBrush(Colors.Red);
+                                    row.Background = new LinearGradientBrush(Colors.Lime, Colors.White,
+                                        new Point(0, 0.5), new Point(1.0, 0.5));
                                     colorChanged = true;
                                 }
-                                else
+
+                                if (salary.WarningEnabled)
                                 {
-                                    row.Background = new LinearGradientBrush(Colors.Lime, Colors.Red, new Point(0, 0.5), new Point(1.0, 0.5));
+                                    if (!colorChanged)
+                                    {
+                                        row.Background = new SolidColorBrush(Colors.Red);
+                                        colorChanged = true;
+                                    }
+                                    else
+                                    {
+                                        row.Background = new LinearGradientBrush(Colors.Lime, Colors.Red,
+                                            new Point(0, 0.5), new Point(1.0, 0.5));
+                                    }
                                 }
-                            }
-                            if (colorChanged)
-                            {
-                                continue;
+
+                                if (colorChanged)
+                                {
+                                    continue;
+                                }
                             }
                         }
 
@@ -74,6 +87,17 @@ namespace SalaryForecast.Desktop.Views.StartView
                     continue;
                 }
             }
+        }
+
+        private void DataGridLoadingRowWithoutHighlighting(object sender, DataGridRowEventArgs e)
+        {
+            var ee = (DataGrid)sender;
+            if (ee?.ItemContainerGenerator == null)
+            {
+                return;
+            }
+
+            FillBackgrounds(ee, false);
         }
     }
 }
