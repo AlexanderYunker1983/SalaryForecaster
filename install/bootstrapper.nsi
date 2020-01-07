@@ -49,6 +49,7 @@ Section "$(ProductName) ${Y_PRODUCT_VERSION}" Product
     WriteUninstaller "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "DisplayName" "$(ProductName) ${Y_PRODUCT_VERSION}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "DisplayIcon" "$INSTDIR\SalaryForecast.Desktop.exe"
  
     CreateShortCut "$DESKTOP\${SHORT_CUT}" "$INSTDIR\SalaryForecast.Desktop.exe"
 	CreateDirectory "$SMPROGRAMS\${Y_PRODUCT}"
