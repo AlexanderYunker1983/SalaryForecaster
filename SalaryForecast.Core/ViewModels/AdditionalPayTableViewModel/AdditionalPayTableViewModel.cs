@@ -56,6 +56,11 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
             base.OnInitialized();
 
             var dbPays = dbService.GetAdditionalPays();
+
+            dbPays.Sort((pay, additionalPay) => pay.Pay.CompareTo(additionalPay.Pay));
+            dbPays.Sort((pay, additionalPay) => pay.Part.CompareTo(additionalPay.Part));
+            dbPays.Sort((pay, additionalPay) => pay.Month.CompareTo(additionalPay.Month));
+
             AdditionalPays.Clear();
             AdditionalPays.AddRange(dbPays);
         }
