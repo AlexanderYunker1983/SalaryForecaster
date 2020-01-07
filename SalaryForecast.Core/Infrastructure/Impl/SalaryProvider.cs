@@ -44,6 +44,9 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
                 var secondPay = secondPays.Sum(p => p.Pay);
+
+                var oneDayCost = settingsManager.Salary * (1.0m / monthPair.Value.WorkDaysCount - 1.0m / 29.4m);
+                
                 var salary = new Salary
                 {
                     SalaryPart = secondPart * settingsManager.Salary,
@@ -51,7 +54,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate),
                     SalaryWithoutCash = secondPart * settingsManager.Salary - settingsManager.SecondCash,
                     SalaryWithoutCashAndPay = secondPart * settingsManager.Salary - settingsManager.SecondCash - settingsManager.SecondPay - secondPay,
-                    AdditionalPay = secondPay
+                    AdditionalPay = secondPay,
+                    OneDayCost = oneDayCost
                 };
                 KeyValuePair<int, Month> previousMonth;
                 if (monthPair.Key == 1)
@@ -82,7 +86,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryWithoutCash = firstPart * settingsManager.Salary - settingsManager.FirstCash,
                     SalaryWithoutCashAndPay = firstPart * settingsManager.Salary - settingsManager.FirstCash - settingsManager.FirstPay - firstPay,
                     SalaryDelta = "-----",
-                    AdditionalPay = firstPay
+                    AdditionalPay = firstPay,
+                    OneDayCost = oneDayCost
                 };
 
                 salaryYearDelta += firstSalary.SalaryWithoutCashAndPay;

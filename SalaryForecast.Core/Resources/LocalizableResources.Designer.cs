@@ -62,9 +62,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to   Дополнительные расходы/
-        ///                      премии 
-        ///(премии идут отрицательными).
+        ///   Looks up a localized string similar to   Доп. расходы/
+        ///       премии .
         /// </summary>
         internal static string AdditionalPay {
             get {
@@ -209,6 +208,16 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Потери от одного
+        ///      дня отгула.
+        /// </summary>
+        internal static string OneDayCost {
+            get {
+                return ResourceManager.GetString("OneDayCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Часть платежа.
         /// </summary>
         internal static string PartHeader {
@@ -254,7 +263,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Месячная разница, руб..
+        ///   Looks up a localized string similar to   Месячная 
+        ///разница, руб..
         /// </summary>
         internal static string SalaryDelta {
             get {

@@ -170,7 +170,8 @@
     <value>Выплаты с зарплаты, руб.</value>
   </data>
   <data name="SalaryDelta" xml:space="preserve">
-    <value>Месячная разница, руб.</value>
+    <value>  Месячная 
+разница, руб.</value>
   </data>
   <data name="SalaryPartWithoutCash" xml:space="preserve">
     <value>Выплата без
@@ -190,9 +191,8 @@
     <value>Годовой баланс, руб.:</value>
   </data>
   <data name="AdditionalPay" xml:space="preserve">
-    <value>  Дополнительные расходы/
-                      премии 
-(премии идут отрицательными)</value>
+    <value>  Доп. расходы/
+       премии </value>
   </data>
   <data name="AdditionalPays" xml:space="preserve">
     <value>Дополнительные платежи</value>
@@ -226,5 +226,9 @@
   </data>
   <data name="YearHeader" xml:space="preserve">
     <value>Год</value>
+  </data>
+  <data name="OneDayCost" xml:space="preserve">
+    <value>Потери от одного
+      дня отгула</value>
   </data>
 </root>
