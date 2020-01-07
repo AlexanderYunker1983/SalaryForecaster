@@ -42,9 +42,9 @@ Section "$(ProductName) ${Y_PRODUCT_VERSION}" Product
     File "${Y_FILE_PATH}\SalaryForecast.Desktop.exe.config"
     File "${Y_FILE_PATH}\*.dll"
     SetOutPath $INSTDIR\x64
-    File "${YURION_FILE_PATH}\x64\*.dll"
+    File "${Y_FILE_PATH}\x64\*.dll"
     SetOutPath $INSTDIR\x86
-    File "${YURION_FILE_PATH}\x86\*.dll"
+    File "${Y_FILE_PATH}\x86\*.dll"
     
     WriteUninstaller "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
