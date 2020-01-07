@@ -37,6 +37,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             }
             var result = new List<Salary>();
             var additionalPays = dbService.GetAdditionalPays().Where(p => p.Year == year).ToList();
+            var salaryYearDelta = 0m;
             foreach (var monthPair in calendarProvider.Years[year].Months)
             {
                 var monthAdditionalPays = additionalPays.Where(p => p.Month == monthPair.Key).ToList();
@@ -57,6 +58,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 {
                     if (!calendarProvider.Years.ContainsKey(year - 1))
                     {
+                        salary.SalaryYearDelta = salary.SalaryWithoutCashAndPay;
+                        salaryYearDelta = salary.SalaryYearDelta;
                         result.Add(salary);
                         continue;
                     }
@@ -81,6 +84,10 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryDelta = "-----",
                     AdditionalPay = firstPay
                 };
+
+                salaryYearDelta += firstSalary.SalaryWithoutCashAndPay;
+                firstSalary.SalaryYearDelta = salaryYearDelta;
+
                 result.Add(firstSalary);
                 var totalDeltaSalary = firstSalary.SalaryWithoutCashAndPay + salary.SalaryWithoutCashAndPay;
                 salary.SalaryDelta = $"{totalDeltaSalary:F2}";
@@ -88,6 +95,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 {
                     salary.WarningEnabled = true;
                 }
+                salaryYearDelta += salary.SalaryWithoutCashAndPay;
+                salary.SalaryYearDelta = salaryYearDelta;
                 result.Add(salary);
             }
             return result;

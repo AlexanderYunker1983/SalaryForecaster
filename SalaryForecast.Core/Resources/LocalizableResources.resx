@@ -221,6 +221,9 @@
   <data name="RemoveSelectedPay" xml:space="preserve">
     <value>Удалить выбранный платёж</value>
   </data>
+  <data name="YearBalanceHeader" xml:space="preserve">
+    <value>Годовой баланс</value>
+  </data>
   <data name="YearHeader" xml:space="preserve">
     <value>Год</value>
   </data>

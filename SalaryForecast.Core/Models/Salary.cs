@@ -13,6 +13,7 @@ namespace SalaryForecast.Core.Models
         public decimal SalaryWithoutCash { get; set; }
         public decimal SalaryWithoutCashAndPay { get; set; }
         public string SalaryDelta { get; set; }
+        public decimal SalaryYearDelta { get; set; }
         public bool WarningEnabled { get; set; }
 
         public decimal AdditionalPay

@@ -364,6 +364,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Годовой баланс.
+        /// </summary>
+        internal static string YearBalanceHeader {
+            get {
+                return ResourceManager.GetString("YearBalanceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Год.
         /// </summary>
         internal static string YearHeader {
