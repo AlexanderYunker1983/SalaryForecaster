@@ -1,0 +1,47 @@
+﻿<Window x:Class="SalaryForecast.Desktop.Views.AdditionalPayTableView.AdditionalPayTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:additionalPayTableViewModel="clr-namespace:SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel;assembly=SalaryForecast.Core"
+        mc:Ignorable="d"
+        Title="{DataBinding '$i18n.AdditionalPayTable'}"
+        WindowStartupLocation="CenterScreen"
+        Width="1000"
+        Height="700"
+        ResizeMode="NoResize"
+        d:DataContext="{d:DesignInstance additionalPayTableViewModel:AdditionalPayTableViewModel}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="11">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,6">
+            <Button Margin="0,0,6,0" Content="{DataBinding '$i18n.AddNewPay'}" Command="{Binding AddNewAdditionalPayCommand}"/>
+            <Button Content="{DataBinding '$i18n.RemoveSelectedPay'}" Command="{Binding RemoveSelectedAdditionalPayCommand}"/>
+        </StackPanel>
+        <DataGrid Grid.Column="0" Grid.Row="1" CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False"
+                  CanUserSortColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"
+                  AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="16"
+                  ItemsSource="{Binding AdditionalPays}" SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Year}" Header="{DataBinding '$i18n.YearHeader'}" Width="50"/>
+                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Month}" Header="{DataBinding '$i18n.MonthHeader'}" Width="50"/>
+                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Part}" Header="{DataBinding '$i18n.PartHeader'}" Width="50"/>
+                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU}" 
+                                    Header="{DataBinding '$i18n.PayHeader'}" Width="100"/>
+                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Comment}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

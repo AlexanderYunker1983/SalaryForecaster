@@ -12,6 +12,7 @@ namespace SalaryForecast.Core
             var iocContainer = context.IocContainer;
             var localizationManager = iocContainer.Get<ILocalizationManager>();
             localizationManager.AddAssembly("SalaryForecast.Core");
+            PlatformVariables.LocalizationManager = localizationManager;
             return true;
         }
 

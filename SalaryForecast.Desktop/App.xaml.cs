@@ -22,6 +22,11 @@ namespace SalaryForecast.Desktop
                 {
                     MainMenuItems.SalarySettings,
                 }),
+            new MenuWithSubItems("AdditionalPays",
+                new[]
+                {
+                    MainMenuItems.AdditionalPaysTable,
+                }),
         };
 
         public App()

@@ -73,6 +73,42 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дополнительные платежи.
+        /// </summary>
+        internal static string AdditionalPays {
+            get {
+                return ResourceManager.GetString("AdditionalPays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Таблица дополнительных платежей.
+        /// </summary>
+        internal static string AdditionalPayTable {
+            get {
+                return ResourceManager.GetString("AdditionalPayTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавить новый платёж.
+        /// </summary>
+        internal static string AddNewPay {
+            get {
+                return ResourceManager.GetString("AddNewPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Комментарий.
+        /// </summary>
+        internal static string CommentHeader {
+            get {
+                return ResourceManager.GetString("CommentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущий год.
         /// </summary>
         internal static string CurrentYear {
@@ -119,6 +155,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Редактировать таблицу дополнительных платежей.
+        /// </summary>
+        internal static string EditAdditionalPays {
+            get {
+                return ResourceManager.GetString("EditAdditionalPays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Наличные с зарплаты, руб..
         /// </summary>
         internal static string FirstCash {
@@ -146,11 +191,38 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Месяц.
+        /// </summary>
+        internal static string MonthHeader {
+            get {
+                return ResourceManager.GetString("MonthHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to До следующей зарплаты осталось.
         /// </summary>
         internal static string NextSalaryDays {
             get {
                 return ResourceManager.GetString("NextSalaryDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Часть платежа.
+        /// </summary>
+        internal static string PartHeader {
+            get {
+                return ResourceManager.GetString("PartHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Платёж.
+        /// </summary>
+        internal static string PayHeader {
+            get {
+                return ResourceManager.GetString("PayHeader", resourceCulture);
             }
         }
         
@@ -169,6 +241,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить выбранный платёж.
+        /// </summary>
+        internal static string RemoveSelectedPay {
+            get {
+                return ResourceManager.GetString("RemoveSelectedPay", resourceCulture);
             }
         }
         
@@ -279,6 +360,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string YearBalance {
             get {
                 return ResourceManager.GetString("YearBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Год.
+        /// </summary>
+        internal static string YearHeader {
+            get {
+                return ResourceManager.GetString("YearHeader", resourceCulture);
             }
         }
     }

@@ -14,5 +14,7 @@ namespace SalaryForecast.Core.Db
         public int Part { get; set; }
         [NotNull]
         public decimal Pay { get; set; }
+
+        public string Comment { get; set; }
     }
 }

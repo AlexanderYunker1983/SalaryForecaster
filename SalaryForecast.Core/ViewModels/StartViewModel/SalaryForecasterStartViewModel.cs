@@ -88,6 +88,16 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private void CreateMenuItems()
         {
             mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
+            mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
+        }
+
+        private async Task OnEditAdditionalPays()
+        {
+            using (var vm = GetViewModel<AdditionalPayTableViewModel.AdditionalPayTableViewModel>())
+            {
+                await vm.ShowAsync();
+            }
+            UpdateCurrentSalaries();
         }
 
         private async Task OnOpenSalarySettings()

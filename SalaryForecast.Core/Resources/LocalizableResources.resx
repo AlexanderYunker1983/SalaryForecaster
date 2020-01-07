@@ -194,4 +194,34 @@
                       премии 
 (премии идут отрицательными)</value>
   </data>
+  <data name="AdditionalPays" xml:space="preserve">
+    <value>Дополнительные платежи</value>
+  </data>
+  <data name="AdditionalPayTable" xml:space="preserve">
+    <value>Таблица дополнительных платежей</value>
+  </data>
+  <data name="AddNewPay" xml:space="preserve">
+    <value>Добавить новый платёж</value>
+  </data>
+  <data name="CommentHeader" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="EditAdditionalPays" xml:space="preserve">
+    <value>Редактировать таблицу дополнительных платежей</value>
+  </data>
+  <data name="MonthHeader" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="PartHeader" xml:space="preserve">
+    <value>Часть платежа</value>
+  </data>
+  <data name="PayHeader" xml:space="preserve">
+    <value>Платёж</value>
+  </data>
+  <data name="RemoveSelectedPay" xml:space="preserve">
+    <value>Удалить выбранный платёж</value>
+  </data>
+  <data name="YearHeader" xml:space="preserve">
+    <value>Год</value>
+  </data>
 </root>
