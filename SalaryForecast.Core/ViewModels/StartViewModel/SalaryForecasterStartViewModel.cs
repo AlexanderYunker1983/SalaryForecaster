@@ -13,20 +13,22 @@ using YMugenExtensions.Menu;
 
 namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
-    public class SalaryForecasterStartViewModel : ViewModelBase, IHasDisplayName
+    public class SalaryForecasterStartViewModel : CloseableViewModel, IHasDisplayName
     {
         public string DisplayName { get; set; }
         public ObservableCollection<IMenuItemViewModel> Menu { get; set; } = new ObservableCollection<IMenuItemViewModel>();
         private readonly Dictionary<string, IMenuItemViewModel> mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
         private readonly ILocalizationManager localizationManager;
         private readonly ISalaryProvider salaryProvider;
+        private readonly IDbService dbService;
         private string nextSalaryStatus;
         private string yearBalance;
 
-        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider)
+        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService)
         {
             this.localizationManager = localizationManager;
             this.salaryProvider = salaryProvider;
+            this.dbService = dbService;
             DisplayName = $"{this.localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
         }
 
@@ -38,6 +40,13 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             Menu.AddRange(ProcessMenu(PlatformVariables.MenuStructure));
 
             UpdateCurrentSalaries();
+        }
+
+        protected override void OnClosed(IDataContext context)
+        {
+            dbService.Close();
+
+            base.OnClosed(context);
         }
 
         private void UpdateCurrentSalaries()

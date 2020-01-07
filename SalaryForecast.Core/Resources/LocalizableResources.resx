@@ -189,4 +189,9 @@
   <data name="YearBalance" xml:space="preserve">
     <value>Годовой баланс, руб.:</value>
   </data>
+  <data name="AdditionalPay" xml:space="preserve">
+    <value>  Дополнительные расходы/
+                      премии 
+(премии идут отрицательными)</value>
+  </data>
 </root>

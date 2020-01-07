@@ -9,11 +9,16 @@ namespace SalaryForecast.Core.Infrastructure.Impl
     {
         private readonly ICalendarProvider calendarProvider;
         private readonly ISettingsManager settingsManager;
+        private readonly IDbService dbService;
+        private readonly IFileProvider fileProvider;
 
-        public SalaryProvider(ICalendarProvider calendarProvider, ISettingsManager settingsManager)
+        public SalaryProvider(ICalendarProvider calendarProvider, ISettingsManager settingsManager, IDbService dbService, IFileProvider fileProvider)
         {
             this.calendarProvider = calendarProvider;
             this.settingsManager = settingsManager;
+            this.dbService = dbService;
+            this.fileProvider = fileProvider;
+            dbService.Init(fileProvider.GetDbFilePath());
         }
 
         private void InitializeYear(int year)

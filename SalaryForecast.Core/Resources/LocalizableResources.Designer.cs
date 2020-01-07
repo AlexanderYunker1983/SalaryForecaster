@@ -62,6 +62,17 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to   Дополнительные расходы/
+        ///                      премии 
+        ///(премии идут отрицательными).
+        /// </summary>
+        internal static string AdditionalPay {
+            get {
+                return ResourceManager.GetString("AdditionalPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущий год.
         /// </summary>
         internal static string CurrentYear {
