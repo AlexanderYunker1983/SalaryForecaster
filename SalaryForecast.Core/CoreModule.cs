@@ -35,6 +35,10 @@ namespace SalaryForecast.Core
             {
                 iocContainer.Bind<ISalaryProvider, SalaryProvider>(DependencyLifecycle.SingleInstance);
             }
+            if (!iocContainer.CanResolve<IDbService>())
+            {
+                iocContainer.Bind<IDbService, DbService>(DependencyLifecycle.SingleInstance);
+            }
             return true;
         }
 

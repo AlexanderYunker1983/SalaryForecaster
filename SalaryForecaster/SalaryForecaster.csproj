@@ -113,6 +113,9 @@
     <PackageReference Include="MugenMvvmToolkit.Binding">
       <Version>6.5.1.1</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.6.292</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
   </ItemGroup>
   <ItemGroup>
