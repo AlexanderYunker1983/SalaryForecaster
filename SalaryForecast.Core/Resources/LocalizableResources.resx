@@ -231,4 +231,8 @@
     <value>Потери от одного
       дня отгула</value>
   </data>
+  <data name="OneHolidayCost" xml:space="preserve">
+    <value>"Монетизация"
+    выходных</value>
+  </data>
 </root>

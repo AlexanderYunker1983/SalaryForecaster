@@ -218,6 +218,16 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;Монетизация&quot;
+        ///    выходных.
+        /// </summary>
+        internal static string OneHolidayCost {
+            get {
+                return ResourceManager.GetString("OneHolidayCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Часть платежа.
         /// </summary>
         internal static string PartHeader {

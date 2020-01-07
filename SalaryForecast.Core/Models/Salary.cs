@@ -15,6 +15,7 @@ namespace SalaryForecast.Core.Models
         public string SalaryDelta { get; set; }
         public decimal SalaryYearDelta { get; set; }
         public decimal OneDayCost { get; set; }
+        public decimal OneHolidayCost { get; set; }
         public bool WarningEnabled { get; set; }
 
         public decimal AdditionalPay
