@@ -170,7 +170,8 @@
     <value>Выплаты с зарплаты, руб.</value>
   </data>
   <data name="SalaryDelta" xml:space="preserve">
-    <value>Месячная разница, руб.</value>
+    <value>  Месячная 
+разница, руб.</value>
   </data>
   <data name="SalaryPartWithoutCash" xml:space="preserve">
     <value>Выплата без
@@ -190,9 +191,8 @@
     <value>Годовой баланс, руб.:</value>
   </data>
   <data name="AdditionalPay" xml:space="preserve">
-    <value>  Дополнительные расходы/
-                      премии 
-(премии идут отрицательными)</value>
+    <value>  Доп. расходы/
+       премии </value>
   </data>
   <data name="AdditionalPays" xml:space="preserve">
     <value>Дополнительные платежи</value>
@@ -213,7 +213,8 @@
     <value>Месяц</value>
   </data>
   <data name="PartHeader" xml:space="preserve">
-    <value>Часть платежа</value>
+    <value>  Часть 
+платежа</value>
   </data>
   <data name="PayHeader" xml:space="preserve">
     <value>Платёж</value>
@@ -226,5 +227,89 @@
   </data>
   <data name="YearHeader" xml:space="preserve">
     <value>Год</value>
+  </data>
+  <data name="OneDayCost" xml:space="preserve">
+    <value>Потери от одного
+      дня отгула</value>
+  </data>
+  <data name="OneHolidayCost" xml:space="preserve">
+    <value>"Монетизация"
+    выходных</value>
+  </data>
+  <data name="UseInCalculation" xml:space="preserve">
+    <value>Включить
+в расчёт</value>
+  </data>
+  <data name="UseInCalculationOfVacation" xml:space="preserve">
+    <value>Входит в расчёт
+средней з/пл</value>
+  </data>
+  <data name="DataWillBeUpdatedAfterClosing" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица
+    автоматически будет пересчитана после того как 
+                      данное окно будет закрыто</value>
+  </data>
+  <data name="DataWillBeUpdatedAfterClosingWide" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица автоматически будет пересчитана 
+                                  после того как данное окно будет закрыто</value>
+  </data>
+  <data name="FirstCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день зарплаты. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="FirstPartDateToolTip" xml:space="preserve">
+    <value>День выплаты зарплаты. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="FirstPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения зарплаты.</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Зелёным</value>
+  </data>
+  <data name="GreenHelp" xml:space="preserve">
+    <value> подсвечивается строка ближайшей выплаты</value>
+  </data>
+  <data name="GreenRed" xml:space="preserve">
+    <value>Красно-зелёным</value>
+  </data>
+  <data name="GreenRedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Красным</value>
+  </data>
+  <data name="RedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов</value>
+  </data>
+  <data name="SalaryValueToolTip" xml:space="preserve">
+    <value>Размер зарплаты в месяц
+за вычитом всех налогов</value>
+  </data>
+  <data name="SecondCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день аванса. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="SecondPartDateToolTip" xml:space="preserve">
+    <value>День выплаты аванса. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="SecondPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения аванса.</value>
+  </data>
+  <data name="WarningNegativePay" xml:space="preserve">
+    <value>!!! Внимание! Положительная величина платежа вводится для обозначения трат. 
+                Премии вводятся с отрицательной величиной платежа !!!
+Часть платежа - индекс от 1 до 2 выплаты:
+1 - зарплата (первая часть выплат в начале месяца);
+2 - аванс (вторая часть выплат в конце месяца).</value>
   </data>
 </root>

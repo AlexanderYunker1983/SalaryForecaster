@@ -74,5 +74,15 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                 Settings.Default.Save();
             }
         }
+
+        public bool FirstStart
+        {
+            get => Settings.Default.FirstStart;
+            set
+            {
+                Settings.Default.FirstStart = value;
+                Settings.Default.Save();
+            }
+        }
     }
 }

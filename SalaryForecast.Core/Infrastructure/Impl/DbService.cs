@@ -12,8 +12,16 @@ namespace SalaryForecast.Core.Infrastructure.Impl
         {
             dbFullPath = dbPath;
             conn = new SQLiteConnection(dbFullPath, SQLiteOpenFlags.ReadWrite);
-
+            MigrateDB();
             conn.CreateTable<AdditionalPay>();
+        }
+
+        private void MigrateDB()
+        {
+            var ap = GetAdditionalPays();
+            conn.DropTable<AdditionalPay>();
+            conn.CreateTable<AdditionalPay>();
+            conn.InsertAll(ap);
         }
 
         public void Close()

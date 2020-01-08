@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Win32;
+using SalaryForecast.Core.Db;
 using SalaryForecast.Core.Infrastructure;
+using SQLite;
 using Path = System.IO.Path;
 
 namespace SalaryForecast.Desktop.Infrastructure.Impl
@@ -33,6 +35,10 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             if (!File.Exists(dbPath))
             {
                 File.Create(dbPath).Close();
+                var conn = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite);
+                conn.CreateTable<AdditionalPay>();
+                conn.Close();
+                conn.Dispose();
             }
             return dbPath;
         }

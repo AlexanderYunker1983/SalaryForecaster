@@ -36,7 +36,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
         {
             if (Years.ContainsKey(year))
             {
-                return;
+                Years.Remove(year);
             }
 
             var yearModel = new Year

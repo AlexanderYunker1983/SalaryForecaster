@@ -62,9 +62,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to   Дополнительные расходы/
-        ///                      премии 
-        ///(премии идут отрицательными).
+        ///   Looks up a localized string similar to   Доп. расходы/
+        ///       премии .
         /// </summary>
         internal static string AdditionalPay {
             get {
@@ -114,6 +113,27 @@ namespace SalaryForecast.Core.Resources {
         internal static string CurrentYear {
             get {
                 return ResourceManager.GetString("CurrentYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные автоматически сохранятся и главная таблица
+        ///    автоматически будет пересчитана после того как 
+        ///                      данное окно будет закрыто.
+        /// </summary>
+        internal static string DataWillBeUpdatedAfterClosing {
+            get {
+                return ResourceManager.GetString("DataWillBeUpdatedAfterClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные автоматически сохранятся и главная таблица автоматически будет пересчитана 
+        ///                                  после того как данное окно будет закрыто.
+        /// </summary>
+        internal static string DataWillBeUpdatedAfterClosingWide {
+            get {
+                return ResourceManager.GetString("DataWillBeUpdatedAfterClosingWide", resourceCulture);
             }
         }
         
@@ -173,6 +193,18 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Размер денежных средств, которые обязательно
+        ///нужно снять в день зарплаты. Например, на оплату
+        ///коммунальных платежей, питание, проезд. Сюда
+        ///не входят платежи по займам и кредитам..
+        /// </summary>
+        internal static string FirstCashToolTip {
+            get {
+                return ResourceManager.GetString("FirstCashToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Число выплаты зарплаты:.
         /// </summary>
         internal static string FirstPartDate {
@@ -182,11 +214,68 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to День выплаты зарплаты. Если день выпадает на
+        ///выходной или праздничный день, рассчитывется
+        ///ближайший к нему предыдущий рабочий день.
+        /// </summary>
+        internal static string FirstPartDateToolTip {
+            get {
+                return ResourceManager.GetString("FirstPartDateToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выплаты с зарплаты, руб..
         /// </summary>
         internal static string FirstPay {
             get {
                 return ResourceManager.GetString("FirstPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Размер платежей по займам и кредитам, 
+        ///которые делаются после получения зарплаты..
+        /// </summary>
+        internal static string FirstPayToolTip {
+            get {
+                return ResourceManager.GetString("FirstPayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зелёным.
+        /// </summary>
+        internal static string Green {
+            get {
+                return ResourceManager.GetString("Green", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка ближайшей выплаты.
+        /// </summary>
+        internal static string GreenHelp {
+            get {
+                return ResourceManager.GetString("GreenHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Красно-зелёным.
+        /// </summary>
+        internal static string GreenRed {
+            get {
+                return ResourceManager.GetString("GreenRed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой.
+        /// </summary>
+        internal static string GreenRedHelp {
+            get {
+                return ResourceManager.GetString("GreenRedHelp", resourceCulture);
             }
         }
         
@@ -209,7 +298,28 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Часть платежа.
+        ///   Looks up a localized string similar to Потери от одного
+        ///      дня отгула.
+        /// </summary>
+        internal static string OneDayCost {
+            get {
+                return ResourceManager.GetString("OneDayCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Монетизация&quot;
+        ///    выходных.
+        /// </summary>
+        internal static string OneHolidayCost {
+            get {
+                return ResourceManager.GetString("OneHolidayCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   Часть 
+        ///платежа.
         /// </summary>
         internal static string PartHeader {
             get {
@@ -245,6 +355,24 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Красным.
+        /// </summary>
+        internal static string Red {
+            get {
+                return ResourceManager.GetString("Red", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов.
+        /// </summary>
+        internal static string RedHelp {
+            get {
+                return ResourceManager.GetString("RedHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удалить выбранный платёж.
         /// </summary>
         internal static string RemoveSelectedPay {
@@ -254,7 +382,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Месячная разница, руб..
+        ///   Looks up a localized string similar to   Месячная 
+        ///разница, руб..
         /// </summary>
         internal static string SalaryDelta {
             get {
@@ -309,6 +438,16 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Размер зарплаты в месяц
+        ///за вычитом всех налогов.
+        /// </summary>
+        internal static string SalaryValueToolTip {
+            get {
+                return ResourceManager.GetString("SalaryValueToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Остаток после
         ///всех платежей.
         /// </summary>
@@ -328,11 +467,34 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Размер денежных средств, которые обязательно
+        ///нужно снять в день аванса. Например, на оплату
+        ///коммунальных платежей, питание, проезд. Сюда
+        ///не входят платежи по займам и кредитам..
+        /// </summary>
+        internal static string SecondCashToolTip {
+            get {
+                return ResourceManager.GetString("SecondCashToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Число выплаты аванса:.
         /// </summary>
         internal static string SecondPartDate {
             get {
                 return ResourceManager.GetString("SecondPartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to День выплаты аванса. Если день выпадает на
+        ///выходной или праздничный день, рассчитывется
+        ///ближайший к нему предыдущий рабочий день.
+        /// </summary>
+        internal static string SecondPartDateToolTip {
+            get {
+                return ResourceManager.GetString("SecondPartDateToolTip", resourceCulture);
             }
         }
         
@@ -346,11 +508,54 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Размер платежей по займам и кредитам, 
+        ///которые делаются после получения аванса..
+        /// </summary>
+        internal static string SecondPayToolTip {
+            get {
+                return ResourceManager.GetString("SecondPayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Настройки.
         /// </summary>
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Включить
+        ///в расчёт.
+        /// </summary>
+        internal static string UseInCalculation {
+            get {
+                return ResourceManager.GetString("UseInCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Входит в расчёт
+        ///средней з/пл.
+        /// </summary>
+        internal static string UseInCalculationOfVacation {
+            get {
+                return ResourceManager.GetString("UseInCalculationOfVacation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to !!! Внимание! Положительная величина платежа вводится для обозначения трат. 
+        ///                Премии вводятся с отрицательной величиной платежа !!!
+        ///Часть платежа - индекс от 1 до 2 выплаты:
+        ///1 - зарплата (первая часть выплат в начале месяца);
+        ///2 - аванс (вторая часть выплат в конце месяца)..
+        /// </summary>
+        internal static string WarningNegativePay {
+            get {
+                return ResourceManager.GetString("WarningNegativePay", resourceCulture);
             }
         }
         

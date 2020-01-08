@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces.Models;
+using MugenMvvmToolkit.Interfaces.Navigation;
+using MugenMvvmToolkit.Interfaces.ViewModels;
 using MugenMvvmToolkit.ViewModels;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
@@ -13,7 +15,7 @@ using YMugenExtensions.Menu;
 
 namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
-    public class SalaryForecasterStartViewModel : CloseableViewModel, IHasDisplayName
+    public class SalaryForecasterStartViewModel : CloseableViewModel, IHasDisplayName, INavigableViewModel
     {
         public string DisplayName { get; set; }
         public ObservableCollection<IMenuItemViewModel> Menu { get; set; } = new ObservableCollection<IMenuItemViewModel>();
@@ -21,14 +23,16 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly ILocalizationManager localizationManager;
         private readonly ISalaryProvider salaryProvider;
         private readonly IDbService dbService;
+        private readonly ISettingsManager settingsManager;
         private string nextSalaryStatus;
         private string yearBalance;
 
-        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService)
+        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService, ISettingsManager settingsManager)
         {
             this.localizationManager = localizationManager;
             this.salaryProvider = salaryProvider;
             this.dbService = dbService;
+            this.settingsManager = settingsManager;
             DisplayName = $"{this.localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
         }
 
@@ -41,7 +45,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
             UpdateCurrentSalaries();
         }
-
+        
         protected override void OnClosed(IDataContext context)
         {
             dbService.Close();
@@ -57,7 +61,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
-            var nextSalary = currentMonthDate.First(s => s.Date > DateTime.Now);
+            var nextSalary = currentMonthDate.First(s => s.Date >= DateTime.Now);
             nextSalary.IsNextSalary = true;
             var salaryDate = nextSalary.Date;
 
@@ -168,5 +172,34 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
         public List<Salary> PastSalaries { get; set; }
         public List<Salary> CurrentSalaries { get; set; }
+
+        public async void OnNavigatedTo(INavigationContext context)
+        {
+            if (settingsManager.FirstStart)
+            {
+                settingsManager.FirstStart = false;
+
+                using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
+                {
+                    await vm.ShowAsync();
+                }
+
+                using (var vm = GetViewModel<AdditionalPayTableViewModel.AdditionalPayTableViewModel>())
+                {
+                    await vm.ShowAsync();
+                }
+
+                UpdateCurrentSalaries();
+            }
+        }
+
+        public Task<bool> OnNavigatingFromAsync(INavigationContext context)
+        {
+            return Task.FromResult(true);
+        }
+
+        public void OnNavigatedFrom(INavigationContext context)
+        {
+        }
     }
 }

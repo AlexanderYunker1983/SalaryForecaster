@@ -191,7 +191,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\help.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\receive_cash.ico" />
   </ItemGroup>
