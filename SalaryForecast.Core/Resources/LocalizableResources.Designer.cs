@@ -375,6 +375,26 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Включить
+        ///в расчёт.
+        /// </summary>
+        internal static string UseInCalculation {
+            get {
+                return ResourceManager.GetString("UseInCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Входит в расчёт
+        ///средней з/пл.
+        /// </summary>
+        internal static string UseInCalculationOfVacation {
+            get {
+                return ResourceManager.GetString("UseInCalculationOfVacation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Годовой баланс, руб.:.
         /// </summary>
         internal static string YearBalance {

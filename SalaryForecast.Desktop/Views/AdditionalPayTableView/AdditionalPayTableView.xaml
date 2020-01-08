@@ -35,11 +35,13 @@
                   AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="16"
                   ItemsSource="{Binding AdditionalPays}" SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Year}" Header="{DataBinding '$i18n.YearHeader'}" Width="50"/>
-                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Month}" Header="{DataBinding '$i18n.MonthHeader'}" Width="50"/>
-                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Part}" Header="{DataBinding '$i18n.PartHeader'}" Width="50"/>
-                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU}" 
-                                    Header="{DataBinding '$i18n.PayHeader'}" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Year}" Header="{DataBinding '$i18n.YearHeader'}" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Month}" Header="{DataBinding '$i18n.MonthHeader'}" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Part}" Header="{DataBinding '$i18n.PartHeader'}" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU}" 
+                                    Header="{DataBinding '$i18n.PayHeader'}" Width="150"/>
+                <DataGridCheckBoxColumn Binding="{Binding UseInCalculation}" Header="{DataBinding '$i18n.UseInCalculation'}" Width="100"/>
+                <DataGridCheckBoxColumn Binding="{Binding UseInCalculationOfVacation}" Header="{DataBinding '$i18n.UseInCalculationOfVacation'}" Width="140"/>
                 <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Comment}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

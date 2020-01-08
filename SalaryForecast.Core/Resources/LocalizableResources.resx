@@ -235,4 +235,12 @@
     <value>"Монетизация"
     выходных</value>
   </data>
+  <data name="UseInCalculation" xml:space="preserve">
+    <value>Включить
+в расчёт</value>
+  </data>
+  <data name="UseInCalculationOfVacation" xml:space="preserve">
+    <value>Входит в расчёт
+средней з/пл</value>
+  </data>
 </root>
