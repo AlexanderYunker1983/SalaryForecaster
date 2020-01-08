@@ -128,6 +128,16 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Данные автоматически сохранятся и главная таблица автоматически будет пересчитана 
+        ///                                  после того как данное окно будет закрыто.
+        /// </summary>
+        internal static string DataWillBeUpdatedAfterClosingWide {
+            get {
+                return ResourceManager.GetString("DataWillBeUpdatedAfterClosingWide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to     Дата
         ///выплаты.
         /// </summary>
@@ -234,6 +244,42 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Зелёным.
+        /// </summary>
+        internal static string Green {
+            get {
+                return ResourceManager.GetString("Green", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка ближайшей выплаты.
+        /// </summary>
+        internal static string GreenHelp {
+            get {
+                return ResourceManager.GetString("GreenHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Красно-зелёным.
+        /// </summary>
+        internal static string GreenRed {
+            get {
+                return ResourceManager.GetString("GreenRed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой.
+        /// </summary>
+        internal static string GreenRedHelp {
+            get {
+                return ResourceManager.GetString("GreenRedHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Месяц.
         /// </summary>
         internal static string MonthHeader {
@@ -272,7 +318,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Часть платежа.
+        ///   Looks up a localized string similar to   Часть 
+        ///платежа.
         /// </summary>
         internal static string PartHeader {
             get {
@@ -304,6 +351,24 @@ namespace SalaryForecast.Core.Resources {
         internal static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Красным.
+        /// </summary>
+        internal static string Red {
+            get {
+                return ResourceManager.GetString("Red", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов.
+        /// </summary>
+        internal static string RedHelp {
+            get {
+                return ResourceManager.GetString("RedHelp", resourceCulture);
             }
         }
         

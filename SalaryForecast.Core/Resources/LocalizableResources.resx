@@ -213,7 +213,8 @@
     <value>Месяц</value>
   </data>
   <data name="PartHeader" xml:space="preserve">
-    <value>Часть платежа</value>
+    <value>  Часть 
+платежа</value>
   </data>
   <data name="PayHeader" xml:space="preserve">
     <value>Платёж</value>
@@ -248,6 +249,10 @@
     автоматически будет пересчитана после того как 
                       данное окно будет закрыто</value>
   </data>
+  <data name="DataWillBeUpdatedAfterClosingWide" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица автоматически будет пересчитана 
+                                  после того как данное окно будет закрыто</value>
+  </data>
   <data name="FirstCashToolTip" xml:space="preserve">
     <value>Размер денежных средств, которые обязательно
 нужно снять в день зарплаты. Например, на оплату
@@ -262,6 +267,24 @@
   <data name="FirstPayToolTip" xml:space="preserve">
     <value>Размер платежей по займам и кредитам, 
 которые делаются после получения зарплаты.</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Зелёным</value>
+  </data>
+  <data name="GreenHelp" xml:space="preserve">
+    <value> подсвечивается строка ближайшей выплаты</value>
+  </data>
+  <data name="GreenRed" xml:space="preserve">
+    <value>Красно-зелёным</value>
+  </data>
+  <data name="GreenRedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Красным</value>
+  </data>
+  <data name="RedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов</value>
   </data>
   <data name="SalaryValueToolTip" xml:space="preserve">
     <value>Размер зарплаты в месяц

@@ -25,6 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,6">
             <Button Margin="0,0,6,0" Content="{DataBinding '$i18n.AddNewPay'}" Command="{Binding AddNewAdditionalPayCommand}"/>
@@ -35,15 +36,17 @@
                   AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="16"
                   ItemsSource="{Binding AdditionalPays}" SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Year, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.YearHeader'}" Width="50"/>
-                <DataGridTextColumn Binding="{Binding Month, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.MonthHeader'}" Width="50"/>
-                <DataGridTextColumn Binding="{Binding Part, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.PartHeader'}" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Year, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.YearHeader'}"/>
+                <DataGridTextColumn Binding="{Binding Month, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.MonthHeader'}"/>
+                <DataGridTextColumn Binding="{Binding Part, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.PartHeader'}"/>
                 <DataGridTextColumn Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
-                                    Header="{DataBinding '$i18n.PayHeader'}" Width="150"/>
-                <DataGridCheckBoxColumn Binding="{Binding UseInCalculation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.UseInCalculation'}" Width="100"/>
-                <DataGridCheckBoxColumn Binding="{Binding UseInCalculationOfVacation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.UseInCalculationOfVacation'}" Width="140"/>
+                                    Header="{DataBinding '$i18n.PayHeader'}" Width="175"/>
+                <DataGridCheckBoxColumn Binding="{Binding UseInCalculation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.UseInCalculation'}"/>
+                <DataGridCheckBoxColumn Binding="{Binding UseInCalculationOfVacation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.UseInCalculationOfVacation'}"/>
                 <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Comment, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DataBinding '$i18n.DataWillBeUpdatedAfterClosingWide'}" HorizontalAlignment="Center"
+                   Foreground="OrangeRed" FontSize="16"/>
     </Grid>
 </Window>

@@ -50,6 +50,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" DockPanel.Dock="Top" ItemsSource="{DataBinding Menu}" Margin="-11,-11,-11,0"/>
         <Grid Grid.Row="1">
@@ -66,8 +70,8 @@
             <TextBlock Grid.Column="2" Grid.Row="0" Text="{DataBinding '$i18n.CurrentYear'}" HorizontalAlignment="Center" FontSize="16" FontWeight="DemiBold"/>
             <Separator Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource VerticalSeparatorStyle}"/>
             <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding PastSalaries}" FontSize="16"
-                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
-                      CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"
+                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True"
+                      CanUserResizeColumns="True" CanUserResizeRows="False" CanUserSortColumns="True"
                       AutoGenerateColumns="False" HeadersVisibility="Column"
                       IsReadOnly="True" LoadingRow="DataGridLoadingRowWithoutHighlighting" UnloadingRow="DataGridLoadingRowWithoutHighlighting">
                 <DataGrid.CellStyle>
@@ -79,7 +83,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.Date'}" SortDirection="Ascending">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -93,7 +97,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartValue'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -107,7 +111,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartPercent'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -122,8 +126,8 @@
             </DataGrid>
 
             <DataGrid Grid.Column="2" Grid.Row="1" ItemsSource="{Binding CurrentSalaries}" FontSize="16"
-                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
-                      CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"
+                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True"
+                      CanUserResizeColumns="True" CanUserResizeRows="False" CanUserSortColumns="True"
                       AutoGenerateColumns="False" HeadersVisibility="Column"
                       IsReadOnly="True" LoadingRow="DataGridLoadingRow" UnloadingRow="DataGridLoadingRow">
                 <DataGrid.CellStyle>
@@ -135,7 +139,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.Date'}" SortDirection="Ascending">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -149,7 +153,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartValue'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -163,7 +167,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartPercent'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -177,7 +181,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.AdditionalPay'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -191,7 +195,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartWithoutCash'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -205,7 +209,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryWithoutCashAndPay'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -219,7 +223,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryDelta'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -233,7 +237,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.YearBalanceHeader'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -247,7 +251,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.OneDayCost'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -261,7 +265,7 @@
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.OneHolidayCost'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="10,2"/>
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -275,7 +279,46 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <StatusBar Grid.Row="2" Margin="-11,0,-11,-11">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,3,0,0">
+            <TextBlock Text="{DataBinding '$i18n.Green'}">
+                <TextBlock.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="Lime" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+            <TextBlock Text="{DataBinding '$i18n.GreenHelp'}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,3,0,0">
+            <TextBlock Text="{DataBinding '$i18n.Red'}">
+                <TextBlock.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="Red" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+            <TextBlock Text="{DataBinding '$i18n.RedHelp'}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,3,0,3">
+            <TextBlock Text="{DataBinding '$i18n.GreenRed'}">
+                <TextBlock.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="Lime" Offset="0"/>
+                            <GradientStop Color="Red" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+            <TextBlock Text="{DataBinding '$i18n.GreenRedHelp'}"/>
+        </StackPanel>
+        <StatusBar Grid.Row="6" Margin="-11,0,-11,-11">
             <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" Margin="0,0,25,0" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding YearBalance}" FontSize="16" VerticalAlignment="Center"/>
         </StatusBar>
