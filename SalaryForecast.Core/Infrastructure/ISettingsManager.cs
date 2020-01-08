@@ -9,5 +9,6 @@
         decimal SecondCash { get; set; }
         decimal FirstPay { get; set; }
         decimal SecondPay { get; set; }
+        bool FirstStart { get; set; }
     }
 }
