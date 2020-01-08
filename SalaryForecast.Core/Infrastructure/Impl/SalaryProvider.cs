@@ -40,7 +40,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             var salaryYearDelta = 0m;
             foreach (var monthPair in calendarProvider.Years[year].Months)
             {
-                var monthAdditionalPays = additionalPays.Where(p => p.Month == monthPair.Key).ToList();
+                var monthAdditionalPays = additionalPays.Where(p => p.Month == monthPair.Key && p.UseInCalculation).ToList();
                 var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
                 var secondPay = secondPays.Sum(p => p.Pay);
