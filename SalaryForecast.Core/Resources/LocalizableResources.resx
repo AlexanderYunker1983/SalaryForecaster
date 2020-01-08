@@ -243,4 +243,43 @@
     <value>Входит в расчёт
 средней з/пл</value>
   </data>
+  <data name="DataWillBeUpdatedAfterClosing" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица
+    автоматически будет пересчитана после того как 
+                      данное окно будет закрыто</value>
+  </data>
+  <data name="FirstCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день зарплаты. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="FirstPartDateToolTip" xml:space="preserve">
+    <value>День выплаты зарплаты. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="FirstPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения зарплаты.</value>
+  </data>
+  <data name="SalaryValueToolTip" xml:space="preserve">
+    <value>Размер зарплаты в месяц
+за вычитом всех налогов</value>
+  </data>
+  <data name="SecondCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день аванса. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="SecondPartDateToolTip" xml:space="preserve">
+    <value>День выплаты аванса. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="SecondPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения аванса.</value>
+  </data>
 </root>
