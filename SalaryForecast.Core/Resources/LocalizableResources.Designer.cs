@@ -547,6 +547,19 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to !!! Внимание! Положительная величина платежа вводится для обозначения трат. 
+        ///                Премии вводятся с отрицательной величиной платежа !!!
+        ///Часть платежа - индекс от 1 до 2 выплаты:
+        ///1 - зарплата (первая часть выплат в начале месяца);
+        ///2 - аванс (вторая часть выплат в конце месяца)..
+        /// </summary>
+        internal static string WarningNegativePay {
+            get {
+                return ResourceManager.GetString("WarningNegativePay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Годовой баланс, руб.:.
         /// </summary>
         internal static string YearBalance {
