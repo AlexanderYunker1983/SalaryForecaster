@@ -24,6 +24,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
         public void InitForYear(int year)
         {
+            Years.Clear();
             var holidays = jsonProvider.GetHolidays(year);
             if (holidays != null)
             {
