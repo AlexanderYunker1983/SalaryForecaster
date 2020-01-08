@@ -24,7 +24,6 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
         public void InitForYear(int year)
         {
-            Years.Clear();
             var holidays = jsonProvider.GetHolidays(year);
             if (holidays != null)
             {
@@ -37,7 +36,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
         {
             if (Years.ContainsKey(year))
             {
-                return;
+                Years.Remove(year);
             }
 
             var yearModel = new Year
