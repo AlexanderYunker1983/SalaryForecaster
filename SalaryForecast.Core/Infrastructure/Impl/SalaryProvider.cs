@@ -45,8 +45,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
                 var secondPay = secondPays.Sum(p => p.Pay);
 
-                var oneDayCost = settingsManager.Salary * (1.0m / monthPair.Value.WorkDaysCount - 1.0m / 29.4m);
-                var oneDayHolidayCost = settingsManager.Salary / 29.4m;
+                var oneDayCost = settingsManager.Salary * (1.0m / monthPair.Value.WorkDaysCount - 1.0m / 29.3m);
+                var oneDayHolidayCost = settingsManager.Salary / 29.3m;
                 
                 var salary = new Salary
                 {
