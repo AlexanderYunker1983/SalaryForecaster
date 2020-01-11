@@ -1,12 +1,12 @@
 [submodule "YBuild"]
 	path = YBuild
-	url = git@github.com:AlexanderYunker1983/YBuild.git
+url=https://github.com/AlexanderYunker1983/YBuild.git
 [submodule "YLocalization"]
 	path = YLocalization
-	url = git@github.com:AlexanderYunker1983/YLocalization.git
+url=https://github.com/AlexanderYunker1983/YLocalization.git
 [submodule "YMugenExtensions"]
 	path = YMugenExtensions
-	url = git@github.com:AlexanderYunker1983/YMugenExtensions.git
+url=https://github.com/AlexanderYunker1983/YMugenExtensions.git
 [submodule "HolidaysCalendar"]
 	path = HolidaysCalendar
-	url = git@github.com:AlexanderYunker1983/holidays-calendar.git
+url=https://github.com/AlexanderYunker1983/holidays-calendar.git
