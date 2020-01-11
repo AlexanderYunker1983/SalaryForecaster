@@ -34,7 +34,7 @@
         </StackPanel>
         <DataGrid Grid.Column="0" Grid.Row="1" CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False"
                   CanUserSortColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"
-                  AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="16"
+                  AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="14"
                   ItemsSource="{Binding AdditionalPays}" SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Year, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.YearHeader'}"/>
