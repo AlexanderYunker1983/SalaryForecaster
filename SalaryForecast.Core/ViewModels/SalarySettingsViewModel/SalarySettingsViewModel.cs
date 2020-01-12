@@ -5,53 +5,53 @@ namespace SalaryForecast.Core.ViewModels.SalarySettingsViewModel
 {
     public class SalarySettingsViewModel : CloseableViewModel
     {
-        private readonly ISettingsManager settingsManager;
+        private readonly ISettingsManager _settingsManager;
 
         public SalarySettingsViewModel(ISettingsManager settingsManager)
         {
-            this.settingsManager = settingsManager;
+            _settingsManager = settingsManager;
         }
 
         public decimal SalaryValue
         {
-            get => settingsManager.Salary;
-            set => settingsManager.Salary = value;
+            get => _settingsManager.Salary;
+            set => _settingsManager.Salary = value;
         }
 
         public int FirstPartDate
         {
-            get => settingsManager.SalaryFirstPartDate;
-            set => settingsManager.SalaryFirstPartDate = value;
+            get => _settingsManager.SalaryFirstPartDate;
+            set => _settingsManager.SalaryFirstPartDate = value;
         }
 
         public int SecondPartDate
         {
-            get => settingsManager.SalarySecondPartDate;
-            set => settingsManager.SalarySecondPartDate = value;
+            get => _settingsManager.SalarySecondPartDate;
+            set => _settingsManager.SalarySecondPartDate = value;
         }
 
         public decimal FirstCash
         {
-            get => settingsManager.FirstCash;
-            set => settingsManager.FirstCash = value;
+            get => _settingsManager.FirstCash;
+            set => _settingsManager.FirstCash = value;
         }
 
         public decimal SecondCash
         {
-            get => settingsManager.SecondCash;
-            set => settingsManager.SecondCash = value;
+            get => _settingsManager.SecondCash;
+            set => _settingsManager.SecondCash = value;
         }
 
         public decimal FirstPay
         {
-            get => settingsManager.FirstPay;
-            set => settingsManager.FirstPay = value;
+            get => _settingsManager.FirstPay;
+            set => _settingsManager.FirstPay = value;
         }
 
         public decimal SecondPay
         {
-            get => settingsManager.SecondPay;
-            set => settingsManager.SecondPay = value;
+            get => _settingsManager.SecondPay;
+            set => _settingsManager.SecondPay = value;
         }
     }
 }

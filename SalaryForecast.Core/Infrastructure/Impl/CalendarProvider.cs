@@ -7,24 +7,22 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 {
     public class CalendarProvider : ICalendarProvider
     {
-        private readonly IFileProvider fileProvider;
-        private readonly IJsonProvider jsonProvider;
-        private readonly ISettingsManager settingsManager;
+        private readonly IJsonProvider _jsonProvider;
+        private readonly ISettingsManager _settingsManager;
 
         public CalendarProvider(IFileProvider fileProvider, IJsonProvider jsonProvider, ISettingsManager settingsManager)
         {
-            this.fileProvider = fileProvider;
-            this.jsonProvider = jsonProvider;
-            this.settingsManager = settingsManager;
+            _jsonProvider = jsonProvider;
+            _settingsManager = settingsManager;
 
-            this.jsonProvider.SetFileProvider(this.fileProvider);
+            _jsonProvider.SetFileProvider(fileProvider);
 
             Years = new Dictionary<int, Year>();
         }
 
         public void InitForYear(int year)
         {
-            var holidays = jsonProvider.GetHolidays(year);
+            var holidays = _jsonProvider.GetHolidays(year);
             if (holidays != null)
             {
                 var holidaysModel = new HolidaysModel(holidays);
@@ -34,10 +32,7 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
         private void PrepareYear(int year, HolidaysModel holidays)
         {
-            if (Years.ContainsKey(year))
-            {
-                Years.Remove(year);
-            }
+            if (Years.ContainsKey(year)) Years.Remove(year);
 
             var yearModel = new Year
             {
@@ -70,10 +65,10 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 monthModel.WorkDaysCount = monthModel.Days.Count(d => d.Value.IsWorkDate);
 
                 monthModel.NearestSalaryFirstPartDate = monthModel.Days.Last(d =>
-                    d.Key <= settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate).Key;
+                    d.Key <= _settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate).Key;
 
                 monthModel.NearestSalarySecondPartDate = monthModel.Days.Last(d =>
-                    d.Key <= settingsManager.SalarySecondPartDate && d.Value.IsWorkDate).Key;
+                    d.Key <= _settingsManager.SalarySecondPartDate && d.Value.IsWorkDate).Key;
                 
                 yearModel.Months.Add(monthIndex, monthModel);
             }

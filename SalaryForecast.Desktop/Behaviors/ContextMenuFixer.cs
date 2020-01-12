@@ -16,10 +16,7 @@ namespace SalaryForecast.Desktop.Behaviors
 
         private static void CommandParameter_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is MenuItem target))
-            {
-                return;
-            }
+            if (!(d is MenuItem target)) return;
 
             target.CommandParameter = IsItemDisconnected(e.NewValue) ? null : e.NewValue;
             (target.Command as IRelayCommand)?.RaiseCanExecuteChanged();
@@ -27,17 +24,12 @@ namespace SalaryForecast.Desktop.Behaviors
 
         private static bool IsItemDisconnected(object item)
         {
-            if (item == null)
-            {
-                return false;
-            }
-            bool isDisconnected = false;
+            if (item == null) return false;
+            var isDisconnected = false;
 
             var itemType = item.GetType();
-            if (itemType.FullName.Equals("MS.Internal.NamedObject"))
-            {
-                isDisconnected = true;
-            }
+            if (itemType.FullName == null) return false;
+            if (itemType.FullName.Equals("MS.Internal.NamedObject")) isDisconnected = true;
 
             return isDisconnected;
         }

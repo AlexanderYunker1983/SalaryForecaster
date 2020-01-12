@@ -26,10 +26,7 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                     "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",
                     "Common AppData", string.Empty);
             var fullPath = Path.Combine(appDataPath, "Yunker");
-            if (!Directory.Exists(fullPath))
-            {
-                Directory.CreateDirectory(fullPath);
-            }
+            if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
 
             var dbPath = Path.Combine(fullPath, "SalaryForecster.db");
             if (!File.Exists(dbPath))

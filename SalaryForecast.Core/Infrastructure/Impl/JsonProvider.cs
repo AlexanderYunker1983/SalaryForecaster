@@ -5,20 +5,17 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 {
     public class JsonProvider : IJsonProvider
     {
-        private IFileProvider fileProvider;
+        private IFileProvider _fileProvider;
 
         public void SetFileProvider(IFileProvider fileProvider)
         {
-            this.fileProvider = fileProvider;
+            _fileProvider = fileProvider;
         }
 
         public Holidays GetHolidays(int year)
         {
-            var fileStream = fileProvider.GetJsonFile(year);
-            if (fileStream == null)
-            {
-                return null;
-            }
+            var fileStream = _fileProvider.GetJsonFile(year);
+            if (fileStream == null) return null;
 
             var json = fileStream.ReadToEnd();
             var result = JsonConvert.DeserializeObject<Holidays>(json);

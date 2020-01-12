@@ -6,52 +6,52 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 {
     public class DbService : IDbService
     {
-        private SQLiteConnection conn;
-        private string dbFullPath;
+        private SQLiteConnection _conn;
+        private string _dbFullPath;
         public void Init(string dbPath)
         {
-            dbFullPath = dbPath;
-            conn = new SQLiteConnection(dbFullPath, SQLiteOpenFlags.ReadWrite);
-            MigrateDB();
-            conn.CreateTable<AdditionalPay>();
+            _dbFullPath = dbPath;
+            _conn = new SQLiteConnection(_dbFullPath, SQLiteOpenFlags.ReadWrite);
+            MigrateDb();
+            _conn.CreateTable<AdditionalPay>();
         }
 
-        private void MigrateDB()
+        private void MigrateDb()
         {
             var ap = GetAdditionalPays();
-            conn.DropTable<AdditionalPay>();
-            conn.CreateTable<AdditionalPay>();
-            conn.InsertAll(ap);
+            _conn.DropTable<AdditionalPay>();
+            _conn.CreateTable<AdditionalPay>();
+            _conn.InsertAll(ap);
         }
 
         public void Close()
         {
-            if (conn != null)
+            if (_conn != null)
             {
-                conn.Close();
-                conn.Dispose();
-                conn = null;
+                _conn.Close();
+                _conn.Dispose();
+                _conn = null;
             }
         }
 
         public void AddAdditionalPay(AdditionalPay pay)
         {
-            conn.Insert(pay);
+            _conn.Insert(pay);
         }
 
         public List<AdditionalPay> GetAdditionalPays()
         {
-            return conn.Table<AdditionalPay>().ToList();
+            return _conn.Table<AdditionalPay>().ToList();
         }
 
         public void DeleteAdditionalPay(AdditionalPay pay)
         {
-            conn.Delete(pay);
+            _conn.Delete(pay);
         }
 
         public void UpdateAdditionalPay(AdditionalPay pay)
         {
-            conn.Update(pay);
+            _conn.Update(pay);
         }
     }
 }

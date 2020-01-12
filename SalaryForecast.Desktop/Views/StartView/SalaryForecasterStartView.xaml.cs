@@ -9,22 +9,17 @@ namespace SalaryForecast.Desktop.Views.StartView
     /// <summary>
     /// Interaction logic for SalaryForecasterStartView.xaml
     /// </summary>
-    public partial class SalaryForecasterStartView : Window
+    public partial class SalaryForecasterStartView
     {
         public SalaryForecasterStartView()
         {
             InitializeComponent();
         }
-
-
-
+        
         private void DataGridLoadingRow(object sender, DataGridRowEventArgs e)
         {
             var ee = (DataGrid)sender;
-            if (ee?.ItemContainerGenerator == null)
-            {
-                return;
-            }
+            if (ee?.ItemContainerGenerator == null) return;
 
             FillBackgrounds(ee, true);
         }
@@ -34,10 +29,7 @@ namespace SalaryForecast.Desktop.Views.StartView
             var counter = -1;
             for (var index = 0; index < ee.Items.Count; index++)
             {
-                if ((index + 1) % 2 != 0)
-                {
-                    counter++;
-                }
+                if ((index + 1) % 2 != 0) counter++;
                 try
                 {
                     var row = (DataGridRow)ee.ItemContainerGenerator.ContainerFromIndex(index);
@@ -70,10 +62,7 @@ namespace SalaryForecast.Desktop.Views.StartView
                                     }
                                 }
 
-                                if (colorChanged)
-                                {
-                                    continue;
-                                }
+                                if (colorChanged) continue;
                             }
                         }
 
@@ -82,9 +71,9 @@ namespace SalaryForecast.Desktop.Views.StartView
                             : new SolidColorBrush(Color.FromArgb(255, 200, 232, 255));
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    continue;
+                    Console.WriteLine(ex);
                 }
             }
         }
@@ -92,10 +81,7 @@ namespace SalaryForecast.Desktop.Views.StartView
         private void DataGridLoadingRowWithoutHighlighting(object sender, DataGridRowEventArgs e)
         {
             var ee = (DataGrid)sender;
-            if (ee?.ItemContainerGenerator == null)
-            {
-                return;
-            }
+            if (ee?.ItemContainerGenerator == null) return;
 
             FillBackgrounds(ee, false);
         }

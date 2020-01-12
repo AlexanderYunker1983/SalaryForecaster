@@ -346,7 +346,7 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Предсказатель зарплаты.
+        ///   Looks up a localized string similar to Прогноз зарплаты.
         /// </summary>
         internal static string ProgramTitle {
             get {
