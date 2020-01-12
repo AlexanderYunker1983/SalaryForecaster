@@ -12,19 +12,19 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
 {
     public class AdditionalPayTableViewModel : CloseableViewModel
     {
-        private readonly IDbService dbService;
-        private AdditionalPay selectedAdditionalPay;
+        private readonly IDbService _dbService;
+        private AdditionalPay _selectedAdditionalPay;
 
         public AdditionalPayTableViewModel(IDbService dbService)
         {
-            this.dbService = dbService;
+            _dbService = dbService;
             AddNewAdditionalPayCommand = new YRelayCommand(OnAddNewAdditionalPay);
-            RemoveSelectedAdditionalPayCommand = new YRelayCommand(OnRemoveSelectedPay, () => SelectedAdditionalPay != null, notifiers:new []{this});
+            RemoveSelectedAdditionalPayCommand = new YRelayCommand(OnRemoveSelectedPay, () => SelectedAdditionalPay != null, notifiers:new object[]{this});
         }
 
         private void OnRemoveSelectedPay()
         {
-            dbService.DeleteAdditionalPay(SelectedAdditionalPay);
+            _dbService.DeleteAdditionalPay(SelectedAdditionalPay);
             AdditionalPays.Remove(SelectedAdditionalPay);
             SelectedAdditionalPay = null;
         }
@@ -37,17 +37,14 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
                 Month = DateTime.Now.Month,
                 Part = 1
             };
-            dbService.AddAdditionalPay(additionalPay);
+            _dbService.AddAdditionalPay(additionalPay);
             AdditionalPays.Add(additionalPay);
             SelectedAdditionalPay = additionalPay;
         }
 
         protected override void OnClosed(IDataContext context)
         {
-            foreach (var additionalPay in AdditionalPays)
-            {
-                dbService.UpdateAdditionalPay(additionalPay);
-            }
+            foreach (var additionalPay in AdditionalPays) _dbService.UpdateAdditionalPay(additionalPay);
             base.OnClosed(context);
         }
 
@@ -55,7 +52,7 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
         {
             base.OnInitialized();
 
-            var dbPays = dbService.GetAdditionalPays();
+            var dbPays = _dbService.GetAdditionalPays();
 
             dbPays.Sort((pay, additionalPay) => pay.Pay.CompareTo(additionalPay.Pay));
             dbPays.Sort((pay, additionalPay) => pay.Part.CompareTo(additionalPay.Part));
@@ -67,15 +64,12 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
 
         public AdditionalPay SelectedAdditionalPay
         {
-            get => selectedAdditionalPay;
+            get => _selectedAdditionalPay;
             set
             {
-                if (Equals(value, selectedAdditionalPay))
-                {
-                    return;
-                }
+                if (Equals(value, _selectedAdditionalPay)) return;
 
-                selectedAdditionalPay = value;
+                _selectedAdditionalPay = value;
                 OnPropertyChanged();
             }
         }

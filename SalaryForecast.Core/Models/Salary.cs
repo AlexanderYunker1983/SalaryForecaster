@@ -5,8 +5,8 @@ namespace SalaryForecast.Core.Models
 {
     public class Salary : NotifyPropertyChangedBase
     {
-        private bool isNextSalary;
-        private decimal additionalPay;
+        private bool _isNextSalary;
+        private decimal _additionalPay;
         public DateTime Date { get; set; }
         public decimal SalaryPart { get; set; }
         public decimal SalaryPercent { get; set; }
@@ -20,30 +20,24 @@ namespace SalaryForecast.Core.Models
 
         public decimal AdditionalPay
         {
-            get => additionalPay;
+            get => _additionalPay;
             set
             {
-                if (value == additionalPay)
-                {
-                    return;
-                }
+                if (value == _additionalPay) return;
 
-                additionalPay = value;
+                _additionalPay = value;
                 OnPropertyChanged();
             }
         }
 
         public bool IsNextSalary
         {
-            get => isNextSalary;
+            get => _isNextSalary;
             set
             {
-                if (value == isNextSalary)
-                {
-                    return;
-                }
+                if (value == _isNextSalary) return;
 
-                isNextSalary = value;
+                _isNextSalary = value;
                 OnPropertyChanged();
             }
         }

@@ -16,7 +16,7 @@ namespace SalaryForecast.Desktop
     /// </summary>
     public partial class App
     {
-        private readonly object[] menuStructure = {
+        private readonly object[] _menuStructure = {
             new MenuWithSubItems("Settings",
                 new[]
                 {
@@ -31,7 +31,7 @@ namespace SalaryForecast.Desktop
 
         public App()
         {
-            PlatformVariables.MenuStructure = menuStructure;
+            PlatformVariables.MenuStructure = _menuStructure;
 
             if (Settings.Default.IsNeedToMigrate)
             {
@@ -40,6 +40,7 @@ namespace SalaryForecast.Desktop
                 Settings.Default.Save();
             }
 
+            // ReSharper disable once ObjectCreationAsStatement
             new BootstrapperEx(this, new AutofacContainer());
         }
 

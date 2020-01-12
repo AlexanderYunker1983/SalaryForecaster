@@ -19,21 +19,21 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
     {
         public string DisplayName { get; set; }
         public ObservableCollection<IMenuItemViewModel> Menu { get; set; } = new ObservableCollection<IMenuItemViewModel>();
-        private readonly Dictionary<string, IMenuItemViewModel> mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
-        private readonly ILocalizationManager localizationManager;
-        private readonly ISalaryProvider salaryProvider;
-        private readonly IDbService dbService;
-        private readonly ISettingsManager settingsManager;
-        private string nextSalaryStatus;
-        private string yearBalance;
+        private readonly Dictionary<string, IMenuItemViewModel> _mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
+        private readonly ILocalizationManager _localizationManager;
+        private readonly ISalaryProvider _salaryProvider;
+        private readonly IDbService _dbService;
+        private readonly ISettingsManager _settingsManager;
+        private string _nextSalaryStatus;
+        private string _yearBalance;
 
         public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService, ISettingsManager settingsManager)
         {
-            this.localizationManager = localizationManager;
-            this.salaryProvider = salaryProvider;
-            this.dbService = dbService;
-            this.settingsManager = settingsManager;
-            DisplayName = $"{this.localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
+            _localizationManager = localizationManager;
+            _salaryProvider = salaryProvider;
+            _dbService = dbService;
+            _settingsManager = settingsManager;
+            DisplayName = $"{_localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
         }
 
         protected override void OnInitialized()
@@ -48,7 +48,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         
         protected override void OnClosed(IDataContext context)
         {
-            dbService.Close();
+            _dbService.Close();
 
             base.OnClosed(context);
         }
@@ -56,8 +56,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private void UpdateCurrentSalaries()
         {
             var currentYear = DateTime.Now.Year;
-            PastSalaries = salaryProvider.GetSalaries(currentYear - 1);
-            CurrentSalaries = salaryProvider.GetSalaries(currentYear);
+            PastSalaries = _salaryProvider.GetSalaries(currentYear - 1);
+            CurrentSalaries = _salaryProvider.GetSalaries(currentYear);
 
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
@@ -67,23 +67,17 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
             var deltaDays = (salaryDate.Date - DateTime.Now.Date).Days;
 
-            var daysCountString = localizationManager.GetString("daysMany");
+            var daysCountString = _localizationManager.GetString("daysMany");
             if (deltaDays / 10 != 1)
             {
-                if (deltaDays % 10 == 1)
-                {
-                    daysCountString = localizationManager.GetString("daysSingle");
-                }
-                if (deltaDays % 10 >= 2 && deltaDays % 10 <= 4)
-                {
-                    daysCountString = localizationManager.GetString("daysSeveral");
-                }
+                if (deltaDays % 10 == 1) daysCountString = _localizationManager.GetString("daysSingle");
+                if (deltaDays % 10 >= 2 && deltaDays % 10 <= 4) daysCountString = _localizationManager.GetString("daysSeveral");
             }
 
-            NextSalaryStatus = $"{localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
+            NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
 
             var yearSum = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPay);
-            YearBalance = $"{localizationManager.GetString("YearBalance")} {yearSum:F2}";
+            YearBalance = $"{_localizationManager.GetString("YearBalance")} {yearSum:F2}";
 
             OnPropertyChanged(nameof(PastSalaries));
             OnPropertyChanged(nameof(CurrentSalaries));
@@ -91,8 +85,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
         private void CreateMenuItems()
         {
-            mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
-            mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
+            _mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(_localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
+            _mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(_localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
         }
 
         private async Task OnEditAdditionalPays()
@@ -117,10 +111,9 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         {
             var result = new List<IMenuItemViewModel>();
             foreach (var menu in menuStructure)
-            {
                 if (menu is MenuWithSubItems withSubitems)
                 {
-                    var sub = new SubMenuItemViewModel(localizationManager.GetString(withSubitems.Caption));
+                    var sub = new SubMenuItemViewModel(_localizationManager.GetString(withSubitems.Caption));
                     var items = ProcessMenu(withSubitems.MenuItems.Cast<object>().ToArray());
                     sub.Items.AddRange(items);
                     result.Add(sub);
@@ -128,44 +121,33 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                 else
                 {
                     if (menu.ToString().Equals(MainMenuItems.Separator))
-                    {
                         result.Add(MenuItemViewModel.NewSeparator());
-                    }
-                    else if (mainMenuItems.TryGetValue(menu.ToString(), out var menuItem))
-                    {
-                        result.Add(menuItem);
-                    }
+                    else if (_mainMenuItems.TryGetValue(menu.ToString(), out var menuItem)) result.Add(menuItem);
                 }
-            }
+
             return result;
         }
 
         public string NextSalaryStatus
         {
-            get => nextSalaryStatus;
+            get => _nextSalaryStatus;
             set
             {
-                if (value == nextSalaryStatus)
-                {
-                    return;
-                }
+                if (value == _nextSalaryStatus) return;
 
-                nextSalaryStatus = value;
+                _nextSalaryStatus = value;
                 OnPropertyChanged();
             }
         }
 
         public string YearBalance
         {
-            get => yearBalance;
+            get => _yearBalance;
             set
             {
-                if (value == yearBalance)
-                {
-                    return;
-                }
+                if (value == _yearBalance) return;
 
-                yearBalance = value;
+                _yearBalance = value;
                 OnPropertyChanged();
             }
         }
@@ -175,9 +157,9 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
         public async void OnNavigatedTo(INavigationContext context)
         {
-            if (settingsManager.FirstStart)
+            if (_settingsManager.FirstStart)
             {
-                settingsManager.FirstStart = false;
+                _settingsManager.FirstStart = false;
 
                 using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
                 {
