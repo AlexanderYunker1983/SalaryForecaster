@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidModule.cs" />
+    <Compile Include="Infrastructure\Impl\FileProvider.cs" />
+    <Compile Include="Infrastructure\Impl\SettingsManager.cs" />
     <Compile Include="MugenSetup.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

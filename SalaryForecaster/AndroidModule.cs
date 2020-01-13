@@ -5,6 +5,7 @@ using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.Models.IoC;
 using SalaryForecast.Core;
 using SalaryForecast.Core.Infrastructure;
+using SalaryForecaster.Infrastructure.Impl;
 
 namespace SalaryForecaster
 {

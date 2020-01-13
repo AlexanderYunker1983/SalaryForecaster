@@ -3187,8 +3187,8 @@ namespace SalaryForecaster
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f090028
-			public const int ApplicationName = 2131296296;
+			// aapt resource value: 0x7f09002a
+			public const int ApplicationName = 2131296298;
 			
 			// aapt resource value: 0x7f090027
 			public const int Empty = 2131296295;
@@ -3280,11 +3280,11 @@ namespace SalaryForecaster
 			// aapt resource value: 0x7f090010
 			public const int abc_toolbar_collapse_description = 2131296272;
 			
-			// aapt resource value: 0x7f09002a
-			public const int action_settings = 2131296298;
-			
 			// aapt resource value: 0x7f090029
-			public const int app_name = 2131296297;
+			public const int action_settings = 2131296297;
+			
+			// aapt resource value: 0x7f090028
+			public const int app_name = 2131296296;
 			
 			// aapt resource value: 0x7f09001e
 			public const int appbar_scrolling_view_behavior = 2131296286;
