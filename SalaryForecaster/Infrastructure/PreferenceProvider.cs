@@ -40,6 +40,11 @@ namespace SalaryForecaster.Infrastructure
             _sharedPreferencesEditor.PutInt(key, value);
             _sharedPreferencesEditor.Commit();
         }
+        public void SavePreference(string key, decimal value)
+        {
+            _sharedPreferencesEditor.PutFloat(key, (float) value);
+            _sharedPreferencesEditor.Commit();
+        }
         public void SavePreference(string key, long value)
         {
             _sharedPreferencesEditor.PutLong(key, value);
@@ -59,9 +64,9 @@ namespace SalaryForecaster.Infrastructure
         {
             return _sharedPreferences.GetBoolean(key, defaultValue);
         }
-        public float GetFloatPreference(string key)
+        public float GetFloatPreference(string key, float defValue = default(float))
         {
-            return _sharedPreferences.GetFloat(key, default(float));
+            return _sharedPreferences.GetFloat(key, defValue);
         }
         public double GetDoublePreference(string key)
         {
