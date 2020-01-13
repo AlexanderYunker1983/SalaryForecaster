@@ -62,6 +62,7 @@
     <Compile Include="AndroidModule.cs" />
     <Compile Include="Infrastructure\Impl\FileProvider.cs" />
     <Compile Include="Infrastructure\Impl\SettingsManager.cs" />
+    <Compile Include="Infrastructure\PreferenceProvider.cs" />
     <Compile Include="MugenSetup.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,16 @@
     <Compile Include="SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\consultant2011.json" />
+    <AndroidAsset Include="Assets\consultant2012.json" />
+    <AndroidAsset Include="Assets\consultant2013.json" />
+    <AndroidAsset Include="Assets\consultant2014.json" />
+    <AndroidAsset Include="Assets\consultant2015.json" />
+    <AndroidAsset Include="Assets\consultant2016.json" />
+    <AndroidAsset Include="Assets\consultant2017.json" />
+    <AndroidAsset Include="Assets\consultant2018.json" />
+    <AndroidAsset Include="Assets\consultant2019.json" />
+    <AndroidAsset Include="Assets\consultant2020.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />

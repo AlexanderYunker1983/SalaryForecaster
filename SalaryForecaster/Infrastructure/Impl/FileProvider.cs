@@ -5,6 +5,8 @@ namespace SalaryForecaster.Infrastructure.Impl
 {
     public class FileProvider : IFileProvider
     {
+        private static readonly string DefaultUserDirectory = Android.OS.Environment.ExternalStorageDirectory.Path;
+
         public StreamReader GetJsonFile(int year)
         {
             throw new System.NotImplementedException();
@@ -12,7 +14,7 @@ namespace SalaryForecaster.Infrastructure.Impl
 
         public string GetDbFilePath()
         {
-            throw new System.NotImplementedException();
+            return Path.Combine(DefaultUserDirectory, "SalaryForecaster");
         }
     }
 }
