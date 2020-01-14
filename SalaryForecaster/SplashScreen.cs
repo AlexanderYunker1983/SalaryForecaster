@@ -15,6 +15,7 @@ namespace SalaryForecaster
     {
         protected override string GetApplicationName()
         {
+            CheckAppPermissions();
             return Resources.GetString(Resource.String.ApplicationName);
         }
 
@@ -32,6 +33,25 @@ namespace SalaryForecaster
         protected override AndroidBootstrapperBase CreateBootstrapper()
         {
             return new MugenSetup();
+        }
+
+        public bool CheckAppPermissions()
+        {
+            if ((int)Build.VERSION.SdkInt < 23)
+            {
+                return true;
+            }
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.WriteExternalStorage) != (int)Permission.Granted 
+                && ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) != (int)Permission.Granted)
+            {
+                var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
+                ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.ReadExternalStorage}, 0);
+                ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.WriteExternalStorage}, 0);
+                return false;
+            }
+            return true;
+
         }
     }
 }
