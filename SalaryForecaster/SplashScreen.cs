@@ -35,23 +35,17 @@ namespace SalaryForecaster
             return new MugenSetup();
         }
 
-        public bool CheckAppPermissions()
+        private void CheckAppPermissions()
         {
-            if ((int)Build.VERSION.SdkInt < 23)
-            {
-                return true;
-            }
+            if ((int)Build.VERSION.SdkInt < 23) return;
 
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.WriteExternalStorage) != (int)Permission.Granted 
-                && ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) != (int)Permission.Granted)
-            {
-                var permissions = new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
-                ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.ReadExternalStorage}, 0);
-                ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.WriteExternalStorage}, 0);
-                return false;
-            }
-            return true;
-
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.WriteExternalStorage) ==
+                (int) Permission.Granted ||
+                ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) ==
+                (int) Permission.Granted)
+                return;
+            ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.ReadExternalStorage}, 0);
+            ActivityCompat.RequestPermissions(this, new []{Manifest.Permission.WriteExternalStorage}, 0);
         }
     }
 }

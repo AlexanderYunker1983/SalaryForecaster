@@ -42,31 +42,34 @@ namespace SalaryForecaster
             var basePathFile = fileProvider.GetDbFilePath();
             var file = new FileInfo(basePathFile);
             var basePath = file.DirectoryName;
-            
-            if (!Directory.Exists(basePath))
-            {
-                Directory.CreateDirectory(basePath);
-            }
 
-            for (var index = 2011; index <= 2020; index++)
+            if (basePath != null)
             {
-                var manualName = Path.Combine(basePath, $"consultant{index}.json");
-                try
+                if (!Directory.Exists(basePath))
+                    Directory.CreateDirectory(basePath);
+
+                for (var index = 2011; index <= 2020; index++)
                 {
-                    if (!File.Exists(manualName))
-                        using (var br = new BinaryReader(Application.Context.Assets.Open($"consultant{index}.json")))
-                        {
-                            using (var bw = new BinaryWriter(new FileStream(manualName, FileMode.Create)))
+                    var manualName = Path.Combine(basePath, $"consultant{index}.json");
+                    try
+                    {
+                        if (!File.Exists(manualName))
+                            using (var br =
+                                new BinaryReader(Application.Context.Assets.Open($"consultant{index}.json")))
                             {
-                                var buffer = new byte[2048];
-                                int length;
-                                while ((length = br.Read(buffer, 0, buffer.Length)) > 0) bw.Write(buffer, 0, length);
+                                using (var bw = new BinaryWriter(new FileStream(manualName, FileMode.Create)))
+                                {
+                                    var buffer = new byte[2048];
+                                    int length;
+                                    while ((length = br.Read(buffer, 0, buffer.Length)) > 0)
+                                        bw.Write(buffer, 0, length);
+                                }
                             }
-                        }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 }
             }
 
