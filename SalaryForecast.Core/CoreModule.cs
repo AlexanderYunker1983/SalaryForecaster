@@ -22,8 +22,8 @@ namespace SalaryForecast.Core
             if (!iocContainer.CanResolve<ILocalizationManager>()) iocContainer.Bind<ILocalizationManager, MugenLocalizationManager>(DependencyLifecycle.SingleInstance);
             if (!iocContainer.CanResolve<IJsonProvider>()) iocContainer.Bind<IJsonProvider, JsonProvider>(DependencyLifecycle.SingleInstance);
             if (!iocContainer.CanResolve<ICalendarProvider>()) iocContainer.Bind<ICalendarProvider, CalendarProvider>(DependencyLifecycle.SingleInstance);
-            if (!iocContainer.CanResolve<ISalaryProvider>()) iocContainer.Bind<ISalaryProvider, SalaryProvider>(DependencyLifecycle.SingleInstance);
             if (!iocContainer.CanResolve<IDbService>()) iocContainer.Bind<IDbService, DbService>(DependencyLifecycle.SingleInstance);
+            if (!iocContainer.CanResolve<ISalaryProvider>()) iocContainer.Bind<ISalaryProvider, SalaryProvider>(DependencyLifecycle.SingleInstance);
             return true;
         }
 
