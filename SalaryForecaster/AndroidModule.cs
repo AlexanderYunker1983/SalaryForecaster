@@ -10,6 +10,7 @@ using SalaryForecast.Core;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecaster.Infrastructure.Impl;
 using Exception = Java.Lang.Exception;
+using FileProvider = SalaryForecaster.Infrastructure.Impl.FileProvider;
 
 namespace SalaryForecaster
 {
@@ -38,7 +39,14 @@ namespace SalaryForecaster
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             PlatformVariables.ProgramVersion = version.Build == 0 ? $"{version.Major}.{version.Minor}" : $"{version.Major}.{version.Minor}.{version.Build}-Developer Version";
             var fileProvider = iocContainer.Get<IFileProvider>();
-            var basePath = fileProvider.GetDbFilePath();
+            var basePathFile = fileProvider.GetDbFilePath();
+            var file = new FileInfo(basePathFile);
+            var basePath = file.DirectoryName;
+            
+            if (!Directory.Exists(basePath))
+            {
+                Directory.CreateDirectory(basePath);
+            }
 
             for (var index = 2011; index <= 2020; index++)
             {

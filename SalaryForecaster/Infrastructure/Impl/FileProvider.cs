@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using SalaryForecast.Core.Db;
 using SalaryForecast.Core.Infrastructure;
+using SQLite;
 
 namespace SalaryForecaster.Infrastructure.Impl
 {
@@ -14,7 +16,17 @@ namespace SalaryForecaster.Infrastructure.Impl
 
         public string GetDbFilePath()
         {
-            return Path.Combine(DefaultUserDirectory, "SalaryForecaster");
+            var fullPath = Path.Combine(DefaultUserDirectory, "SalaryForecaster");
+            var dbPath = Path.Combine(fullPath, "SalaryForecster.db");
+            if (!File.Exists(dbPath))
+            {
+                File.Create(dbPath).Close();
+                var conn = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite);
+                conn.CreateTable<AdditionalPay>();
+                conn.Close();
+                conn.Dispose();
+            }
+            return dbPath;
         }
     }
 }
