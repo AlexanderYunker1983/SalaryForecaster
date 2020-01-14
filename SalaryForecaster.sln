@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryForecast.Desktop", "SalaryForecast.Desktop\SalaryForecast.Desktop.csproj", "{22F6FF12-627E-4909-91B2-125E60C69411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryForecast.Core", "SalaryForecast.Core\SalaryForecast.Core.csproj", "{5FD39DFD-BC79-4958-BFF2-5D6FF55FD2E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryForecast.Core", "SalaryForecast.Core\SalaryForecast.Core.csproj", "{5FD39DFD-BC79-4958-BFF2-5D6FF55FD2E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YLocalization", "YLocalization\YLocalization.csproj", "{8BA6E185-F9E9-46E1-AC12-19DAA9083A86}"
 EndProject
@@ -36,6 +36,8 @@ Global
 		{7E2072E7-57A0-421E-9275-0EE26A67DD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E2072E7-57A0-421E-9275-0EE26A67DD8B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{50176DA1-FA79-42F6-AD02-14D93A877C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
