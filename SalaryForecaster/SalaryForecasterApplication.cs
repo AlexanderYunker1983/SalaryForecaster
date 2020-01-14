@@ -1,6 +1,8 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
 
 namespace SalaryForecaster
@@ -8,6 +10,14 @@ namespace SalaryForecaster
     [Application(LargeHeap = true, Label = "@string/ApplicationName")]
     public class SalaryForecasterApplication : Application
     {
+        protected SalaryForecasterApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
+        public SalaryForecasterApplication()
+        {
+        }
+
         public override void OnCreate()
         {
             RegisterActivityLifecycleCallbacks(new SetCommonSettingsToActivity());
