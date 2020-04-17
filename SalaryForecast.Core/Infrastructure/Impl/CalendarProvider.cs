@@ -64,12 +64,25 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
                 monthModel.WorkDaysCount = monthModel.Days.Count(d => d.Value.IsWorkDate);
 
-                monthModel.NearestSalaryFirstPartDate = monthModel.Days.Last(d =>
-                    d.Key <= _settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate).Key;
+                var monthModelNearestSalaryFirstPartDateExists = monthModel.Days.Any(d =>
+                    d.Key <= _settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate);
+                if (monthModelNearestSalaryFirstPartDateExists)
+                    monthModel.NearestSalaryFirstPartDate = monthModel.Days.Last(d =>
+                        d.Key <= _settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate).Key;
+                else
+                    monthModel.NearestSalaryFirstPartDate = monthModel.Days.First(d =>
+                    d.Key > _settingsManager.SalaryFirstPartDate && d.Value.IsWorkDate).Key;
 
-                monthModel.NearestSalarySecondPartDate = monthModel.Days.Last(d =>
-                    d.Key <= _settingsManager.SalarySecondPartDate && d.Value.IsWorkDate).Key;
-                
+
+                var monthModelNearestSecondPartDateExists = monthModel.Days.Any(d =>
+                    d.Key <= _settingsManager.SalarySecondPartDate && d.Value.IsWorkDate);
+                if (monthModelNearestSecondPartDateExists)
+                    monthModel.NearestSalarySecondPartDate = monthModel.Days.Last(d =>
+                        d.Key <= _settingsManager.SalarySecondPartDate && d.Value.IsWorkDate).Key;
+                else
+                    monthModel.NearestSalarySecondPartDate = monthModel.Days.First(d =>
+                        d.Key > _settingsManager.SalarySecondPartDate && d.Value.IsWorkDate).Key;
+
                 yearModel.Months.Add(monthIndex, monthModel);
             }
 
