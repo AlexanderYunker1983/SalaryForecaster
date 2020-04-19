@@ -8,7 +8,7 @@ namespace SalaryForecast.Core
     {
         public static ILocalizationManager LocalizationManager { get; set; }
         public static string ProgramVersion { get; set; }
-        public static bool IsWpfPlatform => ToolkitServiceProvider.Application.PlatformInfo.Platform == PlatformType.WPF;
+        public static bool IsWpfPlatform => ServiceProvider.Application.PlatformInfo.Platform == PlatformType.WPF;
         public static object[] MenuStructure { get; set; } = new object[0];
     }
 }

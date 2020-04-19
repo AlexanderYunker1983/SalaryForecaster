@@ -1,7 +1,5 @@
 <thirdparty>
-    <dependency name='vscrt15' version='14.16.27023' if='windows and vs15'/>
     <dependency name='nuget' version='5.2.0' if='windows' auto_link='false'/>
-	<dependency name='cmake' version='3.12.0-windows' if='windows' auto_link='false'/>
+	<dependency name='cmake' version='3.16.2-windows' if='windows' auto_link='false'/>
 	<dependency name='nsis' version='2.46' if='windows'/>
-	<dependency name='android-sdk' version='1.0'/>
 </thirdparty>

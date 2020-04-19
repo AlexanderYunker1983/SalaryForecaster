@@ -61,7 +61,20 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
-            var nextSalary = currentMonthDate.First(s => s.Date >= DateTime.Now);
+            var salaryInThisMonth = currentMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
+            if (salaryInThisMonth == null)
+            {
+                var nextMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth + 1).ToList();
+                var salaryInNextMonth = nextMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
+                if (salaryInNextMonth == null)
+                {
+                    return;
+                }
+
+                salaryInThisMonth = salaryInNextMonth;
+            }
+            
+            var nextSalary = salaryInThisMonth;
             nextSalary.IsNextSalary = true;
             var salaryDate = nextSalary.Date;
 

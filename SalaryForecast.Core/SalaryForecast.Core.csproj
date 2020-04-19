@@ -51,8 +51,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MugenMvvmToolkit" Version="6.5.1.1" />
-    <PackageReference Include="MugenMvvmToolkit.AutofacContainer" Version="6.5.1.1" />
+    <PackageReference Include="MugenMvvmToolkit" Version="6.5.0" />
+    <PackageReference Include="MugenMvvmToolkit.AutofacContainer" Version="6.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>

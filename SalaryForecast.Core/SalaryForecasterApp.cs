@@ -6,7 +6,7 @@ namespace SalaryForecast.Core
 {
     public class SalaryForecasterApp : MvvmApplication
     {
-        protected override Type GetStartViewModelType()
+        public override Type GetStartViewModelType()
         {
             return typeof(SalaryForecasterStartViewModel);
         }
