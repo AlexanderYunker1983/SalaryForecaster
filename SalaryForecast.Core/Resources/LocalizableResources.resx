@@ -312,4 +312,10 @@
 1 - зарплата (первая часть выплат в начале месяца);
 2 - аванс (вторая часть выплат в конце месяца).</value>
   </data>
+  <data name="CalendarDoesNotExists" xml:space="preserve">
+    <value>Отсутствует файл производственного календаря на текущий или предыдущий год. Расчёт остановлен.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
 </root>
