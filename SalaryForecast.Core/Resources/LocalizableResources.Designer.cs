@@ -271,7 +271,7 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой.
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяце имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой.
         /// </summary>
         internal static string GreenRedHelp {
             get {
@@ -364,7 +364,7 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяца имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов.
+        ///   Looks up a localized string similar to  подсвечивается строка аванса, если в этом месяце имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов.
         /// </summary>
         internal static string RedHelp {
             get {
