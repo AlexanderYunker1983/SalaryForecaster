@@ -99,6 +99,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отсутствует файл производственного календаря на текущий или предыдущий год. Расчёт остановлен..
+        /// </summary>
+        internal static string CalendarDoesNotExists {
+            get {
+                return ResourceManager.GetString("CalendarDoesNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Комментарий.
         /// </summary>
         internal static string CommentHeader {
@@ -180,6 +189,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string EditAdditionalPays {
             get {
                 return ResourceManager.GetString("EditAdditionalPays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
