@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using MugenMvvmToolkit;
 using MugenMvvmToolkit.Interfaces.Models;
 using MugenMvvmToolkit.Interfaces.Navigation;
+using MugenMvvmToolkit.Interfaces.Presenters;
 using MugenMvvmToolkit.Interfaces.ViewModels;
+using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
@@ -24,15 +26,18 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly ISalaryProvider _salaryProvider;
         private readonly IDbService _dbService;
         private readonly ISettingsManager _settingsManager;
+        private readonly IMessagePresenter _messagePresenter;
         private string _nextSalaryStatus;
         private string _yearBalance;
 
-        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService, ISettingsManager settingsManager)
+        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService,
+            ISettingsManager settingsManager, IMessagePresenter messagePresenter)
         {
             _localizationManager = localizationManager;
             _salaryProvider = salaryProvider;
             _dbService = dbService;
             _settingsManager = settingsManager;
+            _messagePresenter = messagePresenter;
             DisplayName = $"{_localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
         }
 
@@ -58,6 +63,16 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             var currentYear = DateTime.Now.Year;
             PastSalaries = _salaryProvider.GetSalaries(currentYear - 1);
             CurrentSalaries = _salaryProvider.GetSalaries(currentYear);
+
+            if (PastSalaries == null || CurrentSalaries == null ||
+                !PastSalaries.Any() || !CurrentSalaries.Any())
+            {
+                _messagePresenter.ShowAsync(_localizationManager.GetString("CalendarDoesNotExists"),
+                    _localizationManager.GetString("Error"),
+                    MessageButton.Ok, MessageImage.Error);
+                this.CloseAsync();
+                return;
+            }
 
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
