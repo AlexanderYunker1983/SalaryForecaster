@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CurrentYear" xml:space="preserve">
+    <value>Текущий год</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>    Дата
+выплаты</value>
+  </data>
+  <data name="daysMany" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="daysSeveral" xml:space="preserve">
+    <value>дня</value>
+  </data>
+  <data name="daysSingle" xml:space="preserve">
+    <value>день</value>
+  </data>
+  <data name="FirstPartDate" xml:space="preserve">
+    <value>Число выплаты зарплаты:</value>
+  </data>
+  <data name="NextSalaryDays" xml:space="preserve">
+    <value>До следующей зарплаты осталось</value>
+  </data>
+  <data name="PreviousYear" xml:space="preserve">
+    <value>Предыдущий год</value>
+  </data>
+  <data name="ProgramTitle" xml:space="preserve">
+    <value>Прогноз зарплаты</value>
+  </data>
+  <data name="SalaryPartPercent" xml:space="preserve">
+    <value>Доля</value>
+  </data>
+  <data name="SalaryPartValue" xml:space="preserve">
+    <value>   Выплата</value>
+  </data>
+  <data name="SalarySettings" xml:space="preserve">
+    <value>Настройки зарплаты</value>
+  </data>
+  <data name="SalaryValue" xml:space="preserve">
+    <value>Величина зарплаты в месяц, руб.:</value>
+  </data>
+  <data name="SecondPartDate" xml:space="preserve">
+    <value>Число выплаты аванса:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="FirstCash" xml:space="preserve">
+    <value>Наличные с зарплаты, руб.</value>
+  </data>
+  <data name="FirstPay" xml:space="preserve">
+    <value>Выплаты с зарплаты, руб.</value>
+  </data>
+  <data name="SalaryDelta" xml:space="preserve">
+    <value>  Месячная 
+разница, руб.</value>
+  </data>
+  <data name="SalaryPartWithoutCash" xml:space="preserve">
+    <value>Выплата без
+  наличных</value>
+  </data>
+  <data name="SalaryWithoutCashAndPay" xml:space="preserve">
+    <value>Остаток после
+всех платежей</value>
+  </data>
+  <data name="SecondCash" xml:space="preserve">
+    <value>Наличные с аванса, руб.</value>
+  </data>
+  <data name="SecondPay" xml:space="preserve">
+    <value>Выплаты с аванса, руб.</value>
+  </data>
+  <data name="YearBalance" xml:space="preserve">
+    <value>Годовой баланс, руб.:</value>
+  </data>
+  <data name="AdditionalPay" xml:space="preserve">
+    <value>  Доп. расходы/
+       премии </value>
+  </data>
+  <data name="AdditionalPays" xml:space="preserve">
+    <value>Дополнительные платежи</value>
+  </data>
+  <data name="AdditionalPayTable" xml:space="preserve">
+    <value>Таблица дополнительных платежей</value>
+  </data>
+  <data name="AddNewPay" xml:space="preserve">
+    <value>Добавить новый платёж</value>
+  </data>
+  <data name="CommentHeader" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="EditAdditionalPays" xml:space="preserve">
+    <value>Редактировать таблицу дополнительных платежей</value>
+  </data>
+  <data name="MonthHeader" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="PartHeader" xml:space="preserve">
+    <value>  Часть 
+платежа</value>
+  </data>
+  <data name="PayHeader" xml:space="preserve">
+    <value>Платёж</value>
+  </data>
+  <data name="RemoveSelectedPay" xml:space="preserve">
+    <value>Удалить выбранный платёж</value>
+  </data>
+  <data name="YearBalanceHeader" xml:space="preserve">
+    <value>Годовой баланс</value>
+  </data>
+  <data name="YearHeader" xml:space="preserve">
+    <value>Год</value>
+  </data>
+  <data name="OneDayCost" xml:space="preserve">
+    <value>Потери от одного
+      дня отгула</value>
+  </data>
+  <data name="OneHolidayCost" xml:space="preserve">
+    <value>"Монетизация"
+    выходных</value>
+  </data>
+  <data name="UseInCalculation" xml:space="preserve">
+    <value>Включить
+в расчёт</value>
+  </data>
+  <data name="UseInCalculationOfVacation" xml:space="preserve">
+    <value>Входит в расчёт
+средней з/пл</value>
+  </data>
+  <data name="DataWillBeUpdatedAfterClosing" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица
+    автоматически будет пересчитана после того как 
+                      данное окно будет закрыто</value>
+  </data>
+  <data name="DataWillBeUpdatedAfterClosingWide" xml:space="preserve">
+    <value>Данные автоматически сохранятся и главная таблица автоматически будет пересчитана 
+                                  после того как данное окно будет закрыто</value>
+  </data>
+  <data name="FirstCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день зарплаты. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="FirstPartDateToolTip" xml:space="preserve">
+    <value>День выплаты зарплаты. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="FirstPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения зарплаты.</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Зелёным</value>
+  </data>
+  <data name="GreenHelp" xml:space="preserve">
+    <value> подсвечивается строка ближайшей выплаты</value>
+  </data>
+  <data name="GreenRed" xml:space="preserve">
+    <value>Красно-зелёным</value>
+  </data>
+  <data name="GreenRedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяце имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов и этот аванс является ближайшей выплатой</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Красным</value>
+  </data>
+  <data name="RedHelp" xml:space="preserve">
+    <value> подсвечивается строка аванса, если в этом месяце имеется отрицательный баланс, то есть все доходы месяца меньше всех расходов</value>
+  </data>
+  <data name="SalaryValueToolTip" xml:space="preserve">
+    <value>Размер зарплаты в месяц
+за вычитом всех налогов</value>
+  </data>
+  <data name="SecondCashToolTip" xml:space="preserve">
+    <value>Размер денежных средств, которые обязательно
+нужно снять в день аванса. Например, на оплату
+коммунальных платежей, питание, проезд. Сюда
+не входят платежи по займам и кредитам.</value>
+  </data>
+  <data name="SecondPartDateToolTip" xml:space="preserve">
+    <value>День выплаты аванса. Если день выпадает на
+выходной или праздничный день, рассчитывется
+ближайший к нему предыдущий рабочий день</value>
+  </data>
+  <data name="SecondPayToolTip" xml:space="preserve">
+    <value>Размер платежей по займам и кредитам, 
+которые делаются после получения аванса.</value>
+  </data>
+  <data name="WarningNegativePay" xml:space="preserve">
+    <value>!!! Внимание! Положительная величина платежа вводится для обозначения трат. 
+                Премии вводятся с отрицательной величиной платежа !!!
+Часть платежа - индекс от 1 до 2 выплаты:
+1 - зарплата (первая часть выплат в начале месяца);
+2 - аванс (вторая часть выплат в конце месяца).</value>
+  </data>
+  <data name="CalendarDoesNotExists" xml:space="preserve">
+    <value>Отсутствует файл производственного календаря на текущий или предыдущий год. Расчёт остановлен.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+</root>

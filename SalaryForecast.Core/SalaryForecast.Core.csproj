@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="HolidaysJSON\consultant2011.json" />
+    <None Remove="HolidaysJSON\consultant2012.json" />
+    <None Remove="HolidaysJSON\consultant2013.json" />
+    <None Remove="HolidaysJSON\consultant2014.json" />
+    <None Remove="HolidaysJSON\consultant2015.json" />
+    <None Remove="HolidaysJSON\consultant2016.json" />
+    <None Remove="HolidaysJSON\consultant2017.json" />
+    <None Remove="HolidaysJSON\consultant2018.json" />
+    <None Remove="HolidaysJSON\consultant2019.json" />
+    <None Remove="HolidaysJSON\consultant2020.json" />
+    <None Remove="HolidaysJSON\consultant2021.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="HolidaysJSON\consultant2011.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2012.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2013.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2014.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2015.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2016.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2017.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2018.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2019.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2020.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HolidaysJSON\consultant2021.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MugenMvvmToolkit" Version="6.5.0" />
+    <PackageReference Include="MugenMvvmToolkit.AutofacContainer" Version="6.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YLocalization\YLocalization.csproj" />
+    <ProjectReference Include="..\YMugenExtensions\YMugenExtensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\LocalizableResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LocalizableResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\LocalizableResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
