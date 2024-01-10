@@ -60,6 +60,9 @@
     <Content Include="HolidaysJSON\consultant2023.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+	<Content Include="HolidaysJSON\consultant2024.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
