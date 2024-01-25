@@ -41,5 +41,14 @@ namespace SalaryForecast.Core.Models
                 OnPropertyChanged();
             }
         }
+
+        public bool IsActive
+        {
+            get
+            {
+                var currentDate = DateTime.Now.Date;
+                return currentDate < Date;
+            }
+        }
     }
 }

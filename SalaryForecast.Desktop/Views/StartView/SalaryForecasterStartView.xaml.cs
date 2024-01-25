@@ -41,6 +41,14 @@ namespace SalaryForecast.Desktop.Views.StartView
                             if (a is Salary salary)
                             {
                                 var colorChanged = false;
+
+                                if (!salary.IsActive)
+                                {
+                                    row.Background = new LinearGradientBrush(Colors.LightGray, Colors.Gray,
+                                        new Point(0, 0.5), new Point(1.0, 0.5));
+                                    continue;
+                                }
+
                                 if (salary.IsNextSalary)
                                 {
                                     row.Background = new LinearGradientBrush(Colors.Lime, Colors.White,

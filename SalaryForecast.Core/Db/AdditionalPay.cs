@@ -18,6 +18,8 @@ namespace SalaryForecast.Core.Db
         public bool UseInCalculation { get; set; } = true;
         [NotNull]
         public bool UseInCalculationOfVacation { get; set; }
+        [NotNull]
+        public bool Finished { get; set; }
         public string Comment { get; set; }
     }
 }

@@ -11,6 +11,7 @@
         Title="{Binding DisplayName}"
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
+        WindowState="Maximized"
         FontSize="14"
         MinHeight="480"
         MinWidth="640">

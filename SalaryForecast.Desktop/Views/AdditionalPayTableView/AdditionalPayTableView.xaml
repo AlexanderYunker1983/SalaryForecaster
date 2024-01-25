@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:additionalPayTableViewModel="clr-namespace:SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel;assembly=SalaryForecast.Core"
+        xmlns:converters="clr-namespace:SalaryForecast.Desktop.Converters"
         mc:Ignorable="d"
         Title="{DataBinding '$i18n.AdditionalPayTable'}"
         WindowStartupLocation="CenterScreen"
@@ -16,6 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Themes/Common.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolInverter x:Key="BoolInverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="11">
@@ -35,14 +38,35 @@
         <DataGrid Grid.Column="0" Grid.Row="1" CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False"
                   CanUserSortColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"
                   AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" FontSize="14"
-                  ItemsSource="{Binding AdditionalPays}" SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
+                  ItemsSource="{Binding AdditionalPays}" 
+                  SelectedItem="{Binding SelectedAdditionalPay, Mode=TwoWay}">
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="White"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Finished}" Value="True">
+                            <DataTrigger.Setters>
+                                <Setter Property="Background" Value="DarkGray"/>
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Year, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.YearHeader'}"/>
                 <DataGridTextColumn Binding="{Binding Month, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.MonthHeader'}"/>
                 <DataGridTextColumn Binding="{Binding Part, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.PartHeader'}"/>
                 <DataGridTextColumn Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
                                     Header="{DataBinding '$i18n.PayHeader'}" Width="175"/>
-                <DataGridCheckBoxColumn Binding="{Binding UseInCalculation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.UseInCalculation'}"/>
+                <DataGridTemplateColumn  Header="{DataBinding '$i18n.UseInCalculation'}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding UseInCalculation, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding Finished, Converter={StaticResource BoolInverter}}"
+                                      HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn Binding="{Binding Finished, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.Finished'}"/>
                 <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Comment, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
