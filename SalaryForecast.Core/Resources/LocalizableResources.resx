@@ -321,4 +321,13 @@
   <data name="Finished" xml:space="preserve">
     <value>Проведён</value>
   </data>
+  <data name="CorrectRealValue" xml:space="preserve">
+    <value>Скорректировать по реальному значению</value>
+  </data>
+  <data name="ToggleLastYear" xml:space="preserve">
+    <value>Показать/скрыть предыдущий год</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Внешний вид</value>
+  </data>
 </root>

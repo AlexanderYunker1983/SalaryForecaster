@@ -50,5 +50,7 @@ namespace SalaryForecast.Core.Models
                 return currentDate < Date;
             }
         }
+
+        public AsyncRelayCommand<Salary> CorrectValueCommand { get; set; }
     }
 }

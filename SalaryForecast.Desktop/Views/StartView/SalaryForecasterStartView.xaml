@@ -6,15 +6,16 @@
         xmlns:startViewModel="clr-namespace:SalaryForecast.Core.ViewModels.StartViewModel;assembly=SalaryForecast.Core"
         xmlns:menu="clr-namespace:YMugenExtensions.Menu;assembly=YMugenExtensions"
         xmlns:models="clr-namespace:SalaryForecast.Core.Models;assembly=SalaryForecast.Core"
+        xmlns:startView="clr-namespace:SalaryForecast.Desktop.Views.StartView"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance startViewModel:SalaryForecasterStartViewModel}"
         Title="{Binding DisplayName}"
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
-        WindowState="Maximized"
         FontSize="14"
         MinHeight="480"
-        MinWidth="640">
+        MinWidth="640"
+        x:Name="Window">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -67,14 +68,18 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="{DataBinding '$i18n.PreviousYear'}" HorizontalAlignment="Center" FontSize="16" FontWeight="DemiBold"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="{DataBinding '$i18n.CurrentYear'}" HorizontalAlignment="Center" FontSize="16" FontWeight="DemiBold"/>
-            <Separator Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource VerticalSeparatorStyle}"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="{DataBinding '$i18n.PreviousYear'}" HorizontalAlignment="Center" FontSize="16" FontWeight="DemiBold"
+                       View.Visible="{DataBinding ShowLastYear}"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="{DataBinding '$i18n.CurrentYear'}" HorizontalAlignment="Center" FontSize="16" FontWeight="DemiBold"
+                       View.Visible="{DataBinding ShowLastYear}"/>
+            <Separator Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Style="{DynamicResource VerticalSeparatorStyle}"
+                       View.Visible="{DataBinding ShowLastYear}"/>
             <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding PastSalaries}" FontSize="16"
                       CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True"
                       CanUserResizeColumns="True" CanUserResizeRows="False" CanUserSortColumns="True"
                       AutoGenerateColumns="False" HeadersVisibility="Column"
-                      IsReadOnly="True" LoadingRow="DataGridLoadingRowWithoutHighlighting" UnloadingRow="DataGridLoadingRowWithoutHighlighting">
+                      IsReadOnly="True" LoadingRow="DataGridLoadingRowWithoutHighlighting" UnloadingRow="DataGridLoadingRowWithoutHighlighting"
+                      View.Visible="{DataBinding ShowLastYear}">
                 <DataGrid.CellStyle>
                     <Style>
                         <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
@@ -245,7 +250,15 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <Grid HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding SalaryYearDelta, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
+                                    <TextBlock Text="{Binding SalaryYearDelta, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1">
+                                        <TextBlock.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="{DataBinding '$i18n.CorrectRealValue'}"
+                                                          Command="{Binding CorrectValueCommand}"
+                                                          CommandParameter="{Binding}"/>
+                                            </ContextMenu>
+                                        </TextBlock.ContextMenu>
+                                    </TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

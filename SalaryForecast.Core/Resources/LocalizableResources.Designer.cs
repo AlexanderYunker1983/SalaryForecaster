@@ -117,6 +117,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Скорректировать по реальному значению.
+        /// </summary>
+        internal static string CorrectRealValue {
+            get {
+                return ResourceManager.GetString("CorrectRealValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Текущий год.
         /// </summary>
         internal static string CurrentYear {
@@ -554,6 +563,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Показать/скрыть предыдущий год.
+        /// </summary>
+        internal static string ToggleLastYear {
+            get {
+                return ResourceManager.GetString("ToggleLastYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Включить
         ///в расчёт.
         /// </summary>
@@ -570,6 +588,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string UseInCalculationOfVacation {
             get {
                 return ResourceManager.GetString("UseInCalculationOfVacation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Внешний вид.
+        /// </summary>
+        internal static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

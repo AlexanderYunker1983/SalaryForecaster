@@ -19,8 +19,21 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
     public class SalaryForecasterStartViewModel : CloseableViewModel, IHasDisplayName, INavigableViewModel
     {
-        public string DisplayName { get; set; }
-        public ObservableCollection<IMenuItemViewModel> Menu { get; set; } = new ObservableCollection<IMenuItemViewModel>();
+        private string _displayName;
+
+        public string DisplayName
+        {
+            get => _displayName;
+            private set
+            {
+                if (value == _displayName) return;
+                _displayName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<IMenuItemViewModel> Menu { get; } = new ObservableCollection<IMenuItemViewModel>();
+
         private readonly Dictionary<string, IMenuItemViewModel> _mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
         private readonly ILocalizationManager _localizationManager;
         private readonly ISalaryProvider _salaryProvider;
@@ -39,6 +52,18 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             _settingsManager = settingsManager;
             _messagePresenter = messagePresenter;
             DisplayName = $"{_localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
+
+            CorrectValueCommand = new AsyncRelayCommand<Salary>(OnCorrectRealValue);
+        }
+
+        private async Task OnCorrectRealValue(Salary salary)
+        {
+            var additionalPays = _dbService.GetAdditionalPays();
+            using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
+            {
+                await vm.ShowAsync();
+            }
+            await UpdateCurrentSalaries();
         }
 
         protected override void OnInitialized()
@@ -48,7 +73,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             CreateMenuItems();
             Menu.AddRange(ProcessMenu(PlatformVariables.MenuStructure));
 
-            UpdateCurrentSalaries();
+            UpdateCurrentSalaries().ConfigureAwait(false);
         }
         
         protected override void OnClosed(IDataContext context)
@@ -58,22 +83,25 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             base.OnClosed(context);
         }
 
-        private void UpdateCurrentSalaries()
+        private async Task UpdateCurrentSalaries()
         {
-            var currentYear = DateTime.Now.Year;
+           var currentYear = DateTime.Now.Year;
             PastSalaries = _salaryProvider.GetSalaries(currentYear - 1);
             CurrentSalaries = _salaryProvider.GetSalaries(currentYear);
 
             if (PastSalaries == null || CurrentSalaries == null ||
                 !PastSalaries.Any() || !CurrentSalaries.Any())
             {
-                _messagePresenter.ShowAsync(_localizationManager.GetString("CalendarDoesNotExists"),
+                await _messagePresenter.ShowAsync(_localizationManager.GetString("CalendarDoesNotExists"),
                     _localizationManager.GetString("Error"),
                     MessageButton.Ok, MessageImage.Error);
-                this.CloseAsync();
+                await this.CloseAsync();
                 return;
             }
-
+            foreach (var currentSalary in CurrentSalaries)
+            {
+                currentSalary.CorrectValueCommand = CorrectValueCommand;
+            }
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
             var salaryInThisMonth = currentMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
@@ -115,6 +143,26 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         {
             _mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(_localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
             _mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(_localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
+            _mainMenuItems.Add(MainMenuItems.View, new MenuItemViewModel(_localizationManager.GetString("ToggleLastYear"), OnToggleLastYear));
+        }
+
+        private bool _showLastYear;
+
+        public bool ShowLastYear
+        {
+            get => _showLastYear;
+            set
+            {
+                if (value == _showLastYear) return;
+                _showLastYear = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Task OnToggleLastYear()
+        {
+            ShowLastYear = !ShowLastYear;
+            return Empty.Task;
         }
 
         private async Task OnEditAdditionalPays()
@@ -123,7 +171,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             {
                 await vm.ShowAsync();
             }
-            UpdateCurrentSalaries();
+            await UpdateCurrentSalaries();
         }
 
         private async Task OnOpenSalarySettings()
@@ -132,17 +180,17 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             {
                 await vm.ShowAsync();
             }
-            UpdateCurrentSalaries();
+            await UpdateCurrentSalaries();
         }
 
         private IEnumerable<IMenuItemViewModel> ProcessMenu(object[] menuStructure)
         {
             var result = new List<IMenuItemViewModel>();
             foreach (var menu in menuStructure)
-                if (menu is MenuWithSubItems withSubitems)
+                if (menu is MenuWithSubItems withSubItems)
                 {
-                    var sub = new SubMenuItemViewModel(_localizationManager.GetString(withSubitems.Caption));
-                    var items = ProcessMenu(withSubitems.MenuItems.Cast<object>().ToArray());
+                    var sub = new SubMenuItemViewModel(_localizationManager.GetString(withSubItems.Caption));
+                    var items = ProcessMenu(withSubItems.MenuItems.Cast<object>().ToArray());
                     sub.Items.AddRange(items);
                     result.Add(sub);
                 }
@@ -159,7 +207,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         public string NextSalaryStatus
         {
             get => _nextSalaryStatus;
-            set
+            private set
             {
                 if (value == _nextSalaryStatus) return;
 
@@ -171,7 +219,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         public string YearBalance
         {
             get => _yearBalance;
-            set
+            private set
             {
                 if (value == _yearBalance) return;
 
@@ -180,8 +228,31 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
         }
 
-        public List<Salary> PastSalaries { get; set; }
-        public List<Salary> CurrentSalaries { get; set; }
+        private List<Salary> _pastSalaries;
+
+        public List<Salary> PastSalaries
+        {
+            get => _pastSalaries;
+            set
+            {
+                if (Equals(value, _pastSalaries)) return;
+                _pastSalaries = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<Salary> _currentSalaries;
+
+        public List<Salary> CurrentSalaries
+        {
+            get => _currentSalaries;
+            set
+            {
+                if (Equals(value, _currentSalaries)) return;
+                _currentSalaries = value;
+                OnPropertyChanged();
+            }
+        }
 
         public async void OnNavigatedTo(INavigationContext context)
         {
@@ -199,7 +270,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                     await vm.ShowAsync();
                 }
 
-                UpdateCurrentSalaries();
+                await UpdateCurrentSalaries();
             }
         }
 
@@ -211,5 +282,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         public void OnNavigatedFrom(INavigationContext context)
         {
         }
+
+        private AsyncRelayCommand<Salary> CorrectValueCommand { get; }
     }
 }

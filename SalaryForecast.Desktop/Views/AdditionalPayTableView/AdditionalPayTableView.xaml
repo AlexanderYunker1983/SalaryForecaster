@@ -67,7 +67,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridCheckBoxColumn Binding="{Binding Finished, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.Finished'}"/>
-                <DataGridTextColumn SortDirection="Ascending" Binding="{Binding Comment, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Comment, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="{DataBinding '$i18n.WarningNegativePay'}" HorizontalAlignment="Center"
