@@ -1,0 +1,57 @@
+﻿<Window x:Class="SalaryForecast.Desktop.Views.CorrectionView.CorrectionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:correctionViewModel="clr-namespace:SalaryForecast.Core.ViewModels.CorrectionViewModel;assembly=SalaryForecast.Core"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance correctionViewModel:CorrectionViewModel}"
+        Title="{DataBinding DisplayName}"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        FontSize="14"
+        MinWidth="600">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="11">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,0">
+            <TextBlock VerticalAlignment="Center" Text="{DataBinding '$i18n.CalculatedMoney'}" Margin="0,0,3,0"/>
+            <TextBlock VerticalAlignment="Center" Text="{Binding SalaryValue, StringFormat={}{0:c}, ConverterCulture=ru-RU}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,6,0,0">
+            <TextBlock VerticalAlignment="Center" Text="{DataBinding '$i18n.RealValue'}" Margin="0,0,3,0"/>
+            <xctk:DecimalUpDown VerticalAlignment="Center" Width="150" Value="{Binding RealValue}" FormatString="C2" Minimum="0" Maximum="1000000000" Increment="1000"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,6,0,0">
+            <TextBlock VerticalAlignment="Center" Text="{DataBinding '$i18n.CalculatedValue'}" Margin="0,0,3,0"/>
+            <TextBlock VerticalAlignment="Center" Text="{Binding CalculatedValue, StringFormat={}{0:c}, ConverterCulture=ru-RU}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3"
+                    Margin="0,6,0,0"
+                    HorizontalAlignment="Right">
+            <Button Margin="0,0,6,0"
+                    Content="{DataBinding '$i18n.Apply'}"
+                    Command="{Binding ApplyCommand}"/>
+            <Button Margin="0,0,6,0"
+                    Content="{DataBinding '$i18n.Cancel'}"
+                    Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

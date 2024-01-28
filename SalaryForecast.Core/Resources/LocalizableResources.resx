@@ -330,4 +330,22 @@
   <data name="View" xml:space="preserve">
     <value>Внешний вид</value>
   </data>
+  <data name="Correction" xml:space="preserve">
+    <value>Корректировка фактического значения остатков после выплат {0:M}</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="CalculatedMoney" xml:space="preserve">
+    <value>Рассчётный остаток:</value>
+  </data>
+  <data name="CalculatedValue" xml:space="preserve">
+    <value>Рассчётное значение:</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="RealValue" xml:space="preserve">
+    <value>Реальный остаток:</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ using MugenMvvmToolkit.Interfaces.Presenters;
 using MugenMvvmToolkit.Interfaces.ViewModels;
 using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
+using SalaryForecast.Core.Db;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
 using YLocalization;
@@ -59,11 +60,28 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private async Task OnCorrectRealValue(Salary salary)
         {
             var additionalPays = _dbService.GetAdditionalPays();
-            using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
+            using (var vm = GetViewModel<CorrectionViewModel.CorrectionViewModel>())
             {
+                vm.SetSalary(salary);
                 await vm.ShowAsync();
+
+                if (vm.Result != null)
+                {
+                    var additionalPay = new AdditionalPay
+                    {
+                        Comment = _localizationManager.GetString("Correction", salary.Date),
+                        Finished = true,
+                        Year = salary.Date.Year,
+                        Month = salary.Date.Month,
+                        Part= salary.Date.Day <= _settingsManager.SalaryFirstPartDate ? 1: 2,
+                        Pay = -(decimal)vm.Result,
+                        UseInCalculation = true,
+                        UseInCalculationOfVacation = true
+                    };
+                    _dbService.AddAdditionalPay(additionalPay);
+                    await UpdateCurrentSalaries();
+                }
             }
-            await UpdateCurrentSalaries();
         }
 
         protected override void OnInitialized()

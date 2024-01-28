@@ -137,6 +137,9 @@
     <Compile Include="Views\AdditionalPayTableView\AdditionalPayTableView.xaml.cs">
       <DependentUpon>AdditionalPayTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CorrectionView\CorrectionView.xaml.cs">
+      <DependentUpon>CorrectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SalarySettingsView\SalarySettingsView.xaml.cs">
       <DependentUpon>SalarySettingsView.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdditionalPayTableView\AdditionalPayTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CorrectionView\CorrectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

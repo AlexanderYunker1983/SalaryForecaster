@@ -99,6 +99,33 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Применить.
+        /// </summary>
+        internal static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рассчётный остаток:.
+        /// </summary>
+        internal static string CalculatedMoney {
+            get {
+                return ResourceManager.GetString("CalculatedMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рассчётное значение:.
+        /// </summary>
+        internal static string CalculatedValue {
+            get {
+                return ResourceManager.GetString("CalculatedValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отсутствует файл производственного календаря на текущий или предыдущий год. Расчёт остановлен..
         /// </summary>
         internal static string CalendarDoesNotExists {
@@ -108,11 +135,29 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отменить.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Комментарий.
         /// </summary>
         internal static string CommentHeader {
             get {
                 return ResourceManager.GetString("CommentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Корректировка фактического значения остатков после выплат {0:M}.
+        /// </summary>
+        internal static string Correction {
+            get {
+                return ResourceManager.GetString("Correction", resourceCulture);
             }
         }
         
@@ -387,6 +432,15 @@ namespace SalaryForecast.Core.Resources {
         internal static string ProgramTitle {
             get {
                 return ResourceManager.GetString("ProgramTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Реальный остаток:.
+        /// </summary>
+        internal static string RealValue {
+            get {
+                return ResourceManager.GetString("RealValue", resourceCulture);
             }
         }
         
