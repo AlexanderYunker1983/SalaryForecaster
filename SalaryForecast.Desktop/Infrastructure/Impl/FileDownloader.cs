@@ -35,17 +35,13 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                 // Пытаемся сохранить без повышенных прав
                 try
                 {
-                    if (!Directory.Exists(directoryPath))
-                    {
-                        Directory.CreateDirectory(directoryPath);
-                    }
                     File.WriteAllBytes(localFilePath, fileData);
                     Console.WriteLine($"File saved successfully: {localFilePath}");
                 }
                 catch (UnauthorizedAccessException)
                 {
                     Console.WriteLine("Administrator privileges required. Requesting elevation...");
-                    SaveWithElevatedPrivileges(fileData, localFilePath, directoryPath);
+                    SaveWithElevatedPrivileges(fileData, localFilePath);
                 }
             }
             catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
@@ -54,7 +50,7 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             }
         }
 
-        private static void SaveWithElevatedPrivileges(byte[] fileData, string targetPath, string directoryPath)
+        private static void SaveWithElevatedPrivileges(byte[] fileData, string targetPath)
         {
             // Создаем временный файл в папке текущего пользователя
             string tempFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
@@ -62,10 +58,6 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
 
             try
             {
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
                 File.WriteAllBytes(tempFile, fileData);
 
                 // Настраиваем процесс для копирования с правами администратора

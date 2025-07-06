@@ -43,7 +43,7 @@ Section "$(ProductName) ${Y_PRODUCT_VERSION}" Product
     File "${Y_FILE_PATH}\x64\*.dll"
     SetOutPath $INSTDIR\x86
     File "${Y_FILE_PATH}\x86\*.dll"
-    
+    CreateDirectory "$INSTDIR\HolidaysJSON"
     WriteUninstaller "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "UninstallString" "$INSTDIR\Uninstall.exe"
     WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${Y_PRODUCT}" "DisplayName" "$(ProductName) ${Y_PRODUCT_VERSION}"
@@ -80,6 +80,7 @@ FunctionEnd
 
 Section "Uninstall"
     RMDir  "$INSTDIR"
+	RMDir /r "$INSTDIR\HolidaysJSON" 
     Delete "$DESKTOP\${SHORT_CUT}"
 	Delete "$SMPROGRAMS\${Y_PRODUCT}\*.*"
     RmDir  "$SMPROGRAMS\${Y_PRODUCT}"
