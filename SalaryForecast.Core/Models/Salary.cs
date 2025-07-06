@@ -12,8 +12,10 @@ namespace SalaryForecast.Core.Models
         public decimal SalaryPercent { get; set; }
         public decimal SalaryWithoutCash { get; set; }
         public decimal SalaryWithoutCashAndPay { get; set; }
+        public decimal SalaryWithoutCashAndPayAlternative { get; set; }
         public string SalaryDelta { get; set; }
         public decimal SalaryYearDelta { get; set; }
+        public decimal SalaryYearDeltaAlternative { get; set; }
         public decimal OneDayCost { get; set; }
         public decimal OneHolidayCost { get; set; }
         public bool WarningEnabled { get; set; }

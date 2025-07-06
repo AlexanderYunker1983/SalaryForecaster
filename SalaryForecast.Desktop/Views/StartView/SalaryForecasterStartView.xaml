@@ -241,6 +241,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.YearBalanceHeader'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
@@ -263,6 +264,22 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.YearBalanceSecondHeader'}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <Grid HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding SalaryYearDeltaAlternative, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.OneDayCost'}">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
@@ -336,6 +353,7 @@
         <StatusBar Grid.Row="6" Margin="-11,0,-11,-11">
             <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" Margin="0,0,25,0" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding YearBalance}" FontSize="16" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding YearBalanceAlternative}" FontSize="16" VerticalAlignment="Center"/>
         </StatusBar>
     </Grid>
 </Window>

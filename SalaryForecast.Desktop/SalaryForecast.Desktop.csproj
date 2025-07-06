@@ -118,6 +118,7 @@
     <Compile Include="Behaviors\ContextMenuFixer.cs" />
     <Compile Include="Converters\BoolInverter.cs" />
     <Compile Include="DesktopModule.cs" />
+    <Compile Include="Infrastructure\Impl\FileDownloader.cs" />
     <Compile Include="Infrastructure\Impl\FileProvider.cs" />
     <Compile Include="Infrastructure\Impl\SettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

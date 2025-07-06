@@ -43,6 +43,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly IMessagePresenter _messagePresenter;
         private string _nextSalaryStatus;
         private string _yearBalance;
+        private string _yearBalanceAlternative;
 
         public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService,
             ISettingsManager settingsManager, IMessagePresenter messagePresenter)
@@ -103,7 +104,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
         private async Task UpdateCurrentSalaries()
         {
-           var currentYear = DateTime.Now.Year;
+            var currentYear = DateTime.Now.Year;
             PastSalaries = _salaryProvider.GetSalaries(currentYear - 1);
             CurrentSalaries = _salaryProvider.GetSalaries(currentYear);
 
@@ -151,7 +152,9 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
 
             var yearSum = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPay);
+            var yearSumAlternative = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPayAlternative);
             YearBalance = $"{_localizationManager.GetString("YearBalance")} {yearSum:F2}";
+            YearBalanceAlternative = $"{_localizationManager.GetString("YearBalance")} {yearSumAlternative:F2}";
 
             OnPropertyChanged(nameof(PastSalaries));
             OnPropertyChanged(nameof(CurrentSalaries));
@@ -242,6 +245,18 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                 if (value == _yearBalance) return;
 
                 _yearBalance = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string YearBalanceAlternative
+        {
+            get => _yearBalanceAlternative;
+            private set
+            {
+                if (value == _yearBalanceAlternative) return;
+
+                _yearBalanceAlternative = value;
                 OnPropertyChanged();
             }
         }

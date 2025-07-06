@@ -20,7 +20,7 @@ namespace SalaryForecast.Core.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class LocalizableResources {
@@ -626,8 +626,8 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Включить
-        ///в расчёт.
+        ///   Looks up a localized string similar to Основной
+        ///расчёт.
         /// </summary>
         internal static string UseInCalculation {
             get {
@@ -682,6 +682,16 @@ namespace SalaryForecast.Core.Resources {
         internal static string YearBalanceHeader {
             get {
                 return ResourceManager.GetString("YearBalanceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Годовой баланс
+        ///(альтернатива).
+        /// </summary>
+        internal static string YearBalanceSecondHeader {
+            get {
+                return ResourceManager.GetString("YearBalanceSecondHeader", resourceCulture);
             }
         }
         

@@ -35,8 +35,6 @@ Name "$(ProductName)"
 Section "$(ProductName) ${Y_PRODUCT_VERSION}" Product
     SetOutPath $INSTDIR\ru
     File "${Y_FILE_PATH}\ru\Xceed.Wpf.AvalonDock.resources.dll"
-	SetOutPath $INSTDIR\HolidaysJSON
-    File "${Y_FILE_PATH}\HolidaysJSON\*.json"
     SetOutPath $INSTDIR
     File "${Y_FILE_PATH}\SalaryForecast.Desktop.exe"
     File "${Y_FILE_PATH}\SalaryForecast.Desktop.exe.config"

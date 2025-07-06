@@ -237,8 +237,8 @@
     выходных</value>
   </data>
   <data name="UseInCalculation" xml:space="preserve">
-    <value>Включить
-в расчёт</value>
+    <value>Основной
+расчёт</value>
   </data>
   <data name="UseInCalculationOfVacation" xml:space="preserve">
     <value>Входит в расчёт
@@ -347,5 +347,9 @@
   </data>
   <data name="RealValue" xml:space="preserve">
     <value>Реальный остаток:</value>
+  </data>
+  <data name="YearBalanceSecondHeader" xml:space="preserve">
+    <value>Годовой баланс
+(альтернатива)</value>
   </data>
 </root>

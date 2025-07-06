@@ -14,6 +14,7 @@ namespace SalaryForecast.Desktop
         public bool Load(IModuleContext context)
         {
             var iocContainer = context.IocContainer;
+            if (!iocContainer.CanResolve<IFileDownloader>()) iocContainer.Bind<IFileDownloader, FileDownloader>(DependencyLifecycle.SingleInstance);
             if (!iocContainer.CanResolve<IFileProvider>()) iocContainer.Bind<IFileProvider, FileProvider>(DependencyLifecycle.SingleInstance);
             if (!iocContainer.CanResolve<ISettingsManager>()) iocContainer.Bind<ISettingsManager, SettingsManager>(DependencyLifecycle.SingleInstance);
             var version = Assembly.GetAssembly(GetType()).GetName().Version;

@@ -7,6 +7,3 @@
 [submodule "YLocalization"]
 	path = YLocalization
 	url = https://github.com/AlexanderYunker1983/YLocalization.git
-[submodule "HolidaysCalendar"]
-	path = HolidaysCalendar
-	url = https://github.com/AlexanderYunker1983/holidays-calendar.git
