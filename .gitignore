@@ -264,3 +264,4 @@ _build_SALARYFORECASTER_VS16/*
 _build_SALARYFORECASTER_NMake_VS16/*
 
 **/*.Generated.cs
+_build_SALARYFORECASTER_NMake_VS17/
