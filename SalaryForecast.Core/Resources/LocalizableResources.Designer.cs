@@ -626,6 +626,15 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Показать/скрыть дополнительные данные.
+        /// </summary>
+        internal static string ToggleShortView {
+            get {
+                return ResourceManager.GetString("ToggleShortView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Основной
         ///расчёт.
         /// </summary>

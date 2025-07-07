@@ -165,6 +165,24 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             _mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(_localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
             _mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(_localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
             _mainMenuItems.Add(MainMenuItems.View, new MenuItemViewModel(_localizationManager.GetString("ToggleLastYear"), OnToggleLastYear));
+            _mainMenuItems.Add(MainMenuItems.ShortView, new MenuItemViewModel(_localizationManager.GetString("ToggleShortView"), OnToggleShortView));
+        }
+
+        private Task OnToggleShortView()
+        {
+            ShowAdditionalColumns = !ShowAdditionalColumns;
+            return Empty.Task;
+        }
+
+        public bool ShowAdditionalColumns
+        {
+            get => _showAdditionalColumns;
+            set
+            {
+                if (value == _showAdditionalColumns) return;
+                _showAdditionalColumns = value;
+                OnPropertyChanged();
+            }
         }
 
         private bool _showLastYear;
@@ -275,6 +293,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         }
 
         private List<Salary> _currentSalaries;
+        private bool _showAdditionalColumns;
 
         public List<Salary> CurrentSalaries
         {

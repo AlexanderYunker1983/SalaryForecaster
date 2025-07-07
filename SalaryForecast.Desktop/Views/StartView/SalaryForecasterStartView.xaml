@@ -6,7 +6,6 @@
         xmlns:startViewModel="clr-namespace:SalaryForecast.Core.ViewModels.StartViewModel;assembly=SalaryForecast.Core"
         xmlns:menu="clr-namespace:YMugenExtensions.Menu;assembly=YMugenExtensions"
         xmlns:models="clr-namespace:SalaryForecast.Core.Models;assembly=SalaryForecast.Core"
-        xmlns:startView="clr-namespace:SalaryForecast.Desktop.Views.StartView"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance startViewModel:SalaryForecasterStartViewModel}"
         Title="{Binding DisplayName}"
@@ -21,7 +20,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Themes/ContextMenuStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <HierarchicalDataTemplate
                 DataType="{x:Type menu:MenuItemViewModel}" ItemsSource="{Binding Path=Items}">
             </HierarchicalDataTemplate>
@@ -185,7 +184,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.AdditionalPay'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.AdditionalPay'}" Visibility="Collapsed" x:Name="AdditionalColumn1">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
@@ -199,7 +198,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartWithoutCash'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartWithoutCash'}" Visibility="Collapsed" x:Name="AdditionalColumn2">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
@@ -213,7 +212,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryWithoutCashAndPay'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryWithoutCashAndPay'}" Visibility="Collapsed" x:Name="AdditionalColumn3">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
@@ -227,7 +226,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryDelta'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryDelta'}" Visibility="Collapsed" x:Name="AdditionalColumn4">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
@@ -280,7 +279,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.OneDayCost'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.OneDayCost'}" Visibility="Collapsed" x:Name="AdditionalColumn5">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
@@ -294,7 +293,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.OneHolidayCost'}">
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.OneHolidayCost'}" Visibility="Collapsed" x:Name="AdditionalColumn6">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">
                                 <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>

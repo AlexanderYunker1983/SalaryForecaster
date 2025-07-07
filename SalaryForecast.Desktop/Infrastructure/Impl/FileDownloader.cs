@@ -35,6 +35,10 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
                 // Пытаемся сохранить без повышенных прав
                 try
                 {
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
                     File.WriteAllBytes(localFilePath, fileData);
                     Console.WriteLine($"File saved successfully: {localFilePath}");
                 }

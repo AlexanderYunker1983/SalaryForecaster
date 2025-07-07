@@ -352,4 +352,7 @@
     <value>Годовой баланс
 (альтернатива)</value>
   </data>
+  <data name="ToggleShortView" xml:space="preserve">
+    <value>Показать/скрыть дополнительные данные</value>
+  </data>
 </root>

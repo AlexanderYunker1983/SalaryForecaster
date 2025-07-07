@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SalaryForecast.Core.Models;
+using SalaryForecast.Core.ViewModels.StartViewModel;
 
 namespace SalaryForecast.Desktop.Views.StartView
 {
@@ -14,6 +15,29 @@ namespace SalaryForecast.Desktop.Views.StartView
         public SalaryForecasterStartView()
         {
             InitializeComponent();
+            this.Loaded += SalaryForecasterStartViewLoaded;
+        }
+
+        private void SalaryForecasterStartViewLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Loaded -= SalaryForecasterStartViewLoaded;
+            var viewModel = DataContext as SalaryForecasterStartViewModel;
+            if (viewModel != null)
+                viewModel.PropertyChanged += (o, args) => 
+                {
+                    if (args.PropertyName == "ShowAdditionalColumns")
+                    {
+                        AdditionalColumn1.Visibility = 
+                        AdditionalColumn2.Visibility = 
+                        AdditionalColumn3.Visibility = 
+                        AdditionalColumn4.Visibility = 
+                        AdditionalColumn5.Visibility = 
+                        AdditionalColumn6.Visibility =
+                            viewModel.ShowAdditionalColumns
+                            ? Visibility.Visible
+                            : Visibility.Collapsed;
+                    }
+                };
         }
         
         private void DataGridLoadingRow(object sender, DataGridRowEventArgs e)
