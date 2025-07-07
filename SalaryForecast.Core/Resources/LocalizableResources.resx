@@ -355,4 +355,11 @@
   <data name="ToggleShortView" xml:space="preserve">
     <value>Показать/скрыть дополнительные данные</value>
   </data>
+  <data name="MaxDiscount" xml:space="preserve">
+    <value>Максимальные траты</value>
+  </data>
+  <data name="MaxDiscountAlternative" xml:space="preserve">
+    <value>Максимальные траты
+(альтернатива)</value>
+  </data>
 </root>

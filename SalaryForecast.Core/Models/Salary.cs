@@ -19,6 +19,8 @@ namespace SalaryForecast.Core.Models
         public decimal OneDayCost { get; set; }
         public decimal OneHolidayCost { get; set; }
         public bool WarningEnabled { get; set; }
+        public decimal MaxDiscount { get; set; }
+        public decimal MaxDiscountAlternative { get; set; }
 
         public decimal AdditionalPay
         {

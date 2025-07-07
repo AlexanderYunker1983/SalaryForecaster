@@ -361,6 +361,25 @@ namespace SalaryForecast.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Максимальные траты.
+        /// </summary>
+        internal static string MaxDiscount {
+            get {
+                return ResourceManager.GetString("MaxDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальные траты
+        ///(альтернатива).
+        /// </summary>
+        internal static string MaxDiscountAlternative {
+            get {
+                return ResourceManager.GetString("MaxDiscountAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Месяц.
         /// </summary>
         internal static string MonthHeader {

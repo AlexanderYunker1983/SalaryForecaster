@@ -127,7 +127,29 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 salary.SalaryYearDeltaAlternative = salaryYearDeltaAlternative;
                 result.Add(salary);
             }
+
+            foreach (var salary in result)
+            {
+                salary.MaxDiscount = CalculateMaxDiscount(salary, result);
+                salary.MaxDiscountAlternative = CalculateMaxAlternativeDiscount(salary, result);
+            }
             return result;
+        }
+
+        private decimal CalculateMaxDiscount(Salary salary, List<Salary> allSalaries)
+        {
+            var salaries = allSalaries.Where(s => s.Date >= salary.Date).ToList();
+            if (!salaries.Any()) return 0;
+            var salaryAfterCalc = salaries.Min(ss => ss.SalaryYearDelta);
+            return salaryAfterCalc < 0 ? 0 : salaryAfterCalc;
+        }
+
+        private decimal CalculateMaxAlternativeDiscount(Salary salary, List<Salary> allSalaries)
+        {
+            var salaries = allSalaries.Where(s => s.Date >= salary.Date).ToList();
+            if (!salaries.Any()) return 0;
+            var salaryAfterCalc = salaries.Min(ss => ss.SalaryYearDeltaAlternative);
+            return salaryAfterCalc < 0 ? 0 : salaryAfterCalc;
         }
     }
 }

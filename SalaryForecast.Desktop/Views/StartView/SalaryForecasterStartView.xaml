@@ -307,6 +307,36 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.MaxDiscount'}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <Grid HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding MaxDiscount, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Header="{DataBinding '$i18n.MaxDiscountAlternative'}">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="models:Salary">
+                                <Grid HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding MaxDiscountAlternative, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
