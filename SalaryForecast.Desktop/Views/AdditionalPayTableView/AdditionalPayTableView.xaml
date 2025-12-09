@@ -28,8 +28,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,6">
             <Button Margin="0,0,6,0" Content="{DataBinding '$i18n.AddNewPay'}" Command="{Binding AddNewAdditionalPayCommand}"/>
@@ -53,7 +51,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{DataBinding '$i18n.MonthHeader'}" Width="160">
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.MonthHeader'}" Width="95">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Months, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -63,7 +61,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{DataBinding '$i18n.PartHeader'}" Width="200">
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.PartHeader'}" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Parts, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -88,9 +86,5 @@
                 <DataGridTextColumn Binding="{Binding Comment, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.CommentHeader'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DataBinding '$i18n.WarningNegativePay'}" HorizontalAlignment="Center"
-                   Foreground="DarkRed" FontSize="16"/>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{DataBinding '$i18n.DataWillBeUpdatedAfterClosingWide'}" HorizontalAlignment="Center"
-                   Foreground="OrangeRed" FontSize="16"/>
     </Grid>
 </Window>
