@@ -62,7 +62,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{DataBinding '$i18n.PartHeader'}" Width="150">
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.PartHeader'}" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Parts, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -72,7 +72,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{DataBinding '$i18n.PayTypeHeader'}" Width="110">
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.PayTypeHeader'}" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.PayTypes, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -82,7 +82,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{DataBinding '$i18n.PayHeader'}" Width="175">
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.PayHeader'}" Width="125">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <xctk:DecimalUpDown Value="{Binding Pay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
