@@ -240,6 +240,10 @@
   <data name="YearBalanceHeader" xml:space="preserve">
     <value>Годовой баланс</value>
   </data>
+  <data name="PeriodBalance" xml:space="preserve">
+    <value>Остаток на
+конец периода</value>
+  </data>
   <data name="YearHeader" xml:space="preserve">
     <value>Год</value>
   </data>
@@ -366,6 +370,10 @@
   <data name="YearBalanceSecondHeader" xml:space="preserve">
     <value>Годовой баланс
 (альтернатива)</value>
+  </data>
+  <data name="PeriodBalanceAlternative" xml:space="preserve">
+    <value>Остаток на конец
+периода (альтернатива)</value>
   </data>
   <data name="ToggleShortView" xml:space="preserve">
     <value>Показать/скрыть дополнительные данные</value>

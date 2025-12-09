@@ -51,18 +51,59 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             var additionalPays = _dbService.GetAdditionalPays().Where(p => p.Year == year).ToList();
             var salaryYearDelta = 0m;
             var salaryYearDeltaAlternative = 0m;
+            // Разложение регулярных платежей: платёж идёт в ближайшую прошедшую выплату.
+            var recurringPayments = (_settingsManager.RecurringPayments ?? new List<RecurringPayment>()).ToList();
+            var firstPartDates = new Dictionary<int, int>();
+            var secondPartDates = new Dictionary<int, int>();
+            var firstRecurringSum = new Dictionary<int, decimal>();
+            var secondRecurringSum = new Dictionary<int, decimal>();
+
+            for (var m = 1; m <= 12; m++)
+            {
+                firstPartDates[m] = _calendarProvider.Years[year].Months[m].NearestSalaryFirstPartDate;
+                secondPartDates[m] = _calendarProvider.Years[year].Months[m].NearestSalarySecondPartDate;
+                firstRecurringSum[m] = 0m;
+                secondRecurringSum[m] = 0m;
+            }
+
+            foreach (var payment in recurringPayments)
+            {
+                for (var m = 1; m <= 12; m++)
+                {
+                    var daysInMonth = DateTime.DaysInMonth(year, m);
+                    if (payment.Day < 1 || payment.Day > daysInMonth) continue;
+
+                    var firstDate = firstPartDates[m];
+                    var secondDate = secondPartDates[m];
+
+                    if (payment.Day < firstDate)
+                    {
+                        if (m > 1)
+                        {
+                            secondRecurringSum[m - 1] += payment.Amount;
+                        }
+                        else
+                        {
+                            // Платежи первых чисел января (до даты первой части) учитываем во второй части декабря текущего года.
+                            secondRecurringSum[12] += payment.Amount;
+                        }
+                    }
+                    else if (payment.Day < secondDate)
+                    {
+                        firstRecurringSum[m] += payment.Amount;
+                    }
+                    else
+                    {
+                        secondRecurringSum[m] += payment.Amount;
+                    }
+                }
+            }
+
             foreach (var monthPair in _calendarProvider.Years[year].Months)
             {
                 var monthAdditionalPays = additionalPays.Where(p => p.Month == monthPair.Key).ToList();
-                var recurringPayments = (_settingsManager.RecurringPayments ?? new List<RecurringPayment>()).ToList();
-                var daysInMonth = DateTime.DaysInMonth(year, monthPair.Key);
-                var filteredRecurring = recurringPayments.Where(p => p.Day >= 1 && p.Day <= daysInMonth).ToList();
-                var firstPartDate = monthPair.Value.NearestSalaryFirstPartDate;
-                var secondPartDate = monthPair.Value.NearestSalarySecondPartDate;
-                var firstRecurringSum = filteredRecurring.Where(p => p.Day <= firstPartDate).Sum(p => p.Amount);
-                var secondRecurringSum = filteredRecurring.Where(p => p.Day > firstPartDate && p.Day <= secondPartDate).Sum(p => p.Amount);
-                // платежи после даты второй части учитываем в ней же, чтобы не терять сумму
-                secondRecurringSum += filteredRecurring.Where(p => p.Day > secondPartDate).Sum(p => p.Amount);
+                var currentFirstRecurring = firstRecurringSum[monthPair.Key];
+                var currentSecondRecurring = secondRecurringSum[monthPair.Key];
                 var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
                 var secondPay = secondPays.Where(pp => pp.UseInCalculation).Sum(p => p.Pay);
@@ -77,8 +118,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryPercent = secondPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate),
                     SalaryWithoutCash = secondPart * _settingsManager.Salary - _settingsManager.SecondCash,
-                    SalaryWithoutCashAndPay = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - secondRecurringSum - secondPay,
-                    SalaryWithoutCashAndPayAlternative = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - secondRecurringSum - secondPayAlternative,
+                    SalaryWithoutCashAndPay = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - currentSecondRecurring - secondPay,
+                    SalaryWithoutCashAndPayAlternative = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - currentSecondRecurring - secondPayAlternative,
                     AdditionalPay = secondPay,
                     OneDayCost = oneDayCost,
                     OneHolidayCost = oneDayHolidayCost
@@ -113,8 +154,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryPercent = firstPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalaryFirstPartDate),
                     SalaryWithoutCash = firstPart * _settingsManager.Salary - _settingsManager.FirstCash,
-                    SalaryWithoutCashAndPay = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - firstRecurringSum - firstPay,
-                    SalaryWithoutCashAndPayAlternative = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - firstRecurringSum - firstPayAlternative,
+                    SalaryWithoutCashAndPay = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - currentFirstRecurring - firstPay,
+                    SalaryWithoutCashAndPayAlternative = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - currentFirstRecurring - firstPayAlternative,
                     SalaryDelta = "-----",
                     AdditionalPay = firstPay,
                     OneDayCost = oneDayCost,
