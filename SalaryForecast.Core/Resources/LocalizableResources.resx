@@ -234,6 +234,15 @@
   <data name="PayHeader" xml:space="preserve">
     <value>Платёж</value>
   </data>
+  <data name="PayTypeHeader" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="PayTypeExpense" xml:space="preserve">
+    <value>Расход</value>
+  </data>
+  <data name="PayTypeIncome" xml:space="preserve">
+    <value>Доход</value>
+  </data>
   <data name="RemoveSelectedPay" xml:space="preserve">
     <value>Удалить выбранный платёж</value>
   </data>

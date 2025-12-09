@@ -543,6 +543,24 @@ namespace SalaryForecast.Core.Resources {
                 return ResourceManager.GetString("PayHeader", resourceCulture);
             }
         }
+
+        internal static string PayTypeHeader {
+            get {
+                return ResourceManager.GetString("PayTypeHeader", resourceCulture);
+            }
+        }
+
+        internal static string PayTypeExpense {
+            get {
+                return ResourceManager.GetString("PayTypeExpense", resourceCulture);
+            }
+        }
+
+        internal static string PayTypeIncome {
+            get {
+                return ResourceManager.GetString("PayTypeIncome", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Величина выплаты, руб..

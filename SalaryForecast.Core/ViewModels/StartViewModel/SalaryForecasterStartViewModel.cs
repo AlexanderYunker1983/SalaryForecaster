@@ -75,7 +75,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                         Year = salary.Date.Year,
                         Month = salary.Date.Month,
                         Part= salary.Date.Day <= _settingsManager.SalaryFirstPartDate ? 1: 2,
-                        Pay = -(decimal)vm.Result,
+                        IsIncome = vm.Result < 0,
+                        Pay = Math.Abs((decimal)vm.Result),
                         UseInCalculation = true,
                         UseInCalculationOfVacation = true
                     };

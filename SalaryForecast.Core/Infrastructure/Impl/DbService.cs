@@ -41,7 +41,16 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
         public List<AdditionalPay> GetAdditionalPays()
         {
-            return _conn.Table<AdditionalPay>().ToList();
+            var pays = _conn.Table<AdditionalPay>().ToList();
+            foreach (var pay in pays)
+            {
+                if (pay.Pay < 0)
+                {
+                    pay.Pay = -pay.Pay;
+                    pay.IsIncome = true;
+                }
+            }
+            return pays;
         }
 
         public void DeleteAdditionalPay(AdditionalPay pay)

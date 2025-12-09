@@ -42,6 +42,12 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
                 new KeyValuePair<int, string>(11, _localizationManager.GetString("November")),
                 new KeyValuePair<int, string>(12, _localizationManager.GetString("December"))
             };
+
+            PayTypes = new List<KeyValuePair<bool, string>>
+            {
+                new KeyValuePair<bool, string>(false, _localizationManager.GetString("PayTypeExpense")),
+                new KeyValuePair<bool, string>(true, _localizationManager.GetString("PayTypeIncome"))
+            };
         }
 
         private void OnRemoveSelectedPay()
@@ -57,7 +63,8 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
             {
                 Year = DateTime.Now.Year,
                 Month = DateTime.Now.Month,
-                Part = 1
+                Part = 1,
+                IsIncome = false
             };
             _dbService.AddAdditionalPay(additionalPay);
             AdditionalPays.Add(additionalPay);
@@ -104,5 +111,6 @@ namespace SalaryForecast.Core.ViewModels.AdditionalPayTableViewModel
         public ICommand RemoveSelectedAdditionalPayCommand { get; set; }
 
         public List<KeyValuePair<int, string>> Months { get; }
+        public List<KeyValuePair<bool, string>> PayTypes { get; }
     }
 }

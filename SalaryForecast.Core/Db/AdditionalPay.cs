@@ -15,6 +15,8 @@ namespace SalaryForecast.Core.Db
         [NotNull]
         public decimal Pay { get; set; }
         [NotNull]
+        public bool IsIncome { get; set; }
+        [NotNull]
         public bool UseInCalculation { get; set; } = true;
         [NotNull]
         public bool UseInCalculationOfVacation { get; set; }

@@ -106,8 +106,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                 var currentSecondRecurring = secondRecurringSum[monthPair.Key];
                 var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
-                var secondPay = secondPays.Where(pp => pp.UseInCalculation).Sum(p => p.Pay);
-                var secondPayAlternative = secondPays.Sum(p => p.Pay);
+                var secondPay = secondPays.Where(pp => pp.UseInCalculation).Sum(p => p.IsIncome ? -p.Pay : p.Pay);
+                var secondPayAlternative = secondPays.Sum(p => p.IsIncome ? -p.Pay : p.Pay);
 
                 var oneDayCost = _settingsManager.Salary * (1.0m / monthPair.Value.WorkDaysCount - 1.0m / 29.3m);
                 var oneDayHolidayCost = _settingsManager.Salary / 29.3m;
@@ -146,8 +146,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
                 var firstPart = (decimal)previousMonth.Value.Days.Count(d => d.Value.IsWorkDate && d.Key > 15) / previousMonth.Value.WorkDaysCount;
                 var firstPays = monthAdditionalPays.Where(p => p.Part == 1).ToList();
-                var firstPay = firstPays.Where(pp => pp.UseInCalculation).Sum(p => p.Pay);
-                var firstPayAlternative = firstPays.Sum(p => p.Pay);
+                var firstPay = firstPays.Where(pp => pp.UseInCalculation).Sum(p => p.IsIncome ? -p.Pay : p.Pay);
+                var firstPayAlternative = firstPays.Sum(p => p.IsIncome ? -p.Pay : p.Pay);
                 var firstSalary = new Salary
                 {
                     SalaryPart = firstPart * _settingsManager.Salary,
