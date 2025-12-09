@@ -53,8 +53,26 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Month, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.MonthHeader'}"/>
-                <DataGridTextColumn Binding="{Binding Part, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" Header="{DataBinding '$i18n.PartHeader'}"/>
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.MonthHeader'}" Width="160">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Months, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                      SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{DataBinding '$i18n.PartHeader'}" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.Parts, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                      SelectedValue="{Binding Part, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Pay, StringFormat={}{0:c}, ConverterCulture=ru-RU, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
                                     Header="{DataBinding '$i18n.PayHeader'}" Width="175"/>
                 <DataGridTemplateColumn  Header="{DataBinding '$i18n.UseInCalculation'}">
