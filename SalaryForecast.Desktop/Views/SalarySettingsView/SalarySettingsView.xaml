@@ -8,11 +8,12 @@
         mc:Ignorable="d"
         Title="{DataBinding '$i18n.SalarySettings'}"
         d:DataContext="{d:DesignInstance salarySettingsViewModel:SalarySettingsViewModel}"
-        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         ResizeMode="NoResize"
-        SnapsToDevicePixels="True">
+        SnapsToDevicePixels="True"
+        Width="800"
+        Height="600">
     <Grid Margin="11">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,6 +22,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -60,19 +63,22 @@
                Margin="6,0,0,0" ToolTipService.ShowOnDisabled="True" ToolTip="{DataBinding '$i18n.SecondCashToolTip'}"
                ToolTipService.ShowDuration="99999999"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="5" Margin="0,0,3,3" Text="{DataBinding '$i18n.FirstPay'}" VerticalAlignment="Center"/>
-        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="5" Margin="0,0,0,3" Width="150" Value="{Binding FirstPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
-        <Image Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/help.png" Width="18" Height="18"
-               Margin="6,0,0,0" ToolTipService.ShowOnDisabled="True" ToolTip="{DataBinding '$i18n.FirstPayToolTip'}"
-               ToolTipService.ShowDuration="99999999"/>
-
-        <TextBlock Grid.Column="0" Grid.Row="6" Margin="0,0,3,3" Text="{DataBinding '$i18n.SecondPay'}" VerticalAlignment="Center"/>
-        <xctk:DecimalUpDown Grid.Column="1" Grid.Row="6" Margin="0,0,0,3" Width="150" Value="{Binding SecondPay}" Minimum="0" Maximum="1000000" Increment="1000"/>
-        <Image Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../../Resources/help.png" Width="18" Height="18"
-               Margin="6,0,0,0" ToolTipService.ShowOnDisabled="True" ToolTip="{DataBinding '$i18n.SecondPayToolTip'}"
-               ToolTipService.ShowDuration="99999999" />
-
-        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{DataBinding '$i18n.DataWillBeUpdatedAfterClosing'}" HorizontalAlignment="Center"
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="{DataBinding '$i18n.DataWillBeUpdatedAfterClosing'}" HorizontalAlignment="Center"
                    Foreground="OrangeRed"/>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,6,0,3" HorizontalAlignment="Left">
+            <Button Content="{DataBinding '$i18n.Add'}" Width="90" Margin="0,0,6,0" Command="{Binding AddPaymentCommand}"/>
+            <Button Content="{DataBinding '$i18n.Remove'}" Width="90" Command="{Binding RemovePaymentCommand}" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RecurringPayments}" SelectedItem="{Binding SelectedPayment}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="0,0,0,3" HeadersVisibility="Column"
+                  MinWidth="460" MinHeight="180">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentName'}" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*" />
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentDate'}" Binding="{Binding Day, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentAmount'}" Binding="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

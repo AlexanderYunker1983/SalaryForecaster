@@ -1,4 +1,7 @@
-﻿using SalaryForecast.Core.Infrastructure;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using SalaryForecast.Core.Infrastructure;
+using SalaryForecast.Core.Models;
 using SalaryForecast.Desktop.Properties;
 
 namespace SalaryForecast.Desktop.Infrastructure.Impl
@@ -55,22 +58,26 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             }
         }
 
-        public decimal FirstPay
+        public IList<RecurringPayment> RecurringPayments
         {
-            get => Settings.Default.FirstPay;
-            set
+            get
             {
-                Settings.Default.FirstPay = value;
-                Settings.Default.Save();
-            }
-        }
+                var raw = Settings.Default.RecurringPaymentsJson;
+                if (string.IsNullOrWhiteSpace(raw))
+                    return new List<RecurringPayment>();
 
-        public decimal SecondPay
-        {
-            get => Settings.Default.SecondPay;
+                try
+                {
+                    return JsonConvert.DeserializeObject<IList<RecurringPayment>>(raw) ?? new List<RecurringPayment>();
+                }
+                catch
+                {
+                    return new List<RecurringPayment>();
+                }
+            }
             set
             {
-                Settings.Default.SecondPay = value;
+                Settings.Default.RecurringPaymentsJson = JsonConvert.SerializeObject(value ?? new List<RecurringPayment>());
                 Settings.Default.Save();
             }
         }

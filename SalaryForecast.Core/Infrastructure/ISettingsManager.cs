@@ -7,8 +7,7 @@
         decimal Salary { get; set; }
         decimal FirstCash { get; set; }
         decimal SecondCash { get; set; }
-        decimal FirstPay { get; set; }
-        decimal SecondPay { get; set; }
+        System.Collections.Generic.IList<Models.RecurringPayment> RecurringPayments { get; set; }
         bool FirstStart { get; set; }
     }
 }

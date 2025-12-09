@@ -210,6 +210,36 @@ namespace SalaryForecast.Core.Resources {
             }
         }
         
+        internal static string PaymentDate {
+            get {
+                return ResourceManager.GetString("PaymentDate", resourceCulture);
+            }
+        }
+        
+        internal static string PaymentName {
+            get {
+                return ResourceManager.GetString("PaymentName", resourceCulture);
+            }
+        }
+        
+        internal static string PaymentAmount {
+            get {
+                return ResourceManager.GetString("PaymentAmount", resourceCulture);
+            }
+        }
+        
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to дней.
         /// </summary>

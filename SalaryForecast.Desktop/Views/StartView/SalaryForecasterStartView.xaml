@@ -184,48 +184,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.AdditionalPay'}" Visibility="Collapsed" x:Name="AdditionalColumn1">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <Grid HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding AdditionalPay, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryPartWithoutCash'}" Visibility="Collapsed" x:Name="AdditionalColumn2">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <Grid HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding SalaryWithoutCash, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryWithoutCashAndPay'}" Visibility="Collapsed" x:Name="AdditionalColumn3">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <TextBlock Text="{Binding}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="models:Salary">
-                                <Grid HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding SalaryWithoutCashAndPay, StringFormat={}{0:c}, ConverterCulture=ru-RU}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="{DataBinding '$i18n.SalaryDelta'}" Visibility="Collapsed" x:Name="AdditionalColumn4">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate DataType="models:Salary">

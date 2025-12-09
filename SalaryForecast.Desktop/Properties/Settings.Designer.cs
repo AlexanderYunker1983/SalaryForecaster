@@ -85,25 +85,13 @@ namespace SalaryForecast.Desktop.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("250")]
-        public decimal FirstPay {
+        [global::System.Configuration.DefaultSettingValueAttribute("[]")]
+        public string RecurringPaymentsJson {
             get {
-                return ((decimal)(this["FirstPay"]));
+                return ((string)(this["RecurringPaymentsJson"]));
             }
             set {
-                this["FirstPay"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("250")]
-        public decimal SecondPay {
-            get {
-                return ((decimal)(this["SecondPay"]));
-            }
-            set {
-                this["SecondPay"] = value;
+                this["RecurringPaymentsJson"] = value;
             }
         }
         

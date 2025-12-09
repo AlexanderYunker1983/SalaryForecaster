@@ -30,8 +30,7 @@ namespace SalaryForecast.Desktop
             new MenuWithSubItems("View",
                 new []
                 {
-                    MainMenuItems.View,
-                    MainMenuItems.ShortView
+                    MainMenuItems.View
                 })
         };
 

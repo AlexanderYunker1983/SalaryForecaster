@@ -54,6 +54,15 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             foreach (var monthPair in _calendarProvider.Years[year].Months)
             {
                 var monthAdditionalPays = additionalPays.Where(p => p.Month == monthPair.Key).ToList();
+                var recurringPayments = (_settingsManager.RecurringPayments ?? new List<RecurringPayment>()).ToList();
+                var daysInMonth = DateTime.DaysInMonth(year, monthPair.Key);
+                var filteredRecurring = recurringPayments.Where(p => p.Day >= 1 && p.Day <= daysInMonth).ToList();
+                var firstPartDate = monthPair.Value.NearestSalaryFirstPartDate;
+                var secondPartDate = monthPair.Value.NearestSalarySecondPartDate;
+                var firstRecurringSum = filteredRecurring.Where(p => p.Day <= firstPartDate).Sum(p => p.Amount);
+                var secondRecurringSum = filteredRecurring.Where(p => p.Day > firstPartDate && p.Day <= secondPartDate).Sum(p => p.Amount);
+                // платежи после даты второй части учитываем в ней же, чтобы не терять сумму
+                secondRecurringSum += filteredRecurring.Where(p => p.Day > secondPartDate).Sum(p => p.Amount);
                 var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
                 var secondPays = monthAdditionalPays.Where(p => p.Part == 2).ToList();
                 var secondPay = secondPays.Where(pp => pp.UseInCalculation).Sum(p => p.Pay);
@@ -68,8 +77,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryPercent = secondPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalarySecondPartDate),
                     SalaryWithoutCash = secondPart * _settingsManager.Salary - _settingsManager.SecondCash,
-                    SalaryWithoutCashAndPay = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - _settingsManager.SecondPay - secondPay,
-                    SalaryWithoutCashAndPayAlternative = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - _settingsManager.SecondPay - secondPayAlternative,
+                    SalaryWithoutCashAndPay = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - secondRecurringSum - secondPay,
+                    SalaryWithoutCashAndPayAlternative = secondPart * _settingsManager.Salary - _settingsManager.SecondCash - secondRecurringSum - secondPayAlternative,
                     AdditionalPay = secondPay,
                     OneDayCost = oneDayCost,
                     OneHolidayCost = oneDayHolidayCost
@@ -104,8 +113,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     SalaryPercent = firstPart * 100.0m,
                     Date = new DateTime(year, monthPair.Key, monthPair.Value.NearestSalaryFirstPartDate),
                     SalaryWithoutCash = firstPart * _settingsManager.Salary - _settingsManager.FirstCash,
-                    SalaryWithoutCashAndPay = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - _settingsManager.FirstPay - firstPay,
-                    SalaryWithoutCashAndPayAlternative = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - _settingsManager.FirstPay - firstPayAlternative,
+                    SalaryWithoutCashAndPay = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - firstRecurringSum - firstPay,
+                    SalaryWithoutCashAndPayAlternative = firstPart * _settingsManager.Salary - _settingsManager.FirstCash - firstRecurringSum - firstPayAlternative,
                     SalaryDelta = "-----",
                     AdditionalPay = firstPay,
                     OneDayCost = oneDayCost,
