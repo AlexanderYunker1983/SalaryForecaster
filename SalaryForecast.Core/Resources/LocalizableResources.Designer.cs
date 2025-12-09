@@ -570,6 +570,24 @@ namespace SalaryForecast.Core.Resources {
                 return ResourceManager.GetString("PaymentAmount", resourceCulture);
             }
         }
+
+        internal static string PaymentAmountShort {
+            get {
+                return ResourceManager.GetString("PaymentAmountShort", resourceCulture);
+            }
+        }
+
+        internal static string PaymentPeriod {
+            get {
+                return ResourceManager.GetString("PaymentPeriod", resourceCulture);
+            }
+        }
+
+        internal static string PaymentAccount {
+            get {
+                return ResourceManager.GetString("PaymentAccount", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Дата платежа.

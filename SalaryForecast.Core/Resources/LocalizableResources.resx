@@ -133,6 +133,15 @@
   <data name="PaymentAmount" xml:space="preserve">
     <value>Величина выплаты, руб.</value>
   </data>
+  <data name="PaymentAmountShort" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="PaymentPeriod" xml:space="preserve">
+    <value>Период платежа</value>
+  </data>
+  <data name="PaymentAccount" xml:space="preserve">
+    <value>Счёт</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>

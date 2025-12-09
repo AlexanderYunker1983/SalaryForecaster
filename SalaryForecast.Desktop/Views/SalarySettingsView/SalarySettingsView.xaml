@@ -71,13 +71,23 @@
             <Button Content="{DataBinding '$i18n.Remove'}" Width="90" Command="{Binding RemovePaymentCommand}" />
         </StackPanel>
 
-        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RecurringPayments}" SelectedItem="{Binding SelectedPayment}"
+        <DataGrid x:Name="RecurringPaymentsGrid" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RecurringPayments}" SelectedItem="{Binding SelectedPayment}"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="0,0,0,3" HeadersVisibility="Column"
                   MinWidth="460" MinHeight="180">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{DataBinding '$i18n.PaymentName'}" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*" />
                 <DataGridTextColumn Header="{DataBinding '$i18n.PaymentDate'}" Binding="{Binding Day, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentAccount'}" Binding="{Binding Account, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                 <DataGridTextColumn Header="{DataBinding '$i18n.PaymentAmount'}" Binding="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding PaymentSummaries}" AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="140">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentAccount'}" Binding="{Binding Account}" Width="*" />
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentPeriod'}" Binding="{Binding Period}" Width="*" />
+                <DataGridTextColumn Header="{DataBinding '$i18n.PaymentAmountShort'}" Binding="{Binding Amount, StringFormat=N2}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

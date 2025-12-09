@@ -51,7 +51,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             var additionalPays = _dbService.GetAdditionalPays().Where(p => p.Year == year).ToList();
             var salaryYearDelta = 0m;
             var salaryYearDeltaAlternative = 0m;
-            // Разложение регулярных платежей: платёж идёт в ближайшую прошедшую выплату.
+            // Разложение регулярных платежей: платёж идёт в ближайшую прошедшую выплату внутри месяца
+            // (до первой даты — ко второй части этого же месяца).
             var recurringPayments = (_settingsManager.RecurringPayments ?? new List<RecurringPayment>()).ToList();
             var firstPartDates = new Dictionary<int, int>();
             var secondPartDates = new Dictionary<int, int>();
@@ -76,24 +77,19 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     var firstDate = firstPartDates[m];
                     var secondDate = secondPartDates[m];
 
-                    if (payment.Day < firstDate)
+                    if (payment.Day <= firstDate)
                     {
-                        if (m > 1)
-                        {
-                            secondRecurringSum[m - 1] += payment.Amount;
-                        }
-                        else
-                        {
-                            // Платежи первых чисел января (до даты первой части) учитываем во второй части декабря текущего года.
-                            secondRecurringSum[12] += payment.Amount;
-                        }
+                        // До или в день первой выплаты — относим ко второй части текущего месяца
+                        secondRecurringSum[m] += payment.Amount;
                     }
-                    else if (payment.Day < secondDate)
+                    else if (payment.Day <= secondDate)
                     {
+                        // Между первой и второй датой — к первой части
                         firstRecurringSum[m] += payment.Amount;
                     }
                     else
                     {
+                        // После второй даты — к второй части
                         secondRecurringSum[m] += payment.Amount;
                     }
                 }

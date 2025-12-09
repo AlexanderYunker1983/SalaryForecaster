@@ -58,6 +58,12 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             }
         }
 
+        private static readonly JsonSerializerSettings PaymentSerializerSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.None,
+            NullValueHandling = NullValueHandling.Ignore
+        };
+
         public IList<RecurringPayment> RecurringPayments
         {
             get
@@ -68,7 +74,8 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
 
                 try
                 {
-                    return JsonConvert.DeserializeObject<IList<RecurringPayment>>(raw) ?? new List<RecurringPayment>();
+                    var payments = JsonConvert.DeserializeObject<IList<RecurringPayment>>(raw, PaymentSerializerSettings) ?? new List<RecurringPayment>();
+                    return payments;
                 }
                 catch
                 {
@@ -77,7 +84,7 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             }
             set
             {
-                Settings.Default.RecurringPaymentsJson = JsonConvert.SerializeObject(value ?? new List<RecurringPayment>());
+                Settings.Default.RecurringPaymentsJson = JsonConvert.SerializeObject(value ?? new List<RecurringPayment>(), PaymentSerializerSettings);
                 Settings.Default.Save();
             }
         }
