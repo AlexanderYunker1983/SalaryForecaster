@@ -10,6 +10,7 @@
     <MediaTemplate EmbedCab="yes" />
 
     <Icon Id="AppIcon.ico" SourceFile="..\SalaryForecast.Desktop\Resources\receive_cash.ico" />
+    <Icon Id="ShortcutIcon.exe" SourceFile="!(bindpath.PublishDir)\SalaryForecast.Desktop.exe" />
     <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
     <Property Id="DISABLEADVTSHORTCUTS" Value="1" />
 
@@ -41,12 +42,16 @@
                     Directory="DesktopFolder"
                     Name="SalaryForecaster"
                     Description="SalaryForecaster"
+                    Icon="ShortcutIcon.exe"
+                    IconIndex="0"
                     WorkingDirectory="INSTALLFOLDER" />
           <Shortcut Id="StartMenuShortcut"
                     Advertise="yes"
                     Directory="ProgramMenuFolder"
                     Name="SalaryForecaster"
                     Description="SalaryForecaster"
+                    Icon="ShortcutIcon.exe"
+                    IconIndex="0"
                     WorkingDirectory="INSTALLFOLDER" />
         </File>
       </Component>
