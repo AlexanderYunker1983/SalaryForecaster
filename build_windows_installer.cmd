@@ -6,6 +6,7 @@ set "CONFIGURATION=Release"
 set "OUTPUT_DIR=%SCRIPT_DIR%artifacts\installer\%CONFIGURATION%"
 set "TAG_VERSION="
 set "TAG_FILE=%TEMP%\salaryforecaster_latest_tag.txt"
+set "PACKAGE_VERSION="
 
 pushd "%SCRIPT_DIR%" >nul
 
@@ -20,13 +21,20 @@ if not defined TAG_VERSION (
 )
 
 if /i "%TAG_VERSION:~0,1%"=="v" set "TAG_VERSION=%TAG_VERSION:~1%"
+for /f "tokens=1 delims=-" %%I in ("%TAG_VERSION%") do set "PACKAGE_VERSION=%%I"
+
+if not defined PACKAGE_VERSION (
+    echo Failed to derive package version from git tag.
+    popd >nul
+    exit /b 1
+)
 
 set "OUTPUT_NAME=SalartForecaster_%TAG_VERSION%"
 
 if exist "%OUTPUT_DIR%" rmdir /s /q "%OUTPUT_DIR%"
 
 echo Building %OUTPUT_NAME%.msi...
-dotnet build "SalaryForecast.Installer\SalaryForecast.Installer.wixproj" -c %CONFIGURATION% -p:OutputName=%OUTPUT_NAME%
+dotnet build "SalaryForecast.Installer\SalaryForecast.Installer.wixproj" -c %CONFIGURATION% -p:OutputName=%OUTPUT_NAME% -p:Version=%PACKAGE_VERSION% -p:InformationalVersion=%TAG_VERSION%
 set "BUILD_EXIT_CODE=%ERRORLEVEL%"
 
 if %BUILD_EXIT_CODE% neq 0 (

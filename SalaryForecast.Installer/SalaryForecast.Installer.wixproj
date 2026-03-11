@@ -21,9 +21,9 @@
     <RemoveDir Directories="$(PublishDir)" />
     <MSBuild Projects="..\SalaryForecast.Desktop\SalaryForecast.Desktop.csproj"
              Targets="Restore"
-             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true" />
+             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;Version=$(Version);InformationalVersion=$(InformationalVersion)" />
     <MSBuild Projects="..\SalaryForecast.Desktop\SalaryForecast.Desktop.csproj"
              Targets="Publish"
-             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;NoRestore=true;PublishDir=$(PublishDir)" />
+             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;NoRestore=true;Version=$(Version);InformationalVersion=$(InformationalVersion);PublishDir=$(PublishDir)" />
   </Target>
 </Project>

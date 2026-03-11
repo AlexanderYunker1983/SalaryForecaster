@@ -10,7 +10,16 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
         {
             get
             {
-                var version = Assembly.GetEntryAssembly()?.GetName().Version ?? new Version(1, 0);
+                var assembly = Assembly.GetEntryAssembly();
+                var informationalVersion = assembly?
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+                    .InformationalVersion;
+                if (!string.IsNullOrWhiteSpace(informationalVersion))
+                {
+                    return informationalVersion.Split('+')[0];
+                }
+
+                var version = assembly?.GetName().Version ?? new Version(1, 0);
                 return version.Build <= 0
                     ? $"{version.Major}.{version.Minor}"
                     : $"{version.Major}.{version.Minor}.{version.Build}";
