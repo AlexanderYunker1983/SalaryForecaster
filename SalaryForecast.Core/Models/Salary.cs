@@ -1,38 +1,15 @@
-﻿using System;
-using MugenMvvmToolkit.Models;
+using System;
 
 namespace SalaryForecast.Core.Models
 {
-    public class Salary : NotifyPropertyChangedBase
+    public class Salary : MugenMvvmToolkit.Models.NotifyPropertyChangedBase
     {
         private bool _isNextSalary;
-        private decimal _additionalPay;
         public DateTime Date { get; set; }
         public decimal SalaryPart { get; set; }
         public decimal SalaryPercent { get; set; }
-        public decimal SalaryWithoutCash { get; set; }
-        public decimal SalaryWithoutCashAndPay { get; set; }
-        public decimal SalaryWithoutCashAndPayAlternative { get; set; }
-        public string SalaryDelta { get; set; }
-        public decimal SalaryYearDelta { get; set; }
-        public decimal SalaryYearDeltaAlternative { get; set; }
         public decimal OneDayCost { get; set; }
         public decimal OneHolidayCost { get; set; }
-        public bool WarningEnabled { get; set; }
-        public decimal MaxDiscount { get; set; }
-        public decimal MaxDiscountAlternative { get; set; }
-
-        public decimal AdditionalPay
-        {
-            get => _additionalPay;
-            set
-            {
-                if (value == _additionalPay) return;
-
-                _additionalPay = value;
-                OnPropertyChanged();
-            }
-        }
 
         public bool IsNextSalary
         {
@@ -54,7 +31,5 @@ namespace SalaryForecast.Core.Models
                 return currentDate < Date;
             }
         }
-
-        public AsyncRelayCommand<Salary> CorrectValueCommand { get; set; }
     }
 }

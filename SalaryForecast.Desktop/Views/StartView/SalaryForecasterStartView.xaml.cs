@@ -1,15 +1,11 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SalaryForecast.Core.Models;
-using SalaryForecast.Core.ViewModels.StartViewModel;
 
 namespace SalaryForecast.Desktop.Views.StartView
 {
-    /// <summary>
-    /// Interaction logic for SalaryForecasterStartView.xaml
-    /// </summary>
     public partial class SalaryForecasterStartView
     {
         public SalaryForecasterStartView()
@@ -21,9 +17,8 @@ namespace SalaryForecast.Desktop.Views.StartView
         private void SalaryForecasterStartViewLoaded(object sender, RoutedEventArgs e)
         {
             this.Loaded -= SalaryForecasterStartViewLoaded;
-            // no dynamic column toggling required anymore
         }
-        
+
         private void DataGridLoadingRow(object sender, DataGridRowEventArgs e)
         {
             var ee = (DataGrid)sender;
@@ -48,8 +43,6 @@ namespace SalaryForecast.Desktop.Views.StartView
                             var a = row.DataContext;
                             if (a is Salary salary)
                             {
-                                var colorChanged = false;
-
                                 if (!salary.IsActive)
                                 {
                                     row.Background = new LinearGradientBrush(Colors.LightGray, Colors.Gray,
@@ -61,24 +54,8 @@ namespace SalaryForecast.Desktop.Views.StartView
                                 {
                                     row.Background = new LinearGradientBrush(Colors.Lime, Colors.White,
                                         new Point(0, 0.5), new Point(1.0, 0.5));
-                                    colorChanged = true;
+                                    continue;
                                 }
-
-                                if (salary.WarningEnabled)
-                                {
-                                    if (!colorChanged)
-                                    {
-                                        row.Background = new SolidColorBrush(Colors.Red);
-                                        colorChanged = true;
-                                    }
-                                    else
-                                    {
-                                        row.Background = new LinearGradientBrush(Colors.Lime, Colors.Red,
-                                            new Point(0, 0.5), new Point(1.0, 0.5));
-                                    }
-                                }
-
-                                if (colorChanged) continue;
                             }
                         }
 

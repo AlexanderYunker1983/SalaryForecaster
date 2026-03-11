@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using MugenMvvmToolkit;
@@ -7,7 +7,6 @@ using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.WPF.Infrastructure;
 using SalaryForecast.Core;
 using SalaryForecast.Core.Infrastructure;
-using SalaryForecast.Desktop.Properties;
 
 namespace SalaryForecast.Desktop
 {
@@ -22,11 +21,6 @@ namespace SalaryForecast.Desktop
                 {
                     MainMenuItems.SalarySettings,
                 }),
-            new MenuWithSubItems("AdditionalPays",
-                new[]
-                {
-                    MainMenuItems.AdditionalPaysTable,
-                }),
             new MenuWithSubItems("View",
                 new []
                 {
@@ -37,13 +31,6 @@ namespace SalaryForecast.Desktop
         public App()
         {
             PlatformVariables.MenuStructure = _menuStructure;
-
-            if (Settings.Default.IsNeedToMigrate)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.IsNeedToMigrate = false;
-                Settings.Default.Save();
-            }
 
             // ReSharper disable once ObjectCreationAsStatement
             new BootstrapperEx(this, new AutofacContainer());

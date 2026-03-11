@@ -8,13 +8,6 @@
         public SalarySettingsView()
         {
             InitializeComponent();
-            this.Closing += OnClosing;
-        }
-
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            RecurringPaymentsGrid.CommitEdit();
-            RecurringPaymentsGrid.CommitEdit(System.Windows.Controls.DataGridEditingUnit.Row, true);
         }
     }
 }

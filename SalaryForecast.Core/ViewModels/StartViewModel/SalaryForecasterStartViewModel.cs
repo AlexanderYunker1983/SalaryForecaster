@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,7 +10,6 @@ using MugenMvvmToolkit.Interfaces.Presenters;
 using MugenMvvmToolkit.Interfaces.ViewModels;
 using MugenMvvmToolkit.Models;
 using MugenMvvmToolkit.ViewModels;
-using SalaryForecast.Core.Db;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
 using YLocalization;
@@ -38,52 +37,18 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly Dictionary<string, IMenuItemViewModel> _mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
         private readonly ILocalizationManager _localizationManager;
         private readonly ISalaryProvider _salaryProvider;
-        private readonly IDbService _dbService;
         private readonly ISettingsManager _settingsManager;
         private readonly IMessagePresenter _messagePresenter;
         private string _nextSalaryStatus;
-        private string _yearBalance;
-        private string _yearBalanceAlternative;
 
-        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider, IDbService dbService,
+        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider,
             ISettingsManager settingsManager, IMessagePresenter messagePresenter)
         {
             _localizationManager = localizationManager;
             _salaryProvider = salaryProvider;
-            _dbService = dbService;
             _settingsManager = settingsManager;
             _messagePresenter = messagePresenter;
             DisplayName = $"{_localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
-
-            CorrectValueCommand = new AsyncRelayCommand<Salary>(OnCorrectRealValue);
-        }
-
-        private async Task OnCorrectRealValue(Salary salary)
-        {
-            var additionalPays = _dbService.GetAdditionalPays();
-            using (var vm = GetViewModel<CorrectionViewModel.CorrectionViewModel>())
-            {
-                vm.SetSalary(salary);
-                await vm.ShowAsync();
-
-                if (vm.Result != null)
-                {
-                    var additionalPay = new AdditionalPay
-                    {
-                        Comment = _localizationManager.GetString("Correction", salary.Date),
-                        Finished = true,
-                        Year = salary.Date.Year,
-                        Month = salary.Date.Month,
-                        Part= salary.Date.Day <= _settingsManager.SalaryFirstPartDate ? 1: 2,
-                        IsIncome = vm.Result > 0,
-                        Pay = Math.Abs((decimal)vm.Result),
-                        UseInCalculation = true,
-                        UseInCalculationOfVacation = true
-                    };
-                    _dbService.AddAdditionalPay(additionalPay);
-                    await UpdateCurrentSalaries();
-                }
-            }
         }
 
         protected override void OnInitialized()
@@ -94,13 +59,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             Menu.AddRange(ProcessMenu(PlatformVariables.MenuStructure));
 
             UpdateCurrentSalaries().ConfigureAwait(false);
-        }
-        
-        protected override void OnClosed(IDataContext context)
-        {
-            _dbService.Close();
-
-            base.OnClosed(context);
         }
 
         private async Task UpdateCurrentSalaries()
@@ -118,10 +76,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                 await this.CloseAsync();
                 return;
             }
-            foreach (var currentSalary in CurrentSalaries)
-            {
-                currentSalary.CorrectValueCommand = CorrectValueCommand;
-            }
+
             var currentMonth = DateTime.Now.Month;
             var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
             var salaryInThisMonth = currentMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
@@ -136,7 +91,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
                 salaryInThisMonth = salaryInNextMonth;
             }
-            
+
             var nextSalary = salaryInThisMonth;
             nextSalary.IsNextSalary = true;
             var salaryDate = nextSalary.Date;
@@ -152,11 +107,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 
             NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
 
-            var yearSum = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPay);
-            var yearSumAlternative = CurrentSalaries.Sum(s => s.SalaryWithoutCashAndPayAlternative);
-            YearBalance = $"{_localizationManager.GetString("YearBalance")} {yearSum:F2}";
-            YearBalanceAlternative = $"{_localizationManager.GetString("YearBalance")} {yearSumAlternative:F2}";
-
             OnPropertyChanged(nameof(PastSalaries));
             OnPropertyChanged(nameof(CurrentSalaries));
         }
@@ -164,7 +114,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private void CreateMenuItems()
         {
             _mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(_localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
-            _mainMenuItems.Add(MainMenuItems.AdditionalPaysTable, new MenuItemViewModel(_localizationManager.GetString("EditAdditionalPays"), OnEditAdditionalPays));
             _mainMenuItems.Add(MainMenuItems.View, new MenuItemViewModel(_localizationManager.GetString("ToggleLastYear"), OnToggleLastYear));
         }
 
@@ -185,15 +134,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         {
             ShowLastYear = !ShowLastYear;
             return Empty.Task;
-        }
-
-        private async Task OnEditAdditionalPays()
-        {
-            using (var vm = GetViewModel<AdditionalPayTableViewModel.AdditionalPayTableViewModel>())
-            {
-                await vm.ShowAsync();
-            }
-            await UpdateCurrentSalaries();
         }
 
         private async Task OnOpenSalarySettings()
@@ -238,30 +178,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
         }
 
-        public string YearBalance
-        {
-            get => _yearBalance;
-            private set
-            {
-                if (value == _yearBalance) return;
-
-                _yearBalance = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string YearBalanceAlternative
-        {
-            get => _yearBalanceAlternative;
-            private set
-            {
-                if (value == _yearBalanceAlternative) return;
-
-                _yearBalanceAlternative = value;
-                OnPropertyChanged();
-            }
-        }
-
         private List<Salary> _pastSalaries;
 
         public List<Salary> PastSalaries
@@ -276,7 +192,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         }
 
         private List<Salary> _currentSalaries;
-        private bool _showAdditionalColumns;
 
         public List<Salary> CurrentSalaries
         {
@@ -300,11 +215,6 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
                     await vm.ShowAsync();
                 }
 
-                using (var vm = GetViewModel<AdditionalPayTableViewModel.AdditionalPayTableViewModel>())
-                {
-                    await vm.ShowAsync();
-                }
-
                 await UpdateCurrentSalaries();
             }
         }
@@ -317,7 +227,5 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         public void OnNavigatedFrom(INavigationContext context)
         {
         }
-
-        private AsyncRelayCommand<Salary> CorrectValueCommand { get; }
     }
 }
