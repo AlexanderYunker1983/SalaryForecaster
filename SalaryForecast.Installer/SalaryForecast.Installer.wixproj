@@ -1,0 +1,26 @@
+<Project Sdk="WixToolset.Sdk/6.0.2">
+  <PropertyGroup>
+    <OutputName>SalaryForecaster</OutputName>
+    <Cultures>ru-RU</Cultures>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+    <PublishDir>$(MSBuildThisFileDirectory)..\artifacts\publish\$(Configuration)\win-x64\</PublishDir>
+    <OutputPath>$(MSBuildThisFileDirectory)..\artifacts\installer\$(Configuration)\</OutputPath>
+    <DefineConstants>$(DefineConstants);ProductVersion=$(Version)</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BindPath Include="$(PublishDir)" BindName="PublishDir" />
+  </ItemGroup>
+
+  <Target Name="PublishApplication" BeforeTargets="BeforeBuild">
+    <RemoveDir Directories="$(PublishDir)" />
+    <MSBuild Projects="..\SalaryForecast.Desktop\SalaryForecast.Desktop.csproj"
+             Targets="Publish"
+             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;PublishDir=$(PublishDir)" />
+  </Target>
+</Project>

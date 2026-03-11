@@ -1,0 +1,60 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package Name="SalaryForecaster"
+           Manufacturer="Yunker"
+           Version="$(var.ProductVersion)"
+           UpgradeCode="A3C3BF77-4BDD-47C3-BF17-56CC88E8E423"
+           Scope="perMachine"
+           Language="1049">
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AppIcon.ico" SourceFile="..\SalaryForecast.Desktop\Resources\receive_cash.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+    <Property Id="DISABLEADVTSHORTCUTS" Value="1" />
+
+    <ui:WixUI Id="WixUI_Minimal" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="CompanyFolder" Name="Yunker">
+        <Directory Id="INSTALLFOLDER" Name="SalaryForecaster" />
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
+      <Files Include="!(bindpath.PublishDir)\**">
+        <Exclude Files="**\*.pdb" />
+        <Exclude Files="!(bindpath.PublishDir)\SalaryForecast.Desktop.exe" />
+      </Files>
+    </ComponentGroup>
+
+    <ComponentGroup Id="ApplicationEntryPoint">
+      <Component Id="MainExecutableComponent" Directory="INSTALLFOLDER" Guid="*" Bitness="always64">
+        <File Id="MainExecutableFile"
+              Source="!(bindpath.PublishDir)\SalaryForecast.Desktop.exe"
+              KeyPath="yes">
+          <Shortcut Id="DesktopShortcut"
+                    Advertise="yes"
+                    Directory="DesktopFolder"
+                    Name="SalaryForecaster"
+                    Description="SalaryForecaster"
+                    WorkingDirectory="INSTALLFOLDER" />
+          <Shortcut Id="StartMenuShortcut"
+                    Advertise="yes"
+                    Directory="ProgramMenuFolder"
+                    Name="SalaryForecaster"
+                    Description="SalaryForecaster"
+                    WorkingDirectory="INSTALLFOLDER" />
+        </File>
+      </Component>
+    </ComponentGroup>
+
+    <Feature Id="MainFeature" Title="SalaryForecaster" Level="1">
+      <ComponentGroupRef Id="ApplicationFiles" />
+      <ComponentGroupRef Id="ApplicationEntryPoint" />
+    </Feature>
+  </Package>
+</Wix>
