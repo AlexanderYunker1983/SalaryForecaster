@@ -3,101 +3,145 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using MugenMvvmToolkit;
-using MugenMvvmToolkit.Interfaces.Models;
-using MugenMvvmToolkit.Interfaces.Navigation;
-using MugenMvvmToolkit.Interfaces.Presenters;
-using MugenMvvmToolkit.Interfaces.ViewModels;
-using MugenMvvmToolkit.Models;
-using MugenMvvmToolkit.ViewModels;
+using CommunityToolkit.Mvvm.Input;
 using SalaryForecast.Core.Infrastructure;
 using SalaryForecast.Core.Models;
-using YLocalization;
-using YMugenExtensions.Menu;
 
 namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
-    public class SalaryForecasterStartViewModel : CloseableViewModel, IHasDisplayName, INavigableViewModel
+    public class SalaryForecasterStartViewModel : ViewModelBase
     {
-        private string _displayName;
-
-        public string DisplayName
-        {
-            get => _displayName;
-            private set
-            {
-                if (value == _displayName) return;
-                _displayName = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<IMenuItemViewModel> Menu { get; } = new ObservableCollection<IMenuItemViewModel>();
-
-        private readonly Dictionary<string, IMenuItemViewModel> _mainMenuItems = new Dictionary<string, IMenuItemViewModel>();
         private readonly ILocalizationManager _localizationManager;
         private readonly ISalaryProvider _salaryProvider;
         private readonly ISettingsManager _settingsManager;
-        private readonly IMessagePresenter _messagePresenter;
-        private string _nextSalaryStatus;
+        private readonly IMessageService _messageService;
+        private readonly ISettingsDialogService _settingsDialogService;
+        private readonly IApplicationService _applicationService;
+        private string _displayName;
+        private bool _showLastYear;
+        private string _nextSalaryStatus = string.Empty;
+        private ObservableCollection<Salary>? _pastSalaries;
+        private ObservableCollection<Salary>? _currentSalaries;
+        private bool _isInitialized;
 
-        public SalaryForecasterStartViewModel(ILocalizationManager localizationManager, ISalaryProvider salaryProvider,
-            ISettingsManager settingsManager, IMessagePresenter messagePresenter)
+        public SalaryForecasterStartViewModel(
+            ILocalizationManager localizationManager,
+            ISalaryProvider salaryProvider,
+            ISettingsManager settingsManager,
+            IMessageService messageService,
+            ISettingsDialogService settingsDialogService,
+            IApplicationService applicationService,
+            IApplicationInfo applicationInfo)
         {
             _localizationManager = localizationManager;
             _salaryProvider = salaryProvider;
             _settingsManager = settingsManager;
-            _messagePresenter = messagePresenter;
-            DisplayName = $"{_localizationManager.GetString("ProgramTitle")} v.{PlatformVariables.ProgramVersion}";
+            _messageService = messageService;
+            _settingsDialogService = settingsDialogService;
+            _applicationService = applicationService;
+            _displayName = $"{_localizationManager.GetString("ProgramTitle")} v.{applicationInfo.ProgramVersion}";
+
+            OpenSalarySettingsCommand = new AsyncRelayCommand(OpenSalarySettingsAsync);
+            ToggleLastYearCommand = new RelayCommand(ToggleLastYear);
         }
 
-        protected override void OnInitialized()
+        public IAsyncRelayCommand OpenSalarySettingsCommand { get; }
+        public IRelayCommand ToggleLastYearCommand { get; }
+
+        public string DisplayName
         {
-            base.OnInitialized();
-
-            CreateMenuItems();
-            Menu.AddRange(ProcessMenu(PlatformVariables.MenuStructure));
-
-            UpdateCurrentSalaries().ConfigureAwait(false);
+            get => _displayName;
+            private set => SetProperty(ref _displayName, value);
         }
 
-        private async Task UpdateCurrentSalaries()
+        public bool ShowLastYear
+        {
+            get => _showLastYear;
+            set => SetProperty(ref _showLastYear, value);
+        }
+
+        public string NextSalaryStatus
+        {
+            get => _nextSalaryStatus;
+            private set => SetProperty(ref _nextSalaryStatus, value);
+        }
+
+        public ObservableCollection<Salary>? PastSalaries
+        {
+            get => _pastSalaries;
+            private set => SetProperty(ref _pastSalaries, value);
+        }
+
+        public ObservableCollection<Salary>? CurrentSalaries
+        {
+            get => _currentSalaries;
+            private set => SetProperty(ref _currentSalaries, value);
+        }
+
+        public string SettingsMenuTitle => _localizationManager.GetString("Settings");
+        public string SalarySettingsMenuTitle => _localizationManager.GetString("SalarySettings");
+        public string ViewMenuTitle => _localizationManager.GetString("View");
+        public string ToggleLastYearMenuTitle => _localizationManager.GetString("ToggleLastYear");
+        public string PreviousYearTitle => _localizationManager.GetString("PreviousYear");
+        public string CurrentYearTitle => _localizationManager.GetString("CurrentYear");
+
+        public async Task InitializeAsync()
+        {
+            if (_isInitialized) return;
+            _isInitialized = true;
+
+            if (_settingsManager.FirstStart)
+            {
+                _settingsManager.FirstStart = false;
+                await _settingsDialogService.ShowSalarySettingsAsync();
+            }
+
+            await UpdateCurrentSalariesAsync();
+        }
+
+        private async Task UpdateCurrentSalariesAsync()
         {
             var currentYear = DateTime.Now.Year;
-            PastSalaries = _salaryProvider.GetSalaries(currentYear - 1);
-            CurrentSalaries = _salaryProvider.GetSalaries(currentYear);
+            var pastSalaries = await _salaryProvider.GetSalariesAsync(currentYear - 1);
+            var currentSalaries = await _salaryProvider.GetSalariesAsync(currentYear);
 
-            if (PastSalaries == null || CurrentSalaries == null ||
-                !PastSalaries.Any() || !CurrentSalaries.Any())
+            PastSalaries = pastSalaries == null ? null : new ObservableCollection<Salary>(pastSalaries);
+            CurrentSalaries = currentSalaries == null ? null : new ObservableCollection<Salary>(currentSalaries);
+
+            if (PastSalaries == null || CurrentSalaries == null || !PastSalaries.Any() || !CurrentSalaries.Any())
             {
-                await _messagePresenter.ShowAsync(_localizationManager.GetString("CalendarDoesNotExists"),
-                    _localizationManager.GetString("Error"),
-                    MessageButton.Ok, MessageImage.Error);
-                await this.CloseAsync();
+                await _messageService.ShowErrorAsync(_localizationManager.GetString("Error"),
+                    _localizationManager.GetString("CalendarDoesNotExists"));
+                _applicationService.Shutdown();
                 return;
             }
 
-            var currentMonth = DateTime.Now.Month;
-            var currentMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth).ToList();
-            var salaryInThisMonth = currentMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
-            if (salaryInThisMonth == null)
-            {
-                var nextMonthDate = CurrentSalaries.Where(s => s.Date.Month == currentMonth + 1).ToList();
-                var salaryInNextMonth = nextMonthDate.FirstOrDefault(s => s.Date >= DateTime.Now);
-                if (salaryInNextMonth == null)
-                {
-                    return;
-                }
+            var nextSalary = CurrentSalaries
+                .Where(s => s.Date >= DateTime.Now)
+                .OrderBy(s => s.Date)
+                .FirstOrDefault();
 
-                salaryInThisMonth = salaryInNextMonth;
+            if (nextSalary == null)
+            {
+                var nextYearSalaries = await _salaryProvider.GetSalariesAsync(currentYear + 1) ?? new List<Salary>();
+                nextSalary = nextYearSalaries
+                    .Where(s => s.Date >= DateTime.Now)
+                    .OrderBy(s => s.Date)
+                    .FirstOrDefault();
             }
 
-            var nextSalary = salaryInThisMonth;
-            nextSalary.IsNextSalary = true;
-            var salaryDate = nextSalary.Date;
+            if (nextSalary == null)
+            {
+                NextSalaryStatus = string.Empty;
+                return;
+            }
 
-            var deltaDays = (salaryDate.Date - DateTime.Now.Date).Days;
+            if (CurrentSalaries.Contains(nextSalary))
+            {
+                nextSalary.IsNextSalary = true;
+            }
 
+            var deltaDays = (nextSalary.Date.Date - DateTime.Now.Date).Days;
             var daysCountString = _localizationManager.GetString("daysMany");
             if (deltaDays / 10 != 1)
             {
@@ -106,126 +150,17 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
 
             NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
-
-            OnPropertyChanged(nameof(PastSalaries));
-            OnPropertyChanged(nameof(CurrentSalaries));
         }
 
-        private void CreateMenuItems()
-        {
-            _mainMenuItems.Add(MainMenuItems.SalarySettings, new MenuItemViewModel(_localizationManager.GetString("SalarySettings"), OnOpenSalarySettings));
-            _mainMenuItems.Add(MainMenuItems.View, new MenuItemViewModel(_localizationManager.GetString("ToggleLastYear"), OnToggleLastYear));
-        }
-
-        private bool _showLastYear;
-
-        public bool ShowLastYear
-        {
-            get => _showLastYear;
-            set
-            {
-                if (value == _showLastYear) return;
-                _showLastYear = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Task OnToggleLastYear()
+        private void ToggleLastYear()
         {
             ShowLastYear = !ShowLastYear;
-            return Empty.Task;
         }
 
-        private async Task OnOpenSalarySettings()
+        private async Task OpenSalarySettingsAsync()
         {
-            using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
-            {
-                await vm.ShowAsync();
-            }
-            await UpdateCurrentSalaries();
-        }
-
-        private IEnumerable<IMenuItemViewModel> ProcessMenu(object[] menuStructure)
-        {
-            var result = new List<IMenuItemViewModel>();
-            foreach (var menu in menuStructure)
-                if (menu is MenuWithSubItems withSubItems)
-                {
-                    var sub = new SubMenuItemViewModel(_localizationManager.GetString(withSubItems.Caption));
-                    var items = ProcessMenu(withSubItems.MenuItems.Cast<object>().ToArray());
-                    sub.Items.AddRange(items);
-                    result.Add(sub);
-                }
-                else
-                {
-                    if (menu.ToString().Equals(MainMenuItems.Separator))
-                        result.Add(MenuItemViewModel.NewSeparator());
-                    else if (_mainMenuItems.TryGetValue(menu.ToString(), out var menuItem)) result.Add(menuItem);
-                }
-
-            return result;
-        }
-
-        public string NextSalaryStatus
-        {
-            get => _nextSalaryStatus;
-            private set
-            {
-                if (value == _nextSalaryStatus) return;
-
-                _nextSalaryStatus = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private List<Salary> _pastSalaries;
-
-        public List<Salary> PastSalaries
-        {
-            get => _pastSalaries;
-            set
-            {
-                if (Equals(value, _pastSalaries)) return;
-                _pastSalaries = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private List<Salary> _currentSalaries;
-
-        public List<Salary> CurrentSalaries
-        {
-            get => _currentSalaries;
-            set
-            {
-                if (Equals(value, _currentSalaries)) return;
-                _currentSalaries = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public async void OnNavigatedTo(INavigationContext context)
-        {
-            if (_settingsManager.FirstStart)
-            {
-                _settingsManager.FirstStart = false;
-
-                using (var vm = GetViewModel<SalarySettingsViewModel.SalarySettingsViewModel>())
-                {
-                    await vm.ShowAsync();
-                }
-
-                await UpdateCurrentSalaries();
-            }
-        }
-
-        public Task<bool> OnNavigatingFromAsync(INavigationContext context)
-        {
-            return Task.FromResult(true);
-        }
-
-        public void OnNavigatedFrom(INavigationContext context)
-        {
+            await _settingsDialogService.ShowSalarySettingsAsync();
+            await UpdateCurrentSalariesAsync();
         }
     }
 }

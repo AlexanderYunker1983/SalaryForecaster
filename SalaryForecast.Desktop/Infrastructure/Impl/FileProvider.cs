@@ -6,21 +6,22 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
 {
     public class FileProvider : IFileProvider
     {
-        public string GetJsonDirectory()
+        private static string GetAppDataDirectory()
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var directoryPath = Path.Combine(baseDirectory, "HolidaysJSON");
-            return directoryPath;
+            return Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Yunker",
+                "SalaryForecaster");
         }
 
-        public StreamReader GetJsonFile(int year)
+        public string GetJsonDirectory()
         {
-            if (!Directory.Exists(GetJsonDirectory()))
-            {
-                return null;
-            }
-            var fileName = $"consultant{year}.json";
-            var fullFilePath = Path.Combine(GetJsonDirectory(), fileName);
+            return Path.Combine(GetAppDataDirectory(), "HolidaysJSON");
+        }
+
+        public StreamReader? GetJsonFile(int year)
+        {
+            var fullFilePath = Path.Combine(GetJsonDirectory(), $"consultant{year}.json");
             return File.Exists(fullFilePath) ? new StreamReader(File.OpenRead(fullFilePath)) : null;
         }
     }

@@ -1,19 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MugenMvvmToolkit" Version="6.5.0" />
-    <PackageReference Include="MugenMvvmToolkit.AutofacContainer" Version="6.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\YLocalization\YLocalization.csproj" />
-    <ProjectReference Include="..\YMugenExtensions\YMugenExtensions.csproj" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
   <ItemGroup>

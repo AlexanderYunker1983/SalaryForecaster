@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="using:SalaryForecast.Core.ViewModels.SalarySettingsViewModel"
+        x:Class="SalaryForecast.Desktop.Views.SalarySettingsWindow"
+        x:DataType="core:SalarySettingsViewModel"
+        Title="{Binding Title}"
+        Width="520"
+        CanResize="False"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/receive_cash.ico">
+  <Grid Margin="16" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding SalaryValueLabel}" VerticalAlignment="Center" />
+    <NumericUpDown Grid.Row="0" Grid.Column="1"
+                   Width="160"
+                   Minimum="0"
+                   Maximum="1000000"
+                   Increment="1000"
+                   FormatString="N0"
+                   Value="{Binding SalaryValue}" />
+    <TextBlock Grid.Row="0" Grid.Column="2" Text="?" ToolTip.Tip="{Binding SalaryValueToolTip}" VerticalAlignment="Center" />
+
+    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding FirstPartDateLabel}" VerticalAlignment="Center" />
+    <NumericUpDown Grid.Row="1" Grid.Column="1"
+                   Width="160"
+                   Minimum="1"
+                   Maximum="15"
+                   Increment="1"
+                   FormatString="N0"
+                   Value="{Binding FirstPartDate}" />
+    <TextBlock Grid.Row="1" Grid.Column="2" Text="?" ToolTip.Tip="{Binding FirstPartDateToolTip}" VerticalAlignment="Center" />
+
+    <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding SecondPartDateLabel}" VerticalAlignment="Center" />
+    <NumericUpDown Grid.Row="2" Grid.Column="1"
+                   Width="160"
+                   Minimum="16"
+                   Maximum="31"
+                   Increment="1"
+                   FormatString="N0"
+                   Value="{Binding SecondPartDate}" />
+    <TextBlock Grid.Row="2" Grid.Column="2" Text="?" ToolTip.Tip="{Binding SecondPartDateToolTip}" VerticalAlignment="Center" />
+
+    <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+               Text="{Binding NoteText}"
+               Foreground="OrangeRed"
+               TextWrapping="Wrap" />
+  </Grid>
+</Window>

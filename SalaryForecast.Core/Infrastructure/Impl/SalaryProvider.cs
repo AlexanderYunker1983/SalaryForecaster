@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using SalaryForecast.Core.Models;
 
 namespace SalaryForecast.Core.Infrastructure.Impl
@@ -12,8 +14,11 @@ namespace SalaryForecast.Core.Infrastructure.Impl
         private readonly IFileDownloader _fileDownloader;
         private readonly IFileProvider _fileProvider;
 
-        public SalaryProvider(ICalendarProvider calendarProvider, ISettingsManager settingsManager,
-            IFileProvider fileProvider, IFileDownloader fileDownloader)
+        public SalaryProvider(
+            ICalendarProvider calendarProvider,
+            ISettingsManager settingsManager,
+            IFileProvider fileProvider,
+            IFileDownloader fileDownloader)
         {
             _calendarProvider = calendarProvider;
             _settingsManager = settingsManager;
@@ -21,26 +26,27 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             _fileProvider = fileProvider;
         }
 
-        private void InitializeYear(int year)
+        private async Task InitializeYearAsync(int year, CancellationToken cancellationToken)
         {
-            // Предыдущий год нужен для рассчёта зарплаты за январь
+            // Previous year is needed to calculate January payouts.
             _calendarProvider.InitForYear(year - 1);
             if (!_calendarProvider.Years.ContainsKey(year - 1))
             {
-                _fileDownloader.EnsureConsultantFile(year - 1, _fileProvider.GetJsonDirectory());
+                await _fileDownloader.EnsureConsultantFileAsync(year - 1, _fileProvider.GetJsonDirectory(), cancellationToken);
                 _calendarProvider.InitForYear(year - 1);
             }
+
             _calendarProvider.InitForYear(year);
             if (!_calendarProvider.Years.ContainsKey(year))
             {
-                _fileDownloader.EnsureConsultantFile(year, _fileProvider.GetJsonDirectory());
+                await _fileDownloader.EnsureConsultantFileAsync(year, _fileProvider.GetJsonDirectory(), cancellationToken);
                 _calendarProvider.InitForYear(year);
             }
         }
 
-        public List<Salary> GetSalaries(int year)
+        public async Task<List<Salary>?> GetSalariesAsync(int year, CancellationToken cancellationToken = default)
         {
-            InitializeYear(year);
+            await InitializeYearAsync(year, cancellationToken);
 
             if (!_calendarProvider.Years.ContainsKey(year)) return null;
 
@@ -48,7 +54,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
 
             foreach (var monthPair in _calendarProvider.Years[year].Months)
             {
-                var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) / monthPair.Value.WorkDaysCount;
+                var secondPart = (decimal)monthPair.Value.Days.Count(d => d.Value.IsWorkDate && d.Key <= 15) /
+                                 monthPair.Value.WorkDaysCount;
 
                 var oneDayCost = _settingsManager.Salary * (1.0m / monthPair.Value.WorkDaysCount - 1.0m / 29.3m);
                 var oneDayHolidayCost = _settingsManager.Salary / 29.3m;
@@ -78,7 +85,8 @@ namespace SalaryForecast.Core.Infrastructure.Impl
                     previousMonth = _calendarProvider.Years[year].Months.First(p => p.Key == monthPair.Key - 1);
                 }
 
-                var firstPart = (decimal)previousMonth.Value.Days.Count(d => d.Value.IsWorkDate && d.Key > 15) / previousMonth.Value.WorkDaysCount;
+                var firstPart = (decimal)previousMonth.Value.Days.Count(d => d.Value.IsWorkDate && d.Key > 15) /
+                                previousMonth.Value.WorkDaysCount;
                 var firstSalary = new Salary
                 {
                     SalaryPart = firstPart * _settingsManager.Salary,

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnassignedField.Global
 // ReSharper disable CollectionNeverUpdated.Global
@@ -8,7 +8,7 @@ namespace SalaryForecast.Core.Models
 {
     public class Holidays
     {
-        public List<string> holidays;
-        public List<string> preholidays;
+        public List<string> holidays = new();
+        public List<string> preholidays = new();
     }
 }

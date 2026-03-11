@@ -1,7 +1,10 @@
-﻿namespace SalaryForecast.Core.Infrastructure
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace SalaryForecast.Core.Infrastructure
 {
     public interface IFileDownloader
     {
-        void EnsureConsultantFile(int year, string directoryPath);
+        Task EnsureConsultantFileAsync(int year, string directoryPath, CancellationToken cancellationToken = default);
     }
 }

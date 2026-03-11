@@ -1,0 +1,99 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="using:SalaryForecast.Core.ViewModels.StartViewModel"
+        xmlns:converters="using:SalaryForecast.Desktop.Converters"
+        x:Class="SalaryForecast.Desktop.Views.MainWindow"
+        x:DataType="core:SalaryForecasterStartViewModel"
+        Title="{Binding DisplayName}"
+        Width="1100"
+        Height="720"
+        MinWidth="720"
+        MinHeight="480"
+        Icon="/Resources/receive_cash.ico"
+        WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <converters:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
+  </Window.Resources>
+
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="{Binding SettingsMenuTitle}">
+        <MenuItem Header="{Binding SalarySettingsMenuTitle}" Command="{Binding OpenSalarySettingsCommand}" />
+      </MenuItem>
+      <MenuItem Header="{Binding ViewMenuTitle}">
+        <MenuItem Header="{Binding ToggleLastYearMenuTitle}" Command="{Binding ToggleLastYearCommand}" />
+      </MenuItem>
+    </Menu>
+
+    <Border DockPanel.Dock="Bottom"
+            Padding="12,10"
+            Background="#FFF4F4F4"
+            BorderBrush="#FFE0E0E0"
+            BorderThickness="1,1,1,0">
+      <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" />
+    </Border>
+
+    <Grid Margin="12" RowDefinitions="Auto,*">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="{Binding ShowLastYear, Converter={StaticResource BoolToGridLengthConverter}}" />
+        <ColumnDefinition Width="{Binding ShowLastYear, Converter={StaticResource BoolToGridLengthConverter}, ConverterParameter=separator}" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <TextBlock Grid.Row="0"
+                 Grid.Column="0"
+                 Text="{Binding PreviousYearTitle}"
+                 FontSize="18"
+                 FontWeight="SemiBold"
+                 HorizontalAlignment="Center"
+                 Margin="0,0,0,10"
+                 IsVisible="{Binding ShowLastYear}" />
+
+      <Border Grid.Row="0"
+              Grid.RowSpan="2"
+              Grid.Column="1"
+              Width="1"
+              Background="#FFD6D6D6"
+              IsVisible="{Binding ShowLastYear}" />
+
+      <TextBlock Grid.Row="0"
+                 Grid.Column="2"
+                 Text="{Binding CurrentYearTitle}"
+                 FontSize="18"
+                 FontWeight="SemiBold"
+                 HorizontalAlignment="Center"
+                 Margin="0,0,0,10" />
+
+      <DataGrid Grid.Row="1"
+                Grid.Column="0"
+                ItemsSource="{Binding PastSalaries}"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                CanUserSortColumns="True"
+                CanUserResizeColumns="True"
+                IsVisible="{Binding ShowLastYear}">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Дата" Binding="{ReflectionBinding DateDisplay}" />
+          <DataGridTextColumn Header="Выплата" Binding="{ReflectionBinding SalaryPartDisplay}" />
+          <DataGridTextColumn Header="Доля" Binding="{ReflectionBinding SalaryPercentDisplay}" />
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <DataGrid Grid.Row="1"
+                Grid.Column="2"
+                ItemsSource="{Binding CurrentSalaries}"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                CanUserSortColumns="True"
+                CanUserResizeColumns="True">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Дата" Binding="{ReflectionBinding DateDisplay}" />
+          <DataGridTextColumn Header="Выплата" Binding="{ReflectionBinding SalaryPartDisplay}" />
+          <DataGridTextColumn Header="Доля" Binding="{ReflectionBinding SalaryPercentDisplay}" />
+          <DataGridTextColumn Header="1 день" Binding="{ReflectionBinding OneDayCostDisplay}" />
+          <DataGridTextColumn Header="1 отпускной день" Binding="{ReflectionBinding OneHolidayCostDisplay}" />
+        </DataGrid.Columns>
+      </DataGrid>
+    </Grid>
+  </DockPanel>
+</Window>
