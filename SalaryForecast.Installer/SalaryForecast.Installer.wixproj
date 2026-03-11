@@ -20,7 +20,10 @@
   <Target Name="PublishApplication" BeforeTargets="BeforeBuild">
     <RemoveDir Directories="$(PublishDir)" />
     <MSBuild Projects="..\SalaryForecast.Desktop\SalaryForecast.Desktop.csproj"
+             Targets="Restore"
+             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true" />
+    <MSBuild Projects="..\SalaryForecast.Desktop\SalaryForecast.Desktop.csproj"
              Targets="Publish"
-             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;PublishDir=$(PublishDir)" />
+             Properties="Configuration=$(Configuration);RuntimeIdentifier=win-x64;SelfContained=true;NoRestore=true;PublishDir=$(PublishDir)" />
   </Target>
 </Project>
