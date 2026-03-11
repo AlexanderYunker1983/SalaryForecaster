@@ -9,14 +9,63 @@
         Height="720"
         MinWidth="720"
         MinHeight="480"
+        FontSize="14"
+        Background="#FFF9FBFD"
         Icon="/Resources/receive_cash.ico"
         WindowStartupLocation="CenterScreen">
   <Window.Resources>
     <converters:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
   </Window.Resources>
+  <Window.Styles>
+    <Style Selector="TextBlock.section-title">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
 
-  <DockPanel>
-    <Menu DockPanel.Dock="Top">
+    <Style Selector="DataGrid.salary-grid">
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="Background" Value="White" />
+      <Setter Property="RowBackground" Value="White" />
+      <Setter Property="BorderBrush" Value="#FFBFD1E1" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="GridLinesVisibility" Value="All" />
+      <Setter Property="HorizontalGridLinesBrush" Value="#FFD6D6D6" />
+      <Setter Property="VerticalGridLinesBrush" Value="#FFD6D6D6" />
+      <Setter Property="HeadersVisibility" Value="Column" />
+      <Setter Property="CanUserReorderColumns" Value="True" />
+    </Style>
+
+    <Style Selector="DataGrid.salary-grid DataGridColumnHeader">
+      <Setter Property="Background" Value="#FFEAF3FB" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Padding" Value="10,6" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderBrush" Value="#FFD6DDE6" />
+      <Setter Property="BorderThickness" Value="0,0,1,1" />
+    </Style>
+
+    <Style Selector="DataGrid.salary-grid DataGridCell">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="10,3" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderBrush" Value="#FFD6DDE6" />
+      <Setter Property="BorderThickness" Value="0,0,1,1" />
+    </Style>
+
+    <Style Selector="DataGrid.salary-grid DataGridCell TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="Margin" Value="10,1" />
+    </Style>
+  </Window.Styles>
+
+  <Grid Margin="12" RowDefinitions="Auto,*,Auto,Auto">
+    <Menu Grid.Row="0" Margin="-12,-12,-12,0">
       <MenuItem Header="{Binding SettingsMenuTitle}">
         <MenuItem Header="{Binding SalarySettingsMenuTitle}" Command="{Binding OpenSalarySettingsCommand}" />
       </MenuItem>
@@ -25,15 +74,7 @@
       </MenuItem>
     </Menu>
 
-    <Border DockPanel.Dock="Bottom"
-            Padding="12,10"
-            Background="#FFF4F4F4"
-            BorderBrush="#FFE0E0E0"
-            BorderThickness="1,1,1,0">
-      <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" />
-    </Border>
-
-    <Grid Margin="12" RowDefinitions="Auto,*">
+    <Grid Grid.Row="1" Margin="0,8,0,0" RowDefinitions="Auto,*">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="{Binding ShowLastYear, Converter={StaticResource BoolToGridLengthConverter}}" />
         <ColumnDefinition Width="{Binding ShowLastYear, Converter={StaticResource BoolToGridLengthConverter}, ConverterParameter=separator}" />
@@ -42,58 +83,84 @@
 
       <TextBlock Grid.Row="0"
                  Grid.Column="0"
+                 Classes="section-title"
                  Text="{Binding PreviousYearTitle}"
-                 FontSize="18"
-                 FontWeight="SemiBold"
-                 HorizontalAlignment="Center"
-                 Margin="0,0,0,10"
+                 Margin="0,0,0,8"
+                 IsVisible="{Binding ShowLastYear}" />
+
+      <TextBlock Grid.Row="0"
+                 Grid.Column="2"
+                 Classes="section-title"
+                 Text="{Binding CurrentYearTitle}"
+                 Margin="0,0,0,8"
                  IsVisible="{Binding ShowLastYear}" />
 
       <Border Grid.Row="0"
               Grid.RowSpan="2"
               Grid.Column="1"
               Width="1"
+              Margin="8,0"
               Background="#FFD6D6D6"
               IsVisible="{Binding ShowLastYear}" />
 
-      <TextBlock Grid.Row="0"
-                 Grid.Column="2"
-                 Text="{Binding CurrentYearTitle}"
-                 FontSize="18"
-                 FontWeight="SemiBold"
-                 HorizontalAlignment="Center"
-                 Margin="0,0,0,10" />
-
-      <DataGrid Grid.Row="1"
+      <DataGrid x:Name="PastSalaryGrid"
+                Grid.Row="1"
                 Grid.Column="0"
+                Classes="salary-grid"
                 ItemsSource="{Binding PastSalaries}"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                CanUserSortColumns="True"
+                CanUserSortColumns="False"
                 CanUserResizeColumns="True"
+                LoadingRow="PastSalaryDataGridLoadingRow"
                 IsVisible="{Binding ShowLastYear}">
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Дата" Binding="{ReflectionBinding DateDisplay}" />
-          <DataGridTextColumn Header="Выплата" Binding="{ReflectionBinding SalaryPartDisplay}" />
-          <DataGridTextColumn Header="Доля" Binding="{ReflectionBinding SalaryPercentDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding DateDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding SalaryPartDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding SalaryPercentDisplay}" />
         </DataGrid.Columns>
       </DataGrid>
 
-      <DataGrid Grid.Row="1"
+      <DataGrid x:Name="CurrentSalaryGrid"
+                Grid.Row="1"
                 Grid.Column="2"
+                Classes="salary-grid"
                 ItemsSource="{Binding CurrentSalaries}"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                CanUserSortColumns="True"
-                CanUserResizeColumns="True">
+                CanUserSortColumns="False"
+                CanUserResizeColumns="True"
+                LoadingRow="CurrentSalaryDataGridLoadingRow">
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Дата" Binding="{ReflectionBinding DateDisplay}" />
-          <DataGridTextColumn Header="Выплата" Binding="{ReflectionBinding SalaryPartDisplay}" />
-          <DataGridTextColumn Header="Доля" Binding="{ReflectionBinding SalaryPercentDisplay}" />
-          <DataGridTextColumn Header="1 день" Binding="{ReflectionBinding OneDayCostDisplay}" />
-          <DataGridTextColumn Header="1 отпускной день" Binding="{ReflectionBinding OneHolidayCostDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding DateDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding SalaryPartDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding SalaryPercentDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding OneDayCostDisplay}" />
+          <DataGridTextColumn Header="" Binding="{ReflectionBinding OneHolidayCostDisplay}" />
         </DataGrid.Columns>
       </DataGrid>
     </Grid>
-  </DockPanel>
+
+    <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10" Margin="0,8,0,8">
+      <Border Padding="8,2" CornerRadius="2">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="Lime" Offset="0" />
+            <GradientStop Color="White" Offset="1" />
+          </LinearGradientBrush>
+        </Border.Background>
+        <TextBlock Text="{Binding GreenLegendTitle}" />
+      </Border>
+      <TextBlock Text="{Binding GreenLegendHelp}" VerticalAlignment="Center" />
+    </StackPanel>
+
+    <Border Grid.Row="3"
+            Margin="-12,0,-12,-12"
+            Padding="12,8"
+            Background="#FFF2F2F2"
+            BorderBrush="#FFD9D9D9"
+            BorderThickness="1,1,1,0">
+      <TextBlock Text="{Binding NextSalaryStatus}" FontSize="16" VerticalAlignment="Center" />
+    </Border>
+  </Grid>
 </Window>

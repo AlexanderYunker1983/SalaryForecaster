@@ -84,6 +84,13 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         public string ToggleLastYearMenuTitle => _localizationManager.GetString("ToggleLastYear");
         public string PreviousYearTitle => _localizationManager.GetString("PreviousYear");
         public string CurrentYearTitle => _localizationManager.GetString("CurrentYear");
+        public string DateColumnTitle => _localizationManager.GetString("Date");
+        public string SalaryPartValueColumnTitle => _localizationManager.GetString("SalaryPartValue");
+        public string SalaryPartPercentColumnTitle => _localizationManager.GetString("SalaryPartPercent");
+        public string OneDayCostColumnTitle => _localizationManager.GetString("OneDayCost");
+        public string OneHolidayCostColumnTitle => _localizationManager.GetString("OneHolidayCost");
+        public string GreenLegendTitle => _localizationManager.GetString("Green");
+        public string GreenLegendHelp => _localizationManager.GetString("GreenHelp");
 
         public async Task InitializeAsync()
         {
@@ -105,18 +112,17 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             var pastSalaries = await _salaryProvider.GetSalariesAsync(currentYear - 1);
             var currentSalaries = await _salaryProvider.GetSalariesAsync(currentYear);
 
-            PastSalaries = pastSalaries == null ? null : new ObservableCollection<Salary>(pastSalaries);
-            CurrentSalaries = currentSalaries == null ? null : new ObservableCollection<Salary>(currentSalaries);
-
-            if (PastSalaries == null || CurrentSalaries == null || !PastSalaries.Any() || !CurrentSalaries.Any())
+            if (pastSalaries == null || currentSalaries == null || !pastSalaries.Any() || !currentSalaries.Any())
             {
+                PastSalaries = null;
+                CurrentSalaries = null;
                 await _messageService.ShowErrorAsync(_localizationManager.GetString("Error"),
                     _localizationManager.GetString("CalendarDoesNotExists"));
                 _applicationService.Shutdown();
                 return;
             }
 
-            var nextSalary = CurrentSalaries
+            var nextSalary = currentSalaries
                 .Where(s => s.Date >= DateTime.Now)
                 .OrderBy(s => s.Date)
                 .FirstOrDefault();
@@ -133,10 +139,12 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             if (nextSalary == null)
             {
                 NextSalaryStatus = string.Empty;
+                PastSalaries = new ObservableCollection<Salary>(pastSalaries);
+                CurrentSalaries = new ObservableCollection<Salary>(currentSalaries);
                 return;
             }
 
-            if (CurrentSalaries.Contains(nextSalary))
+            if (currentSalaries.Contains(nextSalary))
             {
                 nextSalary.IsNextSalary = true;
             }
@@ -150,6 +158,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
 
             NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
+            PastSalaries = new ObservableCollection<Salary>(pastSalaries);
+            CurrentSalaries = new ObservableCollection<Salary>(currentSalaries);
         }
 
         private void ToggleLastYear()

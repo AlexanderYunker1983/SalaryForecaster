@@ -1,4 +1,4 @@
-# Файл сборки для проекта Salary Forecast
+# Р¤Р°Р№Р» СЃР±РѕСЂРєРё РґР»СЏ РїСЂРѕРµРєС‚Р° Salary Forecast
 
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/YBuild")
@@ -18,7 +18,5 @@ if("${Y_SYSTEM}" STREQUAL "3RDPARTY")
 else("${Y_SYSTEM}" STREQUAL "3RDPARTY")
     add_subdirectory(SalaryForecast.Desktop)
     add_subdirectory(SalaryForecast.Core)
-    add_subdirectory(YLocalization)
-    add_subdirectory(YMugenExtensions)
     add_subdirectory(install)
 endif("${Y_SYSTEM}" STREQUAL "3RDPARTY")

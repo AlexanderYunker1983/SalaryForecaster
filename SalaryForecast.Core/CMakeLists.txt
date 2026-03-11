@@ -1,5 +1,4 @@
-# Файл сборки для проекта SalaryForecast.Core
+# Р¤Р°Р№Р» СЃР±РѕСЂРєРё РґР»СЏ РїСЂРѕРµРєС‚Р° SalaryForecast.Core
 
 YBUILD_ADD_STANDARD_PROJECT(SalaryForecast.Core CSDLL)
 
-add_dependencies(SalaryForecast.Core YLocalization YMugenExtensions)
