@@ -11,12 +11,20 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
 {
     public class SalaryForecasterStartViewModel : ViewModelBase
     {
+        private const string ManualCalendarImportPrompt =
+            "Не удалось загрузить производственные календари. Загрузить их вручную из каталога?";
+
+        private const string MissingCalendarsShutdownMessage =
+            "Отсутствуют производственные календари, программа будет закрыта";
+
         private readonly ILocalizationManager _localizationManager;
         private readonly ISalaryProvider _salaryProvider;
         private readonly ISettingsManager _settingsManager;
         private readonly IMessageService _messageService;
         private readonly ISettingsDialogService _settingsDialogService;
         private readonly IApplicationService _applicationService;
+        private readonly IFileProvider _fileProvider;
+        private readonly ICalendarImportService _calendarImportService;
         private string _displayName;
         private bool _showLastYear;
         private string _nextSalaryStatus = string.Empty;
@@ -31,6 +39,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             IMessageService messageService,
             ISettingsDialogService settingsDialogService,
             IApplicationService applicationService,
+            IFileProvider fileProvider,
+            ICalendarImportService calendarImportService,
             IApplicationInfo applicationInfo)
         {
             _localizationManager = localizationManager;
@@ -39,6 +49,8 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             _messageService = messageService;
             _settingsDialogService = settingsDialogService;
             _applicationService = applicationService;
+            _fileProvider = fileProvider;
+            _calendarImportService = calendarImportService;
             _displayName = $"{_localizationManager.GetString("ProgramTitle")} v.{applicationInfo.ProgramVersion}";
 
             OpenSalarySettingsCommand = new AsyncRelayCommand(OpenSalarySettingsAsync);
@@ -112,17 +124,26 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             var pastSalaries = await _salaryProvider.GetSalariesAsync(currentYear - 1);
             var currentSalaries = await _salaryProvider.GetSalariesAsync(currentYear);
 
-            if (pastSalaries == null || currentSalaries == null || !pastSalaries.Any() || !currentSalaries.Any())
+            if (!HasSalaryData(pastSalaries, currentSalaries) && await TryImportCalendarsAsync(currentYear))
+            {
+                pastSalaries = await _salaryProvider.GetSalariesAsync(currentYear - 1);
+                currentSalaries = await _salaryProvider.GetSalariesAsync(currentYear);
+            }
+
+            if (!HasSalaryData(pastSalaries, currentSalaries))
             {
                 PastSalaries = null;
                 CurrentSalaries = null;
                 await _messageService.ShowErrorAsync(_localizationManager.GetString("Error"),
-                    _localizationManager.GetString("CalendarDoesNotExists"));
+                    MissingCalendarsShutdownMessage);
                 _applicationService.Shutdown();
                 return;
             }
 
-            var nextSalary = currentSalaries
+            var safePastSalaries = pastSalaries!;
+            var safeCurrentSalaries = currentSalaries!;
+
+            var nextSalary = safeCurrentSalaries
                 .Where(s => s.Date >= DateTime.Now)
                 .OrderBy(s => s.Date)
                 .FirstOrDefault();
@@ -139,12 +160,12 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             if (nextSalary == null)
             {
                 NextSalaryStatus = string.Empty;
-                PastSalaries = new ObservableCollection<Salary>(pastSalaries);
-                CurrentSalaries = new ObservableCollection<Salary>(currentSalaries);
+                PastSalaries = new ObservableCollection<Salary>(safePastSalaries);
+                CurrentSalaries = new ObservableCollection<Salary>(safeCurrentSalaries);
                 return;
             }
 
-            if (currentSalaries.Contains(nextSalary))
+            if (safeCurrentSalaries.Contains(nextSalary))
             {
                 nextSalary.IsNextSalary = true;
             }
@@ -158,13 +179,34 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             }
 
             NextSalaryStatus = $"{_localizationManager.GetString("NextSalaryDays")} {deltaDays} {daysCountString}";
-            PastSalaries = new ObservableCollection<Salary>(pastSalaries);
-            CurrentSalaries = new ObservableCollection<Salary>(currentSalaries);
+            PastSalaries = new ObservableCollection<Salary>(safePastSalaries);
+            CurrentSalaries = new ObservableCollection<Salary>(safeCurrentSalaries);
         }
 
         private void ToggleLastYear()
         {
             ShowLastYear = !ShowLastYear;
+        }
+
+        private static bool HasSalaryData(List<Salary>? pastSalaries, List<Salary>? currentSalaries)
+        {
+            return pastSalaries != null && currentSalaries != null && pastSalaries.Any() && currentSalaries.Any();
+        }
+
+        private async Task<bool> TryImportCalendarsAsync(int currentYear)
+        {
+            if (_fileProvider.CalendarFileExists(currentYear - 1) && _fileProvider.CalendarFileExists(currentYear))
+            {
+                return false;
+            }
+
+            var shouldImport = await _messageService.ShowConfirmationAsync(
+                _localizationManager.GetString("Error"),
+                ManualCalendarImportPrompt);
+
+            if (!shouldImport) return false;
+
+            return await _calendarImportService.TryImportCalendarsAsync();
         }
 
         private async Task OpenSalarySettingsAsync()

@@ -1,3 +1,4 @@
+using System.IO;
 using Newtonsoft.Json;
 using SalaryForecast.Core.Models;
 
@@ -19,10 +20,22 @@ namespace SalaryForecast.Core.Infrastructure.Impl
             var fileStream = _fileProvider.GetJsonFile(year);
             if (fileStream == null) return null;
 
-            var json = fileStream.ReadToEnd();
-            var result = JsonConvert.DeserializeObject<Holidays>(json);
-            fileStream.Dispose();
-            return result;
+            using (fileStream)
+            {
+                try
+                {
+                    var json = fileStream.ReadToEnd();
+                    return JsonConvert.DeserializeObject<Holidays>(json);
+                }
+                catch (JsonException)
+                {
+                    return null;
+                }
+                catch (IOException)
+                {
+                    return null;
+                }
+            }
         }
     }
 }

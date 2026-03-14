@@ -49,6 +49,7 @@ namespace SalaryForecast.Desktop
             services.AddSingleton<IApplicationInfo, ApplicationInfo>();
             services.AddSingleton<IApplicationService, ApplicationService>();
             services.AddSingleton<IMessageService, MessageService>();
+            services.AddSingleton<ICalendarImportService, CalendarImportService>();
             services.AddSingleton<ISettingsDialogService, SettingsDialogService>();
 
             services.AddTransient<SalarySettingsViewModel>();

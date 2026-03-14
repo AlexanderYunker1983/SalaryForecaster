@@ -29,19 +29,30 @@ namespace SalaryForecast.Core.Infrastructure.Impl
         private async Task InitializeYearAsync(int year, CancellationToken cancellationToken)
         {
             // Previous year is needed to calculate January payouts.
-            _calendarProvider.InitForYear(year - 1);
-            if (!_calendarProvider.Years.ContainsKey(year - 1))
+            await EnsureYearAsync(year - 1, cancellationToken);
+            await EnsureYearAsync(year, cancellationToken);
+        }
+
+        private async Task EnsureYearAsync(int year, CancellationToken cancellationToken)
+        {
+            _calendarProvider.InitForYear(year);
+            if (_calendarProvider.Years.ContainsKey(year)) return;
+
+            try
             {
-                await _fileDownloader.EnsureConsultantFileAsync(year - 1, _fileProvider.GetJsonDirectory(), cancellationToken);
-                _calendarProvider.InitForYear(year - 1);
+                // Let the UI offer manual import when automatic download is unavailable.
+                await _fileDownloader.EnsureConsultantFileAsync(year, _fileProvider.GetJsonDirectory(), cancellationToken);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch
+            {
+                return;
             }
 
             _calendarProvider.InitForYear(year);
-            if (!_calendarProvider.Years.ContainsKey(year))
-            {
-                await _fileDownloader.EnsureConsultantFileAsync(year, _fileProvider.GetJsonDirectory(), cancellationToken);
-                _calendarProvider.InitForYear(year);
-            }
         }
 
         public async Task<List<Salary>?> GetSalariesAsync(int year, CancellationToken cancellationToken = default)
