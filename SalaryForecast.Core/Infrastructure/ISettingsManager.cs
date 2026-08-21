@@ -1,3 +1,5 @@
+using SalaryForecast.Core.Models;
+
 namespace SalaryForecast.Core.Infrastructure
 {
     public interface ISettingsManager
@@ -6,5 +8,6 @@ namespace SalaryForecast.Core.Infrastructure
         int SalarySecondPartDate { get; set; }
         decimal Salary { get; set; }
         bool FirstStart { get; set; }
+        AppTheme Theme { get; set; }
     }
 }

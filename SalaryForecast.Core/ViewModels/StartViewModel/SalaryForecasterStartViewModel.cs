@@ -25,12 +25,14 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private readonly IApplicationService _applicationService;
         private readonly IFileProvider _fileProvider;
         private readonly ICalendarImportService _calendarImportService;
+        private readonly IThemeService _themeService;
         private string _displayName;
         private bool _showLastYear;
         private string _nextSalaryStatus = string.Empty;
         private ObservableCollection<Salary>? _pastSalaries;
         private ObservableCollection<Salary>? _currentSalaries;
         private bool _isInitialized;
+        private AppTheme _selectedTheme;
 
         public SalaryForecasterStartViewModel(
             ILocalizationManager localizationManager,
@@ -41,6 +43,7 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             IApplicationService applicationService,
             IFileProvider fileProvider,
             ICalendarImportService calendarImportService,
+            IThemeService themeService,
             IApplicationInfo applicationInfo)
         {
             _localizationManager = localizationManager;
@@ -51,14 +54,22 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             _applicationService = applicationService;
             _fileProvider = fileProvider;
             _calendarImportService = calendarImportService;
+            _themeService = themeService;
+            _selectedTheme = _settingsManager.Theme;
             _displayName = $"{_localizationManager.GetString("ProgramTitle")} v.{applicationInfo.ProgramVersion}";
 
             OpenSalarySettingsCommand = new AsyncRelayCommand(OpenSalarySettingsAsync);
             ToggleLastYearCommand = new RelayCommand(ToggleLastYear);
+            SetLightThemeCommand = new RelayCommand(() => SetTheme(AppTheme.Light));
+            SetDarkThemeCommand = new RelayCommand(() => SetTheme(AppTheme.Dark));
+            SetSystemThemeCommand = new RelayCommand(() => SetTheme(AppTheme.System));
         }
 
         public IAsyncRelayCommand OpenSalarySettingsCommand { get; }
         public IRelayCommand ToggleLastYearCommand { get; }
+        public IRelayCommand SetLightThemeCommand { get; }
+        public IRelayCommand SetDarkThemeCommand { get; }
+        public IRelayCommand SetSystemThemeCommand { get; }
 
         public string DisplayName
         {
@@ -90,8 +101,16 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
             private set => SetProperty(ref _currentSalaries, value);
         }
 
+        public bool IsLightThemeSelected => SelectedTheme == AppTheme.Light;
+        public bool IsDarkThemeSelected => SelectedTheme == AppTheme.Dark;
+        public bool IsSystemThemeSelected => SelectedTheme == AppTheme.System;
+
         public string SettingsMenuTitle => _localizationManager.GetString("Settings");
         public string SalarySettingsMenuTitle => _localizationManager.GetString("SalarySettings");
+        public string ThemeMenuTitle => "Тема";
+        public string LightThemeMenuTitle => "Светлая";
+        public string DarkThemeMenuTitle => "Тёмная";
+        public string SystemThemeMenuTitle => "Системная";
         public string ViewMenuTitle => _localizationManager.GetString("View");
         public string ToggleLastYearMenuTitle => _localizationManager.GetString("ToggleLastYear");
         public string PreviousYearTitle => _localizationManager.GetString("PreviousYear");
@@ -186,6 +205,28 @@ namespace SalaryForecast.Core.ViewModels.StartViewModel
         private void ToggleLastYear()
         {
             ShowLastYear = !ShowLastYear;
+        }
+
+        private AppTheme SelectedTheme
+        {
+            get => _selectedTheme;
+            set
+            {
+                if (!SetProperty(ref _selectedTheme, value)) return;
+
+                OnPropertyChanged(nameof(IsLightThemeSelected));
+                OnPropertyChanged(nameof(IsDarkThemeSelected));
+                OnPropertyChanged(nameof(IsSystemThemeSelected));
+            }
+        }
+
+        private void SetTheme(AppTheme theme)
+        {
+            if (SelectedTheme == theme) return;
+
+            SelectedTheme = theme;
+            _settingsManager.Theme = theme;
+            _themeService.ApplyTheme(theme);
         }
 
         private static bool HasSalaryData(List<Salary>? pastSalaries, List<Salary>? currentSalaries)

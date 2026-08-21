@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using SalaryForecast.Core.Infrastructure;
+using SalaryForecast.Core.Models;
 
 namespace SalaryForecast.Desktop.Infrastructure.Impl
 {
@@ -66,6 +67,17 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             }
         }
 
+        public AppTheme Theme
+        {
+            get => _settings.Theme;
+            set
+            {
+                if (_settings.Theme == value) return;
+                _settings.Theme = value;
+                SaveSettings();
+            }
+        }
+
         private DesktopSettings LoadSettings()
         {
             if (!File.Exists(_settingsPath))
@@ -90,6 +102,7 @@ namespace SalaryForecast.Desktop.Infrastructure.Impl
             public int SalarySecondPartDate { get; set; } = 25;
             public decimal SalaryValue { get; set; } = 1000m;
             public bool FirstStart { get; set; } = true;
+            public AppTheme Theme { get; set; } = AppTheme.System;
         }
     }
 }

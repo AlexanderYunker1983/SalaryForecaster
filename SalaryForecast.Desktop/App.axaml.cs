@@ -19,6 +19,13 @@ namespace SalaryForecast.Desktop
         {
             AvaloniaXamlLoader.Load(this);
             _services = ConfigureServices();
+
+            if (_services != null)
+            {
+                var settingsManager = _services.GetRequiredService<ISettingsManager>();
+                var themeService = _services.GetRequiredService<IThemeService>();
+                themeService.ApplyTheme(settingsManager.Theme);
+            }
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -50,6 +57,7 @@ namespace SalaryForecast.Desktop
             services.AddSingleton<IApplicationService, ApplicationService>();
             services.AddSingleton<IMessageService, MessageService>();
             services.AddSingleton<ICalendarImportService, CalendarImportService>();
+            services.AddSingleton<IThemeService, ThemeService>();
             services.AddSingleton<ISettingsDialogService, SettingsDialogService>();
 
             services.AddTransient<SalarySettingsViewModel>();
